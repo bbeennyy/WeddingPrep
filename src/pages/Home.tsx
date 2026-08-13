@@ -78,7 +78,7 @@ export function HomePage() {
         <div className="card flex items-center justify-center py-6">
           <Ring
             value={program.length ? (filledProgram / program.length) * 100 : 0}
-            label="Program filled"
+            label="Day filled"
           />
         </div>
       </section>
@@ -90,7 +90,7 @@ export function HomePage() {
             <li>{done} of {checklist.length} preparation tasks done</li>
             <li>{guests.length} guests · {attending} attending · {pending} waiting</li>
             <li>{seated} seated at {tables.length} tables</li>
-            <li>{program.length} points in the church program</li>
+            <li>{program.length} moments on the wedding-day timeline</li>
           </ul>
         </div>
         <div className="card p-5">
@@ -99,7 +99,7 @@ export function HomePage() {
             <Link className="btn-ghost" to="/tasks">Checklist</Link>
             <Link className="btn-ghost" to="/guests">Guest list</Link>
             <Link className="btn-ghost" to="/tables">Table seating</Link>
-            <Link className="btn-ghost" to="/program">Church program</Link>
+            <Link className="btn-ghost" to="/program">Wedding day</Link>
             <Link className="btn-ghost" to="/organize">Vendors & budget</Link>
             <Link className="btn-ghost" to="/settings">Names & sharing</Link>
           </div>

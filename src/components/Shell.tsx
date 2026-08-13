@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import {
-  BookOpen,
   CheckSquare,
+  Clock,
   Columns3,
   Home,
   MoreHorizontal,
@@ -17,7 +17,7 @@ const links = [
   { to: "/organize", label: "Organize", icon: MoreHorizontal },
   { to: "/guests", label: "Guests", icon: Users },
   { to: "/tables", label: "Tables", icon: Columns3 },
-  { to: "/program", label: "Program", icon: BookOpen },
+  { to: "/program", label: "Day", icon: Clock },
 ];
 
 export function Shell() {

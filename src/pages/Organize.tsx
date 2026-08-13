@@ -4,29 +4,31 @@ import { useWedding } from "../context";
 import { money, uid } from "../defaults";
 import type { BudgetItem, NoteCard, Vendor, VendorStatus } from "../types";
 import { EmptyState, Modal } from "../components/Ui";
+import { PhotoShotsPanel } from "./Photos";
 
 const vendorStatuses: VendorStatus[] = ["researching", "contacted", "booked", "paid"];
 
 export function OrganizePage() {
   const { data, patch } = useWedding();
-  const [tab, setTab] = useState<"vendors" | "budget" | "notes">("vendors");
+  const [tab, setTab] = useState<"vendors" | "budget" | "notes" | "photos">("vendors");
   const [vendor, setVendor] = useState<Vendor | null>(null);
   const [note, setNote] = useState<NoteCard | null>(null);
 
   const spent = data.budget.reduce((sum, row) => sum + (row.actual || 0), 0);
   const planned = data.budget.reduce((sum, row) => sum + (row.estimate || 0), 0);
+  const overBudget = Boolean(data.settings.totalBudget) && planned > data.settings.totalBudget;
 
   return (
     <div className="space-y-5">
-      <div>
+      <div className="no-print">
         <h1 className="font-serif text-4xl">Organize</h1>
-        <p className="mt-1 text-sm text-muted">Vendors, money, and the notes you do not want to lose.</p>
+        <p className="mt-1 text-sm text-muted">Vendors, money, notes, and the photographer’s shot list.</p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        {(["vendors", "budget", "notes"] as const).map((key) => (
+      <div className="no-print flex flex-wrap gap-2">
+        {(["vendors", "budget", "notes", "photos"] as const).map((key) => (
           <button key={key} className={tab === key ? "btn-primary !py-1" : "btn-ghost !py-1"} onClick={() => setTab(key)}>
-            {key === "vendors" ? "Vendors" : key === "budget" ? "Budget" : "Notes"}
+            {key === "vendors" ? "Vendors" : key === "budget" ? "Budget" : key === "notes" ? "Notes" : "Photographer"}
           </button>
         ))}
       </div>
@@ -62,7 +64,26 @@ export function OrganizePage() {
 
       {tab === "budget" ? (
         <div className="space-y-3">
-          <div className="card grid grid-cols-2 gap-3 p-4 sm:grid-cols-3">
+          <div className="card grid grid-cols-2 gap-3 p-4 sm:grid-cols-4">
+            <div>
+              <label className="label">Total we can spend</label>
+              <div className="flex items-center gap-1">
+                <span className="font-serif text-2xl text-muted">{data.settings.currency}</span>
+                <input
+                  className="field font-serif text-2xl"
+                  type="number"
+                  min={0}
+                  value={data.settings.totalBudget || ""}
+                  placeholder="0"
+                  onChange={(e) =>
+                    patch("settings", {
+                      ...data.settings,
+                      totalBudget: Math.max(0, Number(e.target.value) || 0),
+                    })
+                  }
+                />
+              </div>
+            </div>
             <div>
               <p className="label">Planned</p>
               <p className="font-serif text-3xl">{money(planned, data.settings.currency)}</p>
@@ -72,8 +93,13 @@ export function OrganizePage() {
               <p className="font-serif text-3xl">{money(spent, data.settings.currency)}</p>
             </div>
             <div>
-              <p className="label">Difference</p>
-              <p className="font-serif text-3xl">{money(planned - spent, data.settings.currency)}</p>
+              <p className="label">{data.settings.totalBudget ? "Left to allocate" : "Difference"}</p>
+              <p className={`font-serif text-3xl ${overBudget ? "text-rose" : ""}`}>
+                {money(
+                  data.settings.totalBudget ? data.settings.totalBudget - planned : planned - spent,
+                  data.settings.currency,
+                )}
+              </p>
             </div>
           </div>
           <div className="flex justify-end">
@@ -120,6 +146,8 @@ export function OrganizePage() {
           </div>
         </div>
       ) : null}
+
+      {tab === "photos" ? <PhotoShotsPanel /> : null}
 
       {tab === "notes" ? (
         <div className="space-y-3">

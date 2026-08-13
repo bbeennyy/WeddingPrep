@@ -20,6 +20,14 @@ export default {
           DEFAULT: "#b0894f",
           soft: "#f4ead8",
         },
+        navy: {
+          DEFAULT: "#6d7f96",
+          soft: "#d9e1ea",
+        },
+        mov: {
+          DEFAULT: "#9a7aa8",
+          soft: "#eadcec",
+        },
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', "Georgia", "serif"],

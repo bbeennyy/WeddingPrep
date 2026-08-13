@@ -59,11 +59,11 @@ export function SettingsPage() {
         <h2 className="font-serif text-2xl">The two of you</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           <div>
-            <label className="label">Partner A</label>
+            <label className="label">Beniamin</label>
             <input className="field" value={settings.partnerA} onChange={(e) => update("partnerA", e.target.value)} />
           </div>
           <div>
-            <label className="label">Partner B</label>
+            <label className="label">Evelyn</label>
             <input className="field" value={settings.partnerB} onChange={(e) => update("partnerB", e.target.value)} />
           </div>
           <div>
@@ -92,7 +92,9 @@ export function SettingsPage() {
       <section className="card space-y-3 p-5">
         <h2 className="font-serif text-2xl">Backup on this phone / computer</h2>
         <p className="text-sm text-muted">
-          Everything is saved in this browser automatically. Download a JSON file if you want a copy, or to send it to each other.
+          Everything you do is saved in this browser and written to <code>data/wedding.json</code> while the app is
+          running — guests, checklist checkmarks, budget, the program, all of it. The GitHub token is never written to
+          that file.
         </p>
         <div className="flex flex-wrap gap-2">
           <button className="btn-primary" onClick={() => downloadData(data)}>
@@ -126,8 +128,9 @@ export function SettingsPage() {
       <section className="card space-y-3 p-5">
         <h2 className="font-serif text-2xl">Share through GitHub</h2>
         <p className="text-sm text-muted">
-          Optional. Create a fine-grained token with access to this repository only, paste it here (it stays in this browser), then save.
-          Keep the data file out of a public repo if it has guest names.
+          This is how another computer or browser gets the same guests and checklist. Create a fine-grained token with
+          access to this repository only, paste it here once on each device (it stays in that browser), and keep the repo
+          private. After that it loads and saves by itself. Manual buttons below are only a backup.
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div>

@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import { Plus, Trash2, Upload } from "lucide-react";
 import { RSVP_LABELS } from "../constants";
 import { useWedding } from "../context";
 import { ownerName, uid } from "../defaults";
+import { parseGuestCsv } from "../storage";
 import type { Guest, Owner, Rsvp } from "../types";
 import { EmptyState, Modal } from "../components/Ui";
 
@@ -19,9 +20,11 @@ const emptyGuest = (): Guest => ({
 
 export function GuestsPage() {
   const { data, patch } = useWedding();
+  const csvRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [rsvp, setRsvp] = useState<"all" | Rsvp>("all");
   const [draft, setDraft] = useState<Guest | null>(null);
+  const [importStatus, setImportStatus] = useState("");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -47,6 +50,32 @@ export function GuestsPage() {
     setDraft(null);
   }
 
+  async function importCsv(file: File) {
+    setImportStatus("");
+    try {
+      const imported = parseGuestCsv(await file.text());
+      const existing = new Set(data.guests.map((guest) => guest.name.trim().toLowerCase()));
+      const fresh = imported.filter((guest) => !existing.has(guest.name.trim().toLowerCase()));
+      const skipped = imported.length - fresh.length;
+      if (fresh.length === 0) {
+        setImportStatus(
+          imported.length === 0
+            ? "No guests found. Use columns A first name, B last name, C party, with names starting on row 2."
+            : "Those names are already on the list.",
+        );
+        return;
+      }
+      patch("guests", [...data.guests, ...fresh]);
+      setImportStatus(
+        skipped
+          ? `Added ${fresh.length} guests. ${skipped} already on the list were skipped. RSVP is Pending until you change it.`
+          : `Added ${fresh.length} guests. RSVP is Pending until you change it.`,
+      );
+    } catch {
+      setImportStatus("That CSV could not be read.");
+    }
+  }
+
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -56,10 +85,27 @@ export function GuestsPage() {
             {counts.attending} attending · {counts.pending} pending · {counts.declined} declined
           </p>
         </div>
-        <button className="btn-primary" onClick={() => setDraft(emptyGuest())}>
-          <Plus className="h-4 w-4" /> Add guest
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button className="btn-ghost" onClick={() => csvRef.current?.click()}>
+            <Upload className="h-4 w-4" /> Import CSV
+          </button>
+          <input
+            ref={csvRef}
+            type="file"
+            accept=".csv,text/csv,.tsv,text/tab-separated-values"
+            className="hidden"
+            onChange={async (event) => {
+              const file = event.target.files?.[0];
+              event.target.value = "";
+              if (file) await importCsv(file);
+            }}
+          />
+          <button className="btn-primary" onClick={() => setDraft(emptyGuest())}>
+            <Plus className="h-4 w-4" /> Add guest
+          </button>
+        </div>
       </div>
+      {importStatus ? <p className="text-sm text-muted">{importStatus}</p> : null}
 
       <div className="grid gap-3 sm:grid-cols-4">
         {(["all", "attending", "pending", "declined"] as const).map((key) => (
@@ -84,7 +130,7 @@ export function GuestsPage() {
       {filtered.length === 0 ? (
         <EmptyState
           title="No guests yet"
-          body="Add people as you think of them. Later you can mark who is coming and seat them at tables."
+          body="Import a CSV (first name, last name, party) or add people as you think of them. RSVP stays Pending until you mark attending or declined."
         />
       ) : (
         <div className="card divide-y divide-gold/10 overflow-hidden">

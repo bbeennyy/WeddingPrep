@@ -1,22 +1,63 @@
-import { useState } from "react";
-import { ChevronDown, ChevronUp, Plus, Printer, Trash2 } from "lucide-react";
-import { PROGRAM_TAGS, TAG_BY_ID } from "../constants";
+import { useMemo, useState } from "react";
+import { ChevronDown, ChevronUp, Clock, Plus, Printer, Trash2 } from "lucide-react";
+import { PROGRAM_SECTIONS, SECTION_PRESETS } from "../constants";
 import { useWedding } from "../context";
 import { coupleLabel, uid } from "../defaults";
-import type { ProgramItem, ProgramTag } from "../types";
+import type { ProgramItem, ProgramSection, ProgramTag } from "../types";
 
-const tagTone: Record<string, string> = {
-  music: "bg-rose-soft text-rose",
-  movement: "bg-gold-soft text-gold",
-  word: "bg-sage-soft text-sage",
-  covenant: "bg-rose-soft text-rose",
-  presbyterian: "bg-sage-soft text-sage",
+const sectionTone: Record<ProgramSection, { line: string; dot: string; chip: string }> = {
+  "pre-ceremony": { line: "bg-gold/35", dot: "border-gold bg-gold-soft", chip: "text-gold" },
+  ceremony: { line: "bg-sage/35", dot: "border-sage bg-sage-soft", chip: "text-sage" },
+  reception: { line: "bg-rose/35", dot: "border-rose bg-rose-soft", chip: "text-rose" },
 };
+
+function formatTime(value: string): string {
+  if (!value) return "";
+  const [hours, minutes] = value.split(":").map(Number);
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return value;
+  const date = new Date();
+  date.setHours(hours, minutes, 0, 0);
+  return date.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+}
+
+function timeRange(items: ProgramItem[]): string {
+  const times = items.map((item) => item.time).filter(Boolean).sort();
+  if (!times.length) return "Add times as you plan";
+  const start = formatTime(times[0]);
+  const end = formatTime(times[times.length - 1]);
+  return start === end ? start : `${start} – ${end}`;
+}
+
+function insertIndex(program: ProgramItem[], section: ProgramSection): number {
+  const last = program.reduce((acc, item, index) => (item.section === section ? index : acc), -1);
+  if (last >= 0) return last + 1;
+  if (section === "pre-ceremony") return 0;
+  if (section === "ceremony") {
+    const lastPre = program.reduce((acc, item, index) => (item.section === "pre-ceremony" ? index : acc), -1);
+    return lastPre + 1;
+  }
+  return program.length;
+}
 
 export function ProgramPage() {
   const { data, patch } = useWedding();
   const [mode, setMode] = useState<"edit" | "preview">("edit");
-  const [adding, setAdding] = useState(false);
+  const [open, setOpen] = useState<Record<ProgramSection, boolean>>({
+    "pre-ceremony": true,
+    ceremony: true,
+    reception: true,
+  });
+  const [adding, setAdding] = useState<ProgramSection | null>(null);
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  const grouped = useMemo(
+    () =>
+      PROGRAM_SECTIONS.map((section) => ({
+        ...section,
+        items: data.program.filter((item) => item.section === section.id),
+      })),
+    [data.program],
+  );
 
   function update(id: string, next: Partial<ProgramItem>) {
     patch(
@@ -25,35 +66,55 @@ export function ProgramPage() {
     );
   }
 
-  function move(index: number, dir: -1 | 1) {
+  function moveInSection(id: string, dir: -1 | 1) {
+    const item = data.program.find((row) => row.id === id);
+    if (!item) return;
+    const ids = data.program.filter((row) => row.section === item.section).map((row) => row.id);
+    const index = ids.indexOf(id);
+    const swapId = ids[index + dir];
+    if (!swapId) return;
     const next = [...data.program];
-    const target = index + dir;
-    if (target < 0 || target >= next.length) return;
-    [next[index], next[target]] = [next[target], next[index]];
+    const a = next.findIndex((row) => row.id === id);
+    const b = next.findIndex((row) => row.id === swapId);
+    [next[a], next[b]] = [next[b], next[a]];
     patch("program", next);
   }
 
-  function addTag(tag: ProgramTag) {
-    const meta = TAG_BY_ID[tag];
+  function addItem(section: ProgramSection, tag: ProgramTag, title: string) {
     const item: ProgramItem = {
       id: uid(),
       tag,
-      title: meta.label,
+      section,
+      time: "",
+      title,
       subtitle: tag === "song" ? "Hymn / title" : "",
       body: tag === "song" ? "Paste lyrics here.\n\nVerse 1\n\nVerse 2" : "",
       people: "",
     };
-    patch("program", [...data.program, item]);
-    setAdding(false);
+    const next = [...data.program];
+    next.splice(insertIndex(next, section), 0, item);
+    patch("program", next);
+    setAdding(null);
+    setExpanded(item.id);
+    setOpen((current) => ({ ...current, [section]: true }));
+  }
+
+  function moveToSection(id: string, section: ProgramSection) {
+    const current = data.program.find((row) => row.id === id);
+    if (!current || current.section === section) return;
+    const without = data.program.filter((row) => row.id !== id);
+    without.splice(insertIndex(without, section), 0, { ...current, section });
+    patch("program", without);
   }
 
   return (
     <div className="space-y-5">
       <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-serif text-4xl">Church program</h1>
+          <h1 className="font-serif text-4xl">Wedding day</h1>
           <p className="mt-1 max-w-xl text-sm text-muted">
-            Build the ceremony flow yourself. Songs keep lyrics, the Word keeps the reading, procession keeps who walks.
+            A timeline for the whole day. Set the time on each moment, and collapse a section when you are done planning
+            it.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -74,87 +135,188 @@ export function ProgramPage() {
       </div>
 
       {mode === "edit" ? (
-        <div className="no-print space-y-3">
-          {data.program.map((item, index) => (
-            <article key={item.id} className="card p-4">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <span className={`tag ${tagTone[TAG_BY_ID[item.tag].group]}`}>{TAG_BY_ID[item.tag].label}</span>
-                <div className="flex gap-1">
-                  <button className="btn-ghost !px-2" onClick={() => move(index, -1)} aria-label="Move up">
-                    <ChevronUp className="h-4 w-4" />
-                  </button>
-                  <button className="btn-ghost !px-2" onClick={() => move(index, 1)} aria-label="Move down">
-                    <ChevronDown className="h-4 w-4" />
-                  </button>
-                  <button
-                    className="btn-ghost !px-2 text-rose"
-                    onClick={() => patch("program", data.program.filter((row) => row.id !== item.id))}
-                    aria-label="Remove"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-              <div className="grid gap-3 md:grid-cols-2">
-                <div>
-                  <label className="label">Title in the program</label>
-                  <input className="field" value={item.title} onChange={(e) => update(item.id, { title: e.target.value })} />
-                </div>
-                <div>
-                  <label className="label">
-                    {item.tag === "song"
-                      ? "Hymn number / source"
-                      : item.tag === "word"
-                        ? "Scripture reference"
-                        : "Subtitle"}
-                  </label>
-                  <input className="field" value={item.subtitle} onChange={(e) => update(item.id, { subtitle: e.target.value })} />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="label">Who</label>
-                  <input
-                    className="field"
-                    placeholder={
-                      item.tag === "procession" || item.tag === "recession"
-                        ? "Walking order"
-                        : item.tag === "song"
-                          ? "Congregation, choir, soloist…"
-                          : "Minister, couple, reader…"
-                    }
-                    value={item.people}
-                    onChange={(e) => update(item.id, { people: e.target.value })}
+        <div className="no-print space-y-4">
+          {grouped.map((section) => {
+            const tone = sectionTone[section.id];
+            const expandedSection = open[section.id];
+            return (
+              <section key={section.id} className="card overflow-hidden">
+                <button
+                  className="flex w-full items-center gap-3 px-4 py-4 text-left"
+                  onClick={() => setOpen((current) => ({ ...current, [section.id]: !current[section.id] }))}
+                  aria-expanded={expandedSection}
+                >
+                  <span className={`h-2.5 w-2.5 shrink-0 rounded-full border-2 ${tone.dot}`} />
+                  <div className="min-w-0 flex-1">
+                    <p className="font-serif text-2xl leading-none">{section.label}</p>
+                    <p className={`mt-1 flex items-center gap-1.5 text-xs ${tone.chip}`}>
+                      <Clock className="h-3 w-3" />
+                      {timeRange(section.items)}
+                      <span className="text-muted">· {section.items.length}</span>
+                    </p>
+                  </div>
+                  <ChevronDown
+                    className={`h-5 w-5 shrink-0 text-muted transition ${expandedSection ? "rotate-180" : ""}`}
                   />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="label">
-                    {item.tag === "song" ? "Lyrics" : item.tag === "word" ? "Reading" : "Words / notes"}
-                  </label>
-                  <textarea
-                    className="field min-h-32 whitespace-pre-wrap"
-                    value={item.body}
-                    onChange={(e) => update(item.id, { body: e.target.value })}
-                  />
-                </div>
-              </div>
-            </article>
-          ))}
+                </button>
 
-          {adding ? (
-            <div className="card p-4">
-              <p className="mb-3 text-xs uppercase tracking-[0.16em] text-muted">Add a point in the ceremony</p>
-              <div className="flex flex-wrap gap-2">
-                {PROGRAM_TAGS.map((tag) => (
-                  <button key={tag.id} className="btn-ghost !py-1" onClick={() => addTag(tag.id)} title={tag.hint}>
-                    {tag.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <button className="btn-sage w-full" onClick={() => setAdding(true)}>
-              <Plus className="h-4 w-4" /> Add a ceremony point
-            </button>
-          )}
+                {expandedSection ? (
+                  <div className="border-t border-gold/10 px-4 pb-4 pt-2">
+                    {section.items.length === 0 ? (
+                      <p className="mb-3 px-1 text-sm text-muted">{section.hint}. Add the first moment below.</p>
+                    ) : (
+                      <ol className="relative">
+                        <span className={`absolute bottom-3 left-[6.35rem] top-3 w-px ${tone.line}`} />
+                        {section.items.map((item, index) => {
+                          const isOpen = expanded === item.id;
+                          return (
+                            <li key={item.id} className="relative grid grid-cols-[6.5rem_1fr] gap-3 py-2">
+                              <input
+                                type="time"
+                                className="field h-10 px-2 text-center text-sm tabular-nums"
+                                value={item.time}
+                                onChange={(e) => update(item.id, { time: e.target.value })}
+                                aria-label={`Time for ${item.title || "this moment"}`}
+                              />
+                              <div className="min-w-0">
+                                <span
+                                  className={`absolute left-[6.1rem] top-5 z-[1] h-2.5 w-2.5 rounded-full border-2 ${tone.dot}`}
+                                />
+                                <div className={`rounded-2xl border border-gold/10 bg-white/60 ${isOpen ? "p-3" : ""}`}>
+                                  <div className="flex items-start gap-2">
+                                    <button
+                                      className="min-w-0 flex-1 px-3 py-2 text-left"
+                                      onClick={() => setExpanded(isOpen ? null : item.id)}
+                                    >
+                                      <p className="font-serif text-xl leading-tight">{item.title || "Untitled"}</p>
+                                      <p className="mt-0.5 text-xs text-muted">
+                                        {[item.people, item.subtitle].filter(Boolean).join(" · ") || "Tap to edit details"}
+                                      </p>
+                                    </button>
+                                    <div className="flex shrink-0 gap-1 pr-1 pt-1">
+                                      <button
+                                        className="btn-ghost !px-2"
+                                        onClick={() => moveInSection(item.id, -1)}
+                                        disabled={index === 0}
+                                        aria-label="Move up"
+                                      >
+                                        <ChevronUp className="h-4 w-4" />
+                                      </button>
+                                      <button
+                                        className="btn-ghost !px-2"
+                                        onClick={() => moveInSection(item.id, 1)}
+                                        disabled={index === section.items.length - 1}
+                                        aria-label="Move down"
+                                      >
+                                        <ChevronDown className="h-4 w-4" />
+                                      </button>
+                                      <button
+                                        className="btn-ghost !px-2 text-rose"
+                                        onClick={() => {
+                                          patch(
+                                            "program",
+                                            data.program.filter((row) => row.id !== item.id),
+                                          );
+                                          if (expanded === item.id) setExpanded(null);
+                                        }}
+                                        aria-label="Remove"
+                                      >
+                                        <Trash2 className="h-4 w-4" />
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {isOpen ? (
+                                    <div className="mt-2 grid gap-3 border-t border-gold/10 pt-3 md:grid-cols-2">
+                                      <div>
+                                        <label className="label">Title</label>
+                                        <input
+                                          className="field"
+                                          value={item.title}
+                                          onChange={(e) => update(item.id, { title: e.target.value })}
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="label">Part of the day</label>
+                                        <select
+                                          className="field"
+                                          value={item.section}
+                                          onChange={(e) => moveToSection(item.id, e.target.value as ProgramSection)}
+                                        >
+                                          {PROGRAM_SECTIONS.map((option) => (
+                                            <option key={option.id} value={option.id}>
+                                              {option.label}
+                                            </option>
+                                          ))}
+                                        </select>
+                                      </div>
+                                      <div>
+                                        <label className="label">Who</label>
+                                        <input
+                                          className="field"
+                                          value={item.people}
+                                          onChange={(e) => update(item.id, { people: e.target.value })}
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="label">
+                                          {item.tag === "song"
+                                            ? "Hymn number / source"
+                                            : item.tag === "word"
+                                              ? "Scripture reference"
+                                              : "Subtitle"}
+                                        </label>
+                                        <input
+                                          className="field"
+                                          value={item.subtitle}
+                                          onChange={(e) => update(item.id, { subtitle: e.target.value })}
+                                        />
+                                      </div>
+                                      <div className="md:col-span-2">
+                                        <label className="label">
+                                          {item.tag === "song" ? "Lyrics" : item.tag === "word" ? "Reading" : "Notes"}
+                                        </label>
+                                        <textarea
+                                          className="field min-h-28 whitespace-pre-wrap"
+                                          value={item.body}
+                                          onChange={(e) => update(item.id, { body: e.target.value })}
+                                        />
+                                      </div>
+                                    </div>
+                                  ) : null}
+                                </div>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    )}
+
+                    {adding === section.id ? (
+                      <div className="mt-2 rounded-2xl border border-gold/15 bg-white/50 p-3">
+                        <p className="mb-2 text-xs uppercase tracking-[0.16em] text-muted">Add to {section.label}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {SECTION_PRESETS[section.id].map((preset) => (
+                            <button
+                              key={`${preset.tag}-${preset.title}`}
+                              className="btn-ghost !py-1"
+                              onClick={() => addItem(section.id, preset.tag, preset.title)}
+                            >
+                              {preset.title}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <button className="btn-ghost mt-2 w-full" onClick={() => setAdding(section.id)}>
+                        <Plus className="h-4 w-4" /> Add a moment
+                      </button>
+                    )}
+                  </div>
+                ) : null}
+              </section>
+            );
+          })}
         </div>
       ) : null}
     </div>
@@ -167,29 +329,48 @@ function Bulletin() {
 
   return (
     <article className="print-sheet card mx-auto max-w-2xl px-8 py-12 text-center">
-      <p className="text-[11px] uppercase tracking-[0.28em] text-gold">The marriage service</p>
+      <p className="text-[11px] uppercase tracking-[0.28em] text-gold">The wedding day</p>
       <h2 className="mt-3 font-serif text-5xl italic">{coupleLabel(settings)}</h2>
       <p className="mt-3 text-sm text-muted">
-        {[settings.weddingDate && new Date(`${settings.weddingDate}T12:00:00`).toLocaleDateString(undefined, { dateStyle: "long" }), settings.churchName, settings.city]
+        {[
+          settings.weddingDate &&
+            new Date(`${settings.weddingDate}T12:00:00`).toLocaleDateString(undefined, { dateStyle: "long" }),
+          settings.churchName,
+          settings.receptionVenue,
+          settings.city,
+        ]
           .filter(Boolean)
           .join(" · ")}
       </p>
       <div className="mx-auto my-8 h-px w-24 bg-gold/50" />
-      <ol className="space-y-8 text-left">
-        {program.map((item) => (
-          <li key={item.id}>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-gold">{TAG_BY_ID[item.tag].label}</p>
-            <h3 className="font-serif text-2xl">{item.title}</h3>
-            {item.subtitle ? <p className="text-sm italic text-muted">{item.subtitle}</p> : null}
-            {item.people ? <p className="text-sm text-muted">{item.people}</p> : null}
-            {item.body ? (
-              <p className={`mt-2 whitespace-pre-wrap text-sm leading-relaxed ${item.tag === "song" ? "text-center italic" : ""}`}>
-                {item.body}
-              </p>
-            ) : null}
-          </li>
-        ))}
-      </ol>
+      {PROGRAM_SECTIONS.map((section) => {
+        const items = program.filter((item) => item.section === section.id);
+        if (!items.length) return null;
+        return (
+          <section key={section.id} className="mb-10 text-left">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-gold">{section.label}</p>
+            <ol className="mt-4 space-y-6">
+              {items.map((item) => (
+                <li key={item.id} className="grid grid-cols-[4.5rem_1fr] gap-3">
+                  <p className="pt-1 text-xs tabular-nums text-muted">{formatTime(item.time) || "—"}</p>
+                  <div>
+                    <h3 className="font-serif text-2xl leading-tight">{item.title}</h3>
+                    {item.subtitle ? <p className="text-sm italic text-muted">{item.subtitle}</p> : null}
+                    {item.people ? <p className="text-sm text-muted">{item.people}</p> : null}
+                    {item.body ? (
+                      <p
+                        className={`mt-2 whitespace-pre-wrap text-sm leading-relaxed ${item.tag === "song" ? "text-center italic" : ""}`}
+                      >
+                        {item.body}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        );
+      })}
     </article>
   );
 }

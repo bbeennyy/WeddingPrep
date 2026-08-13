@@ -1,10 +1,43 @@
-import { createDefaultData } from "./defaults";
-import type { WeddingData } from "./types";
+import { createDefaultData, ensureCoupleGuests, uid } from "./defaults";
+import { TAG_BY_ID } from "./constants";
+import type { Guest, PhotoShot, ProgramItem, ProgramSection, ProgramTag, WeddingData } from "./types";
 
 const STORAGE_KEY = "wedding-prep-data-v1";
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
+}
+
+const PROGRAM_SECTION_IDS = new Set<ProgramSection>(["pre-ceremony", "ceremony", "reception"]);
+
+function normalizePhotoShot(raw: unknown): PhotoShot {
+  const row = isObject(raw) ? raw : {};
+  return {
+    id: String(row.id || uid()),
+    name: String(row.name ?? ""),
+    notes: String(row.notes ?? ""),
+    guestIds: Array.isArray(row.guestIds) ? row.guestIds.map((id) => String(id)) : [],
+  };
+}
+
+function normalizeProgramItem(raw: unknown): ProgramItem {
+  const row = isObject(raw) ? raw : {};
+  const tag = (typeof row.tag === "string" && row.tag in TAG_BY_ID ? row.tag : "custom") as ProgramTag;
+  const section = PROGRAM_SECTION_IDS.has(row.section as ProgramSection)
+    ? (row.section as ProgramSection)
+    : tag === "prelude"
+      ? "pre-ceremony"
+      : "ceremony";
+  return {
+    id: String(row.id || uid()),
+    tag,
+    section,
+    time: typeof row.time === "string" ? row.time : "",
+    title: String(row.title ?? ""),
+    subtitle: String(row.subtitle ?? ""),
+    body: String(row.body ?? ""),
+    people: String(row.people ?? ""),
+  };
 }
 
 export function parseWeddingData(raw: unknown): WeddingData {
@@ -13,20 +46,50 @@ export function parseWeddingData(raw: unknown): WeddingData {
 
   const settings = isObject(raw.settings) ? { ...fallback.settings, ...raw.settings } : fallback.settings;
 
+  const guests = ensureCoupleGuests(Array.isArray(raw.guests) ? (raw.guests as WeddingData["guests"]) : []);
+  const photoShots = Array.isArray(raw.photoShots)
+    ? raw.photoShots.map(normalizePhotoShot)
+    : fallback.photoShots;
+
   return {
     version: 1,
+    updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : "",
     settings: {
       ...settings,
       githubToken: String(settings.githubToken ?? ""),
+      partnerA: String(settings.partnerA ?? "").trim() || fallback.settings.partnerA,
+      partnerB: partnerBName(settings.partnerB, fallback.settings.partnerB),
+      totalBudget: Number(settings.totalBudget) || 0,
     },
     checklist: Array.isArray(raw.checklist) ? (raw.checklist as WeddingData["checklist"]) : fallback.checklist,
     vendors: Array.isArray(raw.vendors) ? (raw.vendors as WeddingData["vendors"]) : fallback.vendors,
     budget: Array.isArray(raw.budget) ? (raw.budget as WeddingData["budget"]) : fallback.budget,
     notes: Array.isArray(raw.notes) ? (raw.notes as WeddingData["notes"]) : fallback.notes,
-    guests: Array.isArray(raw.guests) ? (raw.guests as WeddingData["guests"]) : fallback.guests,
+    guests,
     tables: Array.isArray(raw.tables) ? (raw.tables as WeddingData["tables"]) : fallback.tables,
-    program: Array.isArray(raw.program) ? (raw.program as WeddingData["program"]) : fallback.program,
+    photoShots: seedCouplePhoto(photoShots, guests),
+    program: Array.isArray(raw.program) ? raw.program.map(normalizeProgramItem) : fallback.program,
   };
+}
+
+function partnerBName(value: unknown, fallback: string): string {
+  const name = String(value ?? "").trim();
+  if (!name || name === "Evelyn Joseph") return fallback;
+  return name;
+}
+
+function seedCouplePhoto(shots: PhotoShot[], guests: Guest[]): PhotoShot[] {
+  const coupleIds = guests
+    .filter((guest) => {
+      const name = guest.name.trim().toLowerCase();
+      return name === "beniamin costea" || name === "evelyn costea";
+    })
+    .map((guest) => guest.id);
+  if (!coupleIds.length) return shots;
+  return shots.map((shot) => {
+    if (shot.name.trim().toLowerCase() !== "the couple" || shot.guestIds.length) return shot;
+    return { ...shot, guestIds: coupleIds };
+  });
 }
 
 export function loadLocal(): WeddingData {
@@ -43,9 +106,177 @@ export function saveLocal(data: WeddingData): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
+export function withoutToken(data: WeddingData): WeddingData {
+  return {
+    ...data,
+    settings: { ...data.settings, githubToken: "" },
+  };
+}
+
+export function stampData(data: WeddingData): WeddingData {
+  return { ...data, updatedAt: new Date().toISOString() };
+}
+
+function timestamp(data: WeddingData): number {
+  const value = Date.parse(data.updatedAt);
+  return Number.isFinite(value) ? value : 0;
+}
+
+function richness(data: WeddingData): number {
+  return (
+    data.guests.length * 10 +
+    data.checklist.filter((item) => item.done).length * 3 +
+    data.vendors.length +
+    data.budget.filter((item) => item.paid).length +
+    data.notes.length +
+    (data.settings.partnerA.trim() ? 1 : 0) +
+    (data.settings.partnerB.trim() ? 1 : 0)
+  );
+}
+
+/** Prefer the newest copy. If timestamps are missing or tied, keep the copy with more real data. */
+export function chooseWeddingData(
+  local: WeddingData,
+  file: WeddingData | null,
+  remote: WeddingData | null,
+): WeddingData {
+  const candidates = [remote, file, local].filter((row): row is WeddingData => row !== null);
+  return candidates.reduce((best, row) => {
+    const timeDiff = timestamp(row) - timestamp(best);
+    if (timeDiff > 0) return row;
+    if (timeDiff < 0) return best;
+    return richness(row) > richness(best) ? row : best;
+  });
+}
+
+export function hasGithubTarget(settings: WeddingData["settings"]): boolean {
+  return Boolean(settings.githubOwner.trim() && settings.githubRepo.trim() && settings.githubToken.trim());
+}
+
+export async function loadFileData(): Promise<WeddingData | null> {
+  try {
+    const res = await fetch("/api/wedding-data");
+    if (!res.ok) return null;
+    return parseWeddingData(await res.json());
+  } catch {
+    return null;
+  }
+}
+
+export async function saveFileData(data: WeddingData): Promise<boolean> {
+  try {
+    const res = await fetch("/api/wedding-data", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(withoutToken(data), null, 2),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 export function exportFilename(): string {
   const stamp = new Date().toISOString().slice(0, 10);
   return `wedding-prep-${stamp}.json`;
+}
+
+function countUnquoted(line: string, delimiter: string): number {
+  let count = 0;
+  let inQuotes = false;
+  for (const ch of line) {
+    if (ch === '"') inQuotes = !inQuotes;
+    else if (ch === delimiter && !inQuotes) count += 1;
+  }
+  return count;
+}
+
+function detectDelimiter(text: string): string {
+  const firstLine = text.split(/\r?\n/).find((line) => line.trim()) ?? "";
+  const commas = countUnquoted(firstLine, ",");
+  const semis = countUnquoted(firstLine, ";");
+  const tabs = countUnquoted(firstLine, "\t");
+  if (tabs > commas && tabs > semis) return "\t";
+  if (semis > commas) return ";";
+  return ",";
+}
+
+function parseCsvRows(text: string): string[][] {
+  const delimiter = detectDelimiter(text);
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += ch;
+      }
+      continue;
+    }
+    if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === delimiter) {
+      row.push(field);
+      field = "";
+    } else if (ch === "\n") {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (ch !== "\r") {
+      field += ch;
+    }
+  }
+
+  if (field.length > 0 || row.length > 0) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+/** Spreadsheet columns A/B/C: first name, last name, party. Row 1 is the header. */
+export function parseGuestCsv(text: string): Guest[] {
+  const cleaned = text.replace(/^\uFEFF/, "");
+  const rows = parseCsvRows(cleaned);
+  if (rows.length < 2) return [];
+
+  const guests: Guest[] = [];
+  const seen = new Set<string>();
+
+  for (const row of rows.slice(1)) {
+    const first = (row[0] ?? "").trim();
+    const last = (row[1] ?? "").trim();
+    const party = (row[2] ?? "").trim();
+    const name = [first, last].filter(Boolean).join(" ");
+    if (!name) continue;
+    const key = name.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    guests.push({
+      id: uid(),
+      name,
+      side: "both",
+      rsvp: "pending",
+      dietary: "",
+      notes: "",
+      tableId: null,
+      group: party,
+    });
+  }
+
+  return guests;
 }
 
 export function downloadData(data: WeddingData): void {
@@ -124,7 +355,7 @@ export async function pushToGithub(target: GithubTarget, data: WeddingData): Pro
     headers: githubHeaders(token, { "Content-Type": "application/json" }),
     body: JSON.stringify({
       message: "Update wedding planner data",
-      content: encodeContent(JSON.stringify(data, null, 2)),
+      content: encodeContent(JSON.stringify(withoutToken(data), null, 2)),
       branch,
       sha,
     }),

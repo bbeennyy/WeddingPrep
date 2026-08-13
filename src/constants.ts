@@ -1,4 +1,4 @@
-import type { ProgramTag, ProgramTagMeta } from "./types";
+import type { ProgramSection, ProgramTag, ProgramTagMeta } from "./types";
 
 export const PROGRAM_TAGS: ProgramTagMeta[] = [
   { id: "prelude", label: "Prelude", hint: "Music as people gather", group: "music" },
@@ -27,6 +27,34 @@ export const TAG_BY_ID = Object.fromEntries(
   PROGRAM_TAGS.map((tag) => [tag.id, tag]),
 ) as Record<ProgramTag, ProgramTagMeta>;
 
+export const PROGRAM_SECTIONS: { id: ProgramSection; label: string; hint: string }[] = [
+  { id: "pre-ceremony", label: "Pre ceremony", hint: "Getting ready, photos, guests arriving" },
+  { id: "ceremony", label: "Ceremony", hint: "The marriage service" },
+  { id: "reception", label: "Reception", hint: "Dinner, toasts, dancing" },
+];
+
+export const SECTION_PRESETS: Record<ProgramSection, { tag: ProgramTag; title: string }[]> = {
+  "pre-ceremony": [
+    { tag: "custom", title: "Getting ready" },
+    { tag: "custom", title: "First look / photos" },
+    { tag: "custom", title: "Guests arrive" },
+    { tag: "prelude", title: "Prelude" },
+    { tag: "custom", title: "Custom" },
+  ],
+  ceremony: PROGRAM_TAGS.map((tag) => ({ tag: tag.id, title: tag.label })),
+  reception: [
+    { tag: "custom", title: "Cocktail hour" },
+    { tag: "custom", title: "Grand entrance" },
+    { tag: "custom", title: "Dinner" },
+    { tag: "custom", title: "Toasts" },
+    { tag: "custom", title: "First dance" },
+    { tag: "custom", title: "Cake" },
+    { tag: "custom", title: "Open dancing" },
+    { tag: "custom", title: "Send-off" },
+    { tag: "custom", title: "Custom" },
+  ],
+};
+
 export const CHECKLIST_CATEGORIES = [
   "Legal",
   "Church",
@@ -42,8 +70,8 @@ export const CHECKLIST_CATEGORIES = [
 ] as const;
 
 export const OWNER_LABELS = {
-  a: "Partner A",
-  b: "Partner B",
+  a: "Beniamin Costea",
+  b: "Evelyn Costea",
   both: "Together",
 } as const;
 

@@ -1,3 +1,2 @@
-# Keep this folder for the optional shared data file.
-# The app can write wedding.json here through Settings → Save to GitHub.
-# Do not commit a GitHub token.
+# Auto-written by the app while npm run dev is running.
+# Guest names live here — do not commit a GitHub token. Keep the repo private.

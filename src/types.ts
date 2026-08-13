@@ -3,6 +3,8 @@ export type Rsvp = "pending" | "attending" | "declined" | "maybe";
 export type VendorStatus = "researching" | "contacted" | "booked" | "paid";
 export type TableShape = "round" | "rect";
 
+export type ProgramSection = "pre-ceremony" | "ceremony" | "reception";
+
 export type ProgramTag =
   | "prelude"
   | "procession"
@@ -33,6 +35,7 @@ export interface Settings {
   receptionVenue: string;
   city: string;
   currency: string;
+  totalBudget: number;
   githubOwner: string;
   githubRepo: string;
   githubBranch: string;
@@ -92,9 +95,18 @@ export interface Table {
   shape: TableShape;
 }
 
+export interface PhotoShot {
+  id: string;
+  name: string;
+  notes: string;
+  guestIds: string[];
+}
+
 export interface ProgramItem {
   id: string;
   tag: ProgramTag;
+  section: ProgramSection;
+  time: string;
   title: string;
   subtitle: string;
   body: string;
@@ -103,6 +115,7 @@ export interface ProgramItem {
 
 export interface WeddingData {
   version: 1;
+  updatedAt: string;
   settings: Settings;
   checklist: ChecklistItem[];
   vendors: Vendor[];
@@ -110,6 +123,7 @@ export interface WeddingData {
   notes: NoteCard[];
   guests: Guest[];
   tables: Table[];
+  photoShots: PhotoShot[];
   program: ProgramItem[];
 }
 
