@@ -4,4 +4,3 @@ dist
 *.local
 .env
 .env.*
-data/wedding.json
