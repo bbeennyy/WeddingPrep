@@ -21,9 +21,19 @@ const links = [
 ];
 
 export function Shell() {
-  const { data } = useWedding();
+  const { data, syncState, syncMessage } = useWedding();
   const location = useLocation();
   const names = coupleLabel(data.settings);
+  const syncHint =
+    syncState === "saving"
+      ? "Saving to GitHub…"
+      : syncState === "saved"
+        ? "Saved to GitHub"
+        : syncState === "error"
+          ? "GitHub save failed"
+          : syncState === "off"
+            ? "This device only"
+            : "";
 
   return (
     <div className="min-h-screen">
@@ -31,12 +41,16 @@ export function Shell() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
           <div>
             <p className="font-serif text-2xl leading-none text-ink">{names}</p>
-            <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-muted">Wedding prep</p>
+            <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-muted">
+              Wedding prep
+              {syncHint ? <span className="normal-case tracking-normal text-muted/80"> · {syncHint}</span> : null}
+            </p>
           </div>
           <NavLink
             to="/settings"
             className="btn-ghost h-10 w-10 !p-0"
             aria-label="Settings"
+            title={syncMessage || "Settings"}
           >
             <Settings className="h-4 w-4" />
           </NavLink>

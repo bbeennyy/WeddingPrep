@@ -35,15 +35,14 @@ Then open the local URL Vite prints.
 
 ## Sharing your real data (not just the app)
 
-The website is only the planner. Guest names and your notes stay in **this browser** unless you share them.
+The website is only the planner. Guest names and your notes stay in **this browser** unless you sync them.
 
-Pick one:
+**Live sync (recommended):** In Settings, paste a [fine-grained personal access token](https://github.com/settings/personal-access-tokens) with **Contents: Read and write** on **only this repo**, on each phone/computer. Edits then update `data/wedding.json` on GitHub within about a second, and the other device loads that file when you open or return to the site.
 
-1. **Simplest.** Each of you uses the app. When you want to sync, **Settings → Download JSON**, send the file (WhatsApp, email), and the other person **Import JSON**.
-2. **One shared file in GitHub.** In Settings, paste a [fine-grained personal access token](https://github.com/settings/personal-access-tokens) that can read/write **only this repo**. Tap **Save to GitHub**. The other person taps **Load from GitHub**. The file is `data/wedding.json`.
-3. If the repo is **public**, do not save guest lists there. Make the repo private, or keep using JSON files off GitHub.
+Other options:
 
-A GitHub token is stored only in that browser. Never paste it into a commit or a chat.
+1. **JSON file.** Settings → Download JSON, send it, then Import JSON on the other device.
+2. If the repo is **public**, anyone can read `data/wedding.json`. Prefer a private repo when you can, or accept that guest lists in GitHub are visible.
 
 ## Church program
 

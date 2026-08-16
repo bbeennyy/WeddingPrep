@@ -1,20 +1,15 @@
 import { useRef, useState } from "react";
 import { useWedding } from "../context";
 import { createDefaultData } from "../defaults";
-import {
-  downloadData,
-  parseWeddingData,
-  pullFromGithub,
-  pushToGithub,
-  targetFromSettings,
-} from "../storage";
+import { downloadData, hasGithubTarget, parseWeddingData } from "../storage";
 
 export function SettingsPage() {
-  const { data, patch, setData } = useWedding();
+  const { data, patch, setData, syncState, syncMessage, syncNow, refreshFromGithub } = useWedding();
   const { settings } = data;
   const fileRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const syncOn = hasGithubTarget(settings);
 
   function update<K extends keyof typeof settings>(key: K, value: (typeof settings)[K]) {
     patch("settings", { ...settings, [key]: value });
@@ -24,9 +19,7 @@ export function SettingsPage() {
     setBusy(true);
     setStatus("");
     try {
-      const next = await pullFromGithub(targetFromSettings(settings));
-      next.settings.githubToken = settings.githubToken;
-      setData(next);
+      await refreshFromGithub();
       setStatus("Loaded the shared file from GitHub.");
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Could not load from GitHub.");
@@ -39,8 +32,8 @@ export function SettingsPage() {
     setBusy(true);
     setStatus("");
     try {
-      await pushToGithub(targetFromSettings(settings), data);
-      setStatus("Saved to GitHub. The other of you can tap Load from GitHub.");
+      await syncNow();
+      setStatus("Saved to GitHub. Open the site on the other phone to pick it up.");
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Could not save to GitHub.");
     } finally {
@@ -90,12 +83,81 @@ export function SettingsPage() {
       </section>
 
       <section className="card space-y-3 p-5">
-        <h2 className="font-serif text-2xl">Backup on this phone / computer</h2>
+        <h2 className="font-serif text-2xl">Live sync through GitHub</h2>
         <p className="text-sm text-muted">
-          Each browser keeps its own copy. On your computer while developing, the app also writes{" "}
-          <code>data/wedding.json</code>. On the public website, open this page and use <strong>Import JSON</strong> if
-          your newest file is only on the PC — or use Share through GitHub below so both phones stay in sync. The GitHub
-          token is never written into the JSON file.
+          A save on your PC only stays in that browser unless GitHub sync is on. Paste the same fine-grained token on{" "}
+          <em>each</em> phone/computer (Contents read/write on this repo only). After that, checklist and guest RSVP
+          changes write to <code>data/wedding.json</code> in about a second, and the other device picks them up when you
+          open or return to the site.
+        </p>
+        <p
+          className={`rounded-xl px-3 py-2 text-sm ${
+            syncState === "error"
+              ? "bg-rose-50 text-rose-900"
+              : syncOn
+                ? "bg-sage/10 text-ink"
+                : "bg-gold/10 text-ink"
+          }`}
+        >
+          {syncOn
+            ? syncMessage || "GitHub sync is on."
+            : "Sync is off on this browser — edits will not appear on the other phone until you add a token."}
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div>
+            <label className="label">Owner</label>
+            <input className="field" value={settings.githubOwner} onChange={(e) => update("githubOwner", e.target.value)} />
+          </div>
+          <div>
+            <label className="label">Repo</label>
+            <input className="field" value={settings.githubRepo} onChange={(e) => update("githubRepo", e.target.value)} />
+          </div>
+          <div>
+            <label className="label">Branch</label>
+            <input className="field" value={settings.githubBranch} onChange={(e) => update("githubBranch", e.target.value)} />
+          </div>
+          <div>
+            <label className="label">File path</label>
+            <input className="field" value={settings.githubPath} onChange={(e) => update("githubPath", e.target.value)} />
+          </div>
+          <div className="sm:col-span-2">
+            <label className="label">Token (stays in this browser only)</label>
+            <input
+              className="field"
+              type="password"
+              autoComplete="off"
+              value={settings.githubToken}
+              onChange={(e) => update("githubToken", e.target.value)}
+              placeholder="github_pat_…"
+            />
+            <p className="mt-2 text-xs text-muted">
+              Create one at{" "}
+              <a
+                className="underline"
+                href="https://github.com/settings/personal-access-tokens"
+                target="_blank"
+                rel="noreferrer"
+              >
+                github.com/settings/personal-access-tokens
+              </a>
+              . Fine-grained → only this repository → Permissions → Contents: Read and write.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button className="btn-sage" disabled={busy || !syncOn} onClick={push}>
+            Save to GitHub now
+          </button>
+          <button className="btn-ghost" disabled={busy} onClick={pull}>
+            Load from GitHub now
+          </button>
+        </div>
+      </section>
+
+      <section className="card space-y-3 p-5">
+        <h2 className="font-serif text-2xl">Backup file</h2>
+        <p className="text-sm text-muted">
+          Download a JSON copy, or import one from your PC if you have not set up the token yet.
         </p>
         <div className="flex flex-wrap gap-2">
           <button className="btn-primary" onClick={() => downloadData(data)}>
@@ -123,52 +185,6 @@ export function SettingsPage() {
               }
             }}
           />
-        </div>
-      </section>
-
-      <section className="card space-y-3 p-5">
-        <h2 className="font-serif text-2xl">Share through GitHub</h2>
-        <p className="text-sm text-muted">
-          This is how another computer or browser gets the same guests and checklist. Create a fine-grained token with
-          access to this repository only, paste it here once on each device (it stays in that browser), and keep the repo
-          private. After that it loads and saves by itself. Manual buttons below are only a backup.
-        </p>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div>
-            <label className="label">Owner</label>
-            <input className="field" value={settings.githubOwner} onChange={(e) => update("githubOwner", e.target.value)} />
-          </div>
-          <div>
-            <label className="label">Repo</label>
-            <input className="field" value={settings.githubRepo} onChange={(e) => update("githubRepo", e.target.value)} />
-          </div>
-          <div>
-            <label className="label">Branch</label>
-            <input className="field" value={settings.githubBranch} onChange={(e) => update("githubBranch", e.target.value)} />
-          </div>
-          <div>
-            <label className="label">File path</label>
-            <input className="field" value={settings.githubPath} onChange={(e) => update("githubPath", e.target.value)} />
-          </div>
-          <div className="sm:col-span-2">
-            <label className="label">Token (never committed)</label>
-            <input
-              className="field"
-              type="password"
-              autoComplete="off"
-              value={settings.githubToken}
-              onChange={(e) => update("githubToken", e.target.value)}
-              placeholder="github_pat_…"
-            />
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button className="btn-sage" disabled={busy} onClick={push}>
-            Save to GitHub
-          </button>
-          <button className="btn-ghost" disabled={busy} onClick={pull}>
-            Load from GitHub
-          </button>
         </div>
       </section>
 

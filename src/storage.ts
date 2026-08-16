@@ -153,8 +153,12 @@ export function chooseWeddingData(
   });
 }
 
+export function hasGithubRepo(settings: WeddingData["settings"]): boolean {
+  return Boolean(settings.githubOwner.trim() && settings.githubRepo.trim());
+}
+
 export function hasGithubTarget(settings: WeddingData["settings"]): boolean {
-  return Boolean(settings.githubOwner.trim() && settings.githubRepo.trim() && settings.githubToken.trim());
+  return hasGithubRepo(settings) && Boolean(settings.githubToken.trim());
 }
 
 async function readWeddingPayload(url: string): Promise<WeddingData | null> {
@@ -177,6 +181,29 @@ export async function loadFileData(): Promise<WeddingData | null> {
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
   return readWeddingPayload(`${base}data/wedding.json`);
+}
+
+/** Latest committed file on GitHub (public raw URL works without a token). */
+export async function pullFromGithubRaw(settings: WeddingData["settings"]): Promise<WeddingData | null> {
+  if (!hasGithubRepo(settings)) return null;
+  const target = targetFromSettings(settings);
+  const url =
+    `https://raw.githubusercontent.com/${target.owner}/${target.repo}/` +
+    `${encodeURIComponent(target.branch)}/${target.path.replace(/^\/+/, "")}` +
+    `?t=${Date.now()}`;
+  return readWeddingPayload(url);
+}
+
+/** Prefer authenticated API; fall back to public raw for read-only devices. */
+export async function pullLatestShared(settings: WeddingData["settings"]): Promise<WeddingData | null> {
+  if (hasGithubTarget(settings)) {
+    try {
+      return await pullFromGithub(targetFromSettings(settings));
+    } catch {
+      /* try raw next */
+    }
+  }
+  return pullFromGithubRaw(settings);
 }
 
 export async function saveFileData(data: WeddingData): Promise<boolean> {
@@ -355,27 +382,38 @@ export async function pushToGithub(target: GithubTarget, data: WeddingData): Pro
   const { owner, repo, path, branch, token } = target;
   if (!token) throw new Error("Add a GitHub token in Settings first.");
 
-  const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
-  const existing = await fetch(getUrl, { headers: githubHeaders(token) });
-  let sha: string | undefined;
-  if (existing.ok) {
-    const payload = (await existing.json()) as { sha?: string };
-    sha = payload.sha;
-  } else if (existing.status !== 404) {
+  async function putWithSha(sha?: string): Promise<Response> {
+    const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    return fetch(putUrl, {
+      method: "PUT",
+      headers: githubHeaders(token, { "Content-Type": "application/json" }),
+      body: JSON.stringify({
+        message: "Update wedding planner data",
+        content: encodeContent(JSON.stringify(withoutToken(data), null, 2)),
+        branch,
+        sha,
+      }),
+    });
+  }
+
+  async function currentSha(): Promise<string | undefined> {
+    const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
+    const existing = await fetch(getUrl, { headers: githubHeaders(token) });
+    if (existing.ok) {
+      const payload = (await existing.json()) as { sha?: string };
+      return payload.sha;
+    }
+    if (existing.status === 404) return undefined;
     throw new Error(`Could not read the GitHub file (${existing.status}).`);
   }
 
-  const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-  const res = await fetch(putUrl, {
-    method: "PUT",
-    headers: githubHeaders(token, { "Content-Type": "application/json" }),
-    body: JSON.stringify({
-      message: "Update wedding planner data",
-      content: encodeContent(JSON.stringify(withoutToken(data), null, 2)),
-      branch,
-      sha,
-    }),
-  });
+  let sha = await currentSha();
+  let res = await putWithSha(sha);
+  // Another device saved first — retry once with the fresh SHA
+  if (res.status === 409) {
+    sha = await currentSha();
+    res = await putWithSha(sha);
+  }
 
   if (!res.ok) {
     const detail = await res.text();
