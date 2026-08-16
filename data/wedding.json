@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-16T23:04:51.507Z",
+  "updatedAt": "2026-08-16T23:05:42.627Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -344,7 +344,7 @@
     {
       "title": "Mass Text reminders for RSVP",
       "category": "Venue",
-      "done": false,
+      "done": true,
       "owner": "a",
       "dueDate": "2026-08-18",
       "notes": "use a 3rd party to mass text an automated reminder for RSVP. \nCollect phone numbers.",
