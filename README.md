@@ -73,6 +73,8 @@ The starter flow follows a common Presbyterian / Reformed marriage service. Repl
 
 Guest lists, addresses, and budget numbers are personal. Prefer a **private** repository. GitHub Pages on a private repo needs GitHub Pro. On the free plan, keep the **code** public if you want the website, and keep **wedding data** in the browser or a private JSON file.
 
+The site has a soft PIN gate (same PIN on both phones) so casual visitors see a lock screen first. That is not real security — anyone who can read the page source can bypass it. Strangers still cannot change your shared GitHub copy without your personal access token.
+
 ## Stack
 
 Vite, React, TypeScript, Tailwind. Static files only, so GitHub Pages can host it.
