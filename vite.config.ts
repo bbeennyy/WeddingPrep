@@ -51,6 +51,13 @@ function weddingDataPlugin(): Plugin {
     name: "wedding-data-file",
     configureServer: attachWeddingDataApi,
     configurePreviewServer: attachWeddingDataApi,
+    closeBundle() {
+      const outDir = path.resolve(__dirname, "dist/data");
+      fs.mkdirSync(outDir, { recursive: true });
+      if (fs.existsSync(dataFile)) {
+        fs.copyFileSync(dataFile, path.join(outDir, "wedding.json"));
+      }
+    },
   };
 }
 

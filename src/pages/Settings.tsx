@@ -92,9 +92,10 @@ export function SettingsPage() {
       <section className="card space-y-3 p-5">
         <h2 className="font-serif text-2xl">Backup on this phone / computer</h2>
         <p className="text-sm text-muted">
-          Everything you do is saved in this browser and written to <code>data/wedding.json</code> while the app is
-          running — guests, checklist checkmarks, budget, the program, all of it. The GitHub token is never written to
-          that file.
+          Each browser keeps its own copy. On your computer while developing, the app also writes{" "}
+          <code>data/wedding.json</code>. On the public website, open this page and use <strong>Import JSON</strong> if
+          your newest file is only on the PC — or use Share through GitHub below so both phones stay in sync. The GitHub
+          token is never written into the JSON file.
         </p>
         <div className="flex flex-wrap gap-2">
           <button className="btn-primary" onClick={() => downloadData(data)}>

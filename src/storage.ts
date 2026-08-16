@@ -134,7 +134,7 @@ function richness(data: WeddingData): number {
   );
 }
 
-/** Prefer the newest copy. If timestamps are missing or tied, keep the copy with more real data. */
+/** Prefer the newest copy. Clearly richer shared data wins over an empty browser shell. */
 export function chooseWeddingData(
   local: WeddingData,
   file: WeddingData | null,
@@ -142,10 +142,14 @@ export function chooseWeddingData(
 ): WeddingData {
   const candidates = [remote, file, local].filter((row): row is WeddingData => row !== null);
   return candidates.reduce((best, row) => {
+    const richDiff = richness(row) - richness(best);
+    // ~3+ guests of extra substance beats a newer empty Pages visit
+    if (richDiff >= 30) return row;
+    if (richDiff <= -30) return best;
     const timeDiff = timestamp(row) - timestamp(best);
     if (timeDiff > 0) return row;
     if (timeDiff < 0) return best;
-    return richness(row) > richness(best) ? row : best;
+    return richDiff > 0 ? row : best;
   });
 }
 
@@ -153,14 +157,26 @@ export function hasGithubTarget(settings: WeddingData["settings"]): boolean {
   return Boolean(settings.githubOwner.trim() && settings.githubRepo.trim() && settings.githubToken.trim());
 }
 
-export async function loadFileData(): Promise<WeddingData | null> {
+async function readWeddingPayload(url: string): Promise<WeddingData | null> {
   try {
-    const res = await fetch("/api/wedding-data");
+    const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) return null;
     return parseWeddingData(await res.json());
   } catch {
     return null;
   }
+}
+
+export async function loadFileData(): Promise<WeddingData | null> {
+  // Local Vite API (writes the same data/wedding.json on disk while developing)
+  const fromApi = await readWeddingPayload("/api/wedding-data");
+  if (fromApi) return fromApi;
+
+  // GitHub Pages / static hosting: ship a copy of data/wedding.json with the build
+  const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+  return readWeddingPayload(`${base}data/wedding.json`);
 }
 
 export async function saveFileData(data: WeddingData): Promise<boolean> {
