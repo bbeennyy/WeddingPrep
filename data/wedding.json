@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-13T22:29:17.413Z",
+  "updatedAt": "2026-08-16T23:01:29.110Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -340,6 +340,15 @@
       "dueDate": "2026-09-20",
       "notes": "",
       "id": "0dbb2ab5-ed04-4161-8c6f-374cb1b229e0"
+    },
+    {
+      "title": "Mass Text reminders for RSVP",
+      "category": "Venue",
+      "done": false,
+      "owner": "a",
+      "dueDate": "2026-08-18",
+      "notes": "use a 3rd party to mass text an automated reminder for RSVP. \nCollect phone numbers.",
+      "id": "bc1ce9c6-247a-4e84-803a-0bfcaea73510"
     }
   ],
   "vendors": [
@@ -1646,7 +1655,7 @@
       "id": "f2e73133-c281-49ec-92b8-7f3d196402a2",
       "name": "George Costea",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": "6071ae84-49de-4797-bf04-945fe6983d94",
@@ -1656,7 +1665,7 @@
       "id": "46c9fe8d-d0d6-4d85-be59-ed6b24d29705",
       "name": "Roberta Costea",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
@@ -1666,7 +1675,7 @@
       "id": "a2f965fc-d7fa-44ed-93d9-823c88723a52",
       "name": "Emma Costea",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
@@ -1676,7 +1685,7 @@
       "id": "77bfb541-f7bf-4bbf-bb9d-a25081b46e5a",
       "name": "Julian Costea",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
