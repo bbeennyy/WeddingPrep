@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:47:51.506Z",
+  "updatedAt": "2026-08-23T22:47:53.205Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2114,7 +2114,7 @@
       "id": "677ec7da-a2ff-47dd-9028-f10b8292a4a9",
       "name": "Sarah Johnson",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
