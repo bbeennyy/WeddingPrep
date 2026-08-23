@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:05:38.650Z",
+  "updatedAt": "2026-08-23T23:05:49.024Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1317,7 +1317,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "dac082d0-2bc1-4c52-97eb-5c64f68e0a35",
       "group": "Annie & Ben Vowels"
     },
     {
