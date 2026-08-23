@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:38:25.461Z",
+  "updatedAt": "2026-08-23T22:38:28.737Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1244,7 +1244,7 @@
       "id": "0d170e4e-4741-4dc6-9093-0c9b7ef0ffaa",
       "name": "Lily Manring",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
