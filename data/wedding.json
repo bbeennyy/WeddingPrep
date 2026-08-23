@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:50.227Z",
+  "updatedAt": "2026-08-23T22:50:57.070Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1054,7 +1054,7 @@
       "id": "3506ef50-1d1e-43ae-ab1d-4b5b32c9755e",
       "name": "Sarah McChesney",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
