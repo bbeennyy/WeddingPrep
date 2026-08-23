@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T20:12:47.551Z",
+  "updatedAt": "2026-08-23T22:30:23.538Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -564,7 +564,7 @@
       "id": "85311152-5c49-41ec-aa7a-ed61b0bdeeb8",
       "name": "Corbin Stilwell",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
