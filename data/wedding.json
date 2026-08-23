@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:50.318Z",
+  "updatedAt": "2026-08-23T22:53:07.036Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2574,7 +2574,7 @@
       "id": "fb6dbb2b-9bfd-47ad-b033-3747740ce139",
       "name": "Kieya Funk",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
