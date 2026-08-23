@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:01.652Z",
+  "updatedAt": "2026-08-23T22:51:04.381Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1074,7 +1074,7 @@
       "id": "8d28c3fb-1353-47e5-afb5-f8bcf78dfa27",
       "name": "Judi Spear",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
