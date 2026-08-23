@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:45.640Z",
+  "updatedAt": "2026-08-23T22:51:52.986Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1624,7 +1624,7 @@
       "id": "84d5a945-3bca-47b3-a086-dd2816498456",
       "name": "Sarah Bakker",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
