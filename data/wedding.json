@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:46:48.710Z",
+  "updatedAt": "2026-08-23T22:47:05.670Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2494,7 +2494,7 @@
       "id": "f7cee1f5-7f8a-4704-85e0-acf334add94b",
       "name": "Garrett Little",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
