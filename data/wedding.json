@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:49:39.753Z",
+  "updatedAt": "2026-08-23T22:49:59.368Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2624,7 +2624,7 @@
       "id": "a8a433b5-e9c8-40f1-a7a7-599c54afba1c",
       "name": "Scott Hinkle",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
