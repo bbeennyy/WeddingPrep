@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:04:41.824Z",
+  "updatedAt": "2026-08-23T23:04:51.919Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1227,7 +1227,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "878704f7-b90a-4531-8c77-c1b8e6b589b9",
       "group": "Manring Family"
     },
     {
@@ -1237,7 +1237,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "878704f7-b90a-4531-8c77-c1b8e6b589b9",
       "group": "Burke & Lily Manring"
     },
     {
@@ -1247,7 +1247,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "878704f7-b90a-4531-8c77-c1b8e6b589b9",
       "group": "Burke & Lily Manring"
     },
     {
