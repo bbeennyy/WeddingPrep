@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:33:09.519Z",
+  "updatedAt": "2026-08-23T22:33:16.828Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -834,7 +834,7 @@
       "id": "e3842b8e-7ff4-462a-88ca-9439e46ede67",
       "name": "Hannah Howland",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
