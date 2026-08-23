@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:21:45.121Z",
+  "updatedAt": "2026-08-23T23:21:49.125Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1687,7 +1687,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "6b07773d-8a23-44ee-aaa1-193c11ed9746",
       "group": "Florin & Camelia Costea"
     },
     {
