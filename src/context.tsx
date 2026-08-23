@@ -15,7 +15,6 @@ import {
   hasGithubTarget,
   loadFileData,
   loadLocal,
-  markGithubInSync,
   pullLatestShared,
   pushToGithub,
   saveFileData,
@@ -23,6 +22,7 @@ import {
   stampData,
   targetFromSettings,
 } from "./storage";
+import { getWriteToken, setWriteToken } from "./writeToken";
 import type { WeddingData } from "./types";
 
 export type SyncState = "off" | "idle" | "saving" | "saved" | "error";
@@ -47,8 +47,16 @@ function withLocalToken(next: WeddingData, token: string): WeddingData {
   return next;
 }
 
+function applyStoredToken(data: WeddingData): WeddingData {
+  const token = getWriteToken(data.settings.githubToken);
+  if (token && data.settings.githubToken !== token) {
+    return { ...data, settings: { ...data.settings, githubToken: token } };
+  }
+  return data;
+}
+
 export function WeddingProvider({ children }: { children: ReactNode }) {
-  const [data, setState] = useState<WeddingData>(() => loadLocal());
+  const [data, setState] = useState<WeddingData>(() => applyStoredToken(loadLocal()));
   const [ready, setReady] = useState(false);
   const [syncState, setSyncState] = useState<SyncState>("off");
   const [syncMessage, setSyncMessage] = useState("");
@@ -56,10 +64,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
   const dirtyRef = useRef(false);
   const pushingRef = useRef(false);
   const pendingPushRef = useRef(false);
-  const connectedTokenRef = useRef(data.settings.githubToken.trim());
-  const fileTimer = useRef(0);
   const gitTimer = useRef(0);
-  const connectTimer = useRef(0);
 
   dataRef.current = data;
 
@@ -72,20 +77,20 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
   };
 
   function setGithubToken(token: string) {
+    setWriteToken(token);
     setState((current) => ({
       ...current,
       settings: { ...current.settings, githubToken: token },
     }));
   }
 
-  async function pushCurrent(reason: string): Promise<void> {
+  async function pushCurrent(): Promise<void> {
     const snapshot = dataRef.current;
     if (!hasGithubTarget(snapshot.settings)) {
       setSyncState("off");
-      setSyncMessage("Add a GitHub token in Settings to save to the shared JSON file.");
+      setSyncMessage("Paste the write key once in Settings. After that, checks commit data/wedding.json.");
       return;
     }
-
     if (pushingRef.current) {
       pendingPushRef.current = true;
       return;
@@ -93,7 +98,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
 
     pushingRef.current = true;
     setSyncState("saving");
-    setSyncMessage(reason);
+    setSyncMessage("Uploading wedding.json…");
     try {
       while (true) {
         pendingPushRef.current = false;
@@ -117,49 +122,44 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
 
   async function refreshFromGithub(): Promise<void> {
     const local = dataRef.current;
-    const token = local.settings.githubToken;
+    const token = getWriteToken(local.settings.githubToken);
     const remote = await pullLatestShared(local.settings);
-    if (!remote) throw new Error("Could not load the shared file from GitHub.");
+    if (!remote) throw new Error("Could not load data/wedding.json from GitHub.");
     if (dirtyRef.current || pushingRef.current) {
-      throw new Error("Finish saving local edits first, then load again.");
+      throw new Error("Wait for the current upload to finish, then load again.");
     }
     const next = withLocalToken(remote, token);
     setState(next);
     saveLocal(next);
-    if (hasGithubTarget(next.settings)) {
-      markGithubInSync(targetFromSettings(next.settings), next);
-    }
     setSyncState(hasGithubTarget(next.settings) ? "idle" : "off");
-    setSyncMessage("Loaded the latest shared file from GitHub.");
+    setSyncMessage("Loaded data/wedding.json from GitHub.");
   }
 
   useEffect(() => {
     let cancelled = false;
 
     async function hydrate() {
-      const local = loadLocal();
+      const local = applyStoredToken(loadLocal());
       const file = await loadFileData();
       const remote = await pullLatestShared(local.settings);
       if (cancelled) return;
 
-      const token = local.settings.githubToken;
       if (dirtyRef.current) {
         setSyncState(hasGithubTarget(local.settings) ? "idle" : "off");
         setReady(true);
         return;
       }
 
+      const token = getWriteToken(local.settings.githubToken);
       const next = withLocalToken(chooseWeddingData(local, file, remote), token);
       setState(next);
       saveLocal(next);
       if (hasGithubTarget(next.settings)) {
-        connectedTokenRef.current = token.trim();
-        markGithubInSync(targetFromSettings(next.settings), next);
         setSyncState("idle");
-        setSyncMessage("GitHub sync is on — edits save to data/wedding.json.");
+        setSyncMessage("Ready. Checks upload data/wedding.json to GitHub.");
       } else {
         setSyncState("off");
-        setSyncMessage("This browser only. Paste a GitHub token in Settings to sync phones.");
+        setSyncMessage("Paste the write key once in Settings so both phones share the JSON.");
       }
       setReady(true);
     }
@@ -172,71 +172,20 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!ready) return;
-    const token = data.settings.githubToken.trim();
-    if (!token || !hasGithubTarget(data.settings)) {
-      connectedTokenRef.current = "";
+    saveLocal(data);
+    void saveFileData(data);
+
+    if (!hasGithubTarget(data.settings)) {
+      setSyncState("off");
       return;
     }
-    if (token === connectedTokenRef.current) return;
-
-    window.clearTimeout(connectTimer.current);
-    connectTimer.current = window.setTimeout(() => {
-      void (async () => {
-        const current = dataRef.current;
-        const nextToken = current.settings.githubToken.trim();
-        if (!nextToken || nextToken === connectedTokenRef.current) return;
-        setSyncState("saving");
-        setSyncMessage("Connecting to the shared file…");
-        try {
-          const remote = await pullLatestShared(current.settings);
-          connectedTokenRef.current = nextToken;
-          if (remote && !dirtyRef.current) {
-            const chosen = chooseWeddingData(current, null, remote);
-            const next = withLocalToken(chosen, nextToken);
-            setState(next);
-            saveLocal(next);
-            markGithubInSync(targetFromSettings(next.settings), next);
-          }
-          setSyncState("idle");
-          setSyncMessage("GitHub sync is on — edits save to data/wedding.json.");
-        } catch (error) {
-          setSyncState("error");
-          setSyncMessage(error instanceof Error ? error.message : "Could not connect to GitHub.");
-        }
-      })();
-    }, 500);
-
-    return () => {
-      window.clearTimeout(connectTimer.current);
-    };
-  }, [data.settings.githubToken, ready]);
-
-  useEffect(() => {
-    if (!ready) return;
-
-    saveLocal(data);
-
-    window.clearTimeout(fileTimer.current);
-    fileTimer.current = window.setTimeout(() => {
-      void saveFileData(data);
+    if (syncState === "off") setSyncState("idle");
+    window.clearTimeout(gitTimer.current);
+    gitTimer.current = window.setTimeout(() => {
+      if (!dirtyRef.current) return;
+      void pushCurrent();
     }, 400);
-
-    if (hasGithubTarget(data.settings)) {
-      if (syncState === "off") setSyncState("idle");
-      window.clearTimeout(gitTimer.current);
-      gitTimer.current = window.setTimeout(() => {
-        if (!dirtyRef.current) return;
-        void pushCurrent("Saving to GitHub…");
-      }, 1100);
-    } else {
-      setSyncState("off");
-    }
-
-    return () => {
-      window.clearTimeout(fileTimer.current);
-      window.clearTimeout(gitTimer.current);
-    };
-    // syncState intentionally omitted — avoid retrigger loops
+    return () => window.clearTimeout(gitTimer.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, ready]);
 
@@ -244,11 +193,9 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
     if (!ready) return;
 
     function flush() {
-      const current = dataRef.current;
-      saveLocal(current);
-      void saveFileData(current);
-      if (dirtyRef.current && hasGithubTarget(current.settings)) {
-        void pushCurrent("Saving to GitHub…");
+      saveLocal(dataRef.current);
+      if (dirtyRef.current && hasGithubTarget(dataRef.current.settings)) {
+        void pushCurrent();
       }
     }
 
@@ -257,15 +204,13 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
         flush();
         return;
       }
-      // Coming back to the tab — pick up edits from the other phone
       if (dirtyRef.current || pushingRef.current) return;
       const local = dataRef.current;
-      const token = local.settings.githubToken;
       const remote = await pullLatestShared(local.settings);
       if (!remote || dirtyRef.current) return;
       const chosen = chooseWeddingData(local, null, remote);
-      if (chosen.updatedAt === local.updatedAt && richnessEqual(chosen, local)) return;
-      const next = withLocalToken(chosen, token);
+      if (chosen.updatedAt === local.updatedAt) return;
+      const next = withLocalToken(chosen, getWriteToken(local.settings.githubToken));
       setState(next);
       saveLocal(next);
       setSyncMessage("Updated from GitHub.");
@@ -287,28 +232,20 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
       patch: (key, value) => setData((current) => ({ ...current, [key]: value })),
       setGithubToken,
       reset: () => {
-        const token = data.settings.githubToken;
+        const token = getWriteToken(data.settings.githubToken);
         const next = createDefaultData();
         next.settings.githubToken = token;
         setData(next);
       },
       syncState,
       syncMessage,
-      syncNow: () => pushCurrent("Saving to GitHub…"),
+      syncNow: () => pushCurrent(),
       refreshFromGithub,
     }),
     [data, syncState, syncMessage],
   );
 
   return <WeddingContext.Provider value={value}>{children}</WeddingContext.Provider>;
-}
-
-function richnessEqual(a: WeddingData, b: WeddingData): boolean {
-  return (
-    a.guests.length === b.guests.length &&
-    a.checklist.filter((item) => item.done).length === b.checklist.filter((item) => item.done).length &&
-    a.updatedAt === b.updatedAt
-  );
 }
 
 export function useWedding(): WeddingContextValue {
