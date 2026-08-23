@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:08:43.609Z",
+  "updatedAt": "2026-08-23T23:10:49.791Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -767,7 +767,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "69fe4338-72bb-4979-9e1b-759a96e47806",
+      "tableId": null,
       "group": "Priscilla Joseph"
     },
     {
