@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:29.758Z",
+  "updatedAt": "2026-08-23T22:50:33.222Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -784,7 +784,7 @@
       "id": "99414bd0-2f1b-4cba-82e3-f7d67fe73cf1",
       "name": "Jake Michel",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
