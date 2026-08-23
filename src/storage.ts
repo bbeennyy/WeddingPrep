@@ -323,7 +323,7 @@ export function parseGuestCsv(text: string): Guest[] {
 }
 
 export function downloadData(data: WeddingData): void {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const blob = new Blob([JSON.stringify(withoutToken(data), null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -359,66 +359,117 @@ function githubHeaders(token: string, extra?: HeadersInit): Headers {
   const headers = new Headers(extra);
   headers.set("Accept", "application/vnd.github+json");
   headers.set("X-GitHub-Api-Version", "2022-11-28");
+  headers.set("Cache-Control", "no-cache");
   if (token) headers.set("Authorization", `Bearer ${token}`);
   return headers;
 }
 
-export async function pullFromGithub(target: GithubTarget): Promise<WeddingData> {
-  const { owner, repo, path, branch, token } = target;
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
-  const res = await fetch(url, { headers: githubHeaders(token) });
-  if (res.status === 404) {
-    throw new Error("No shared file yet. Save to GitHub once to create it.");
-  }
-  if (!res.ok) {
-    throw new Error(`Could not load from GitHub (${res.status}). Check owner, repo, path, and token.`);
-  }
-  const payload = (await res.json()) as { content?: string };
-  if (!payload.content) throw new Error("GitHub returned an empty file.");
-  return parseWeddingData(JSON.parse(decodeContent(payload.content)));
+function fileKey(target: GithubTarget): string {
+  return `${target.owner}/${target.repo}/${target.branch}/${target.path}`.toLowerCase();
 }
 
-export async function pushToGithub(target: GithubTarget, data: WeddingData): Promise<void> {
+const rememberedSha = new Map<string, string>();
+
+function rememberSha(target: GithubTarget, sha?: string): void {
+  const key = fileKey(target);
+  if (sha) rememberedSha.set(key, sha);
+  else rememberedSha.delete(key);
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+interface RemoteFile {
+  sha?: string;
+  content?: string;
+}
+
+async function readRemoteFile(target: GithubTarget): Promise<RemoteFile | null> {
+  const { owner, repo, path, branch, token } = target;
+  const url =
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}` +
+    `?ref=${encodeURIComponent(branch)}&t=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store", headers: githubHeaders(token) });
+  if (res.status === 404) return null;
+  if (!res.ok) {
+    throw new Error(`Could not read the GitHub file (${res.status}). Check owner, repo, path, and token.`);
+  }
+  const payload = (await res.json()) as RemoteFile;
+  if (payload.sha) rememberSha(target, payload.sha);
+  return payload;
+}
+
+export async function pullFromGithub(target: GithubTarget): Promise<WeddingData> {
+  const remote = await readRemoteFile(target);
+  if (!remote) {
+    throw new Error("No shared file yet. Save to GitHub once to create it.");
+  }
+  if (!remote.content) throw new Error("GitHub returned an empty file.");
+  return parseWeddingData(JSON.parse(decodeContent(remote.content)));
+}
+
+async function pushToGithubOnce(target: GithubTarget, data: WeddingData): Promise<void> {
   const { owner, repo, path, branch, token } = target;
   if (!token) throw new Error("Add a GitHub token in Settings first.");
 
+  const body = encodeContent(JSON.stringify(withoutToken(data), null, 2));
+  const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
   async function putWithSha(sha?: string): Promise<Response> {
-    const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    const payload: Record<string, string> = {
+      message: "Update wedding planner data",
+      content: body,
+      branch,
+    };
+    if (sha) payload.sha = sha;
     return fetch(putUrl, {
       method: "PUT",
       headers: githubHeaders(token, { "Content-Type": "application/json" }),
-      body: JSON.stringify({
-        message: "Update wedding planner data",
-        content: encodeContent(JSON.stringify(withoutToken(data), null, 2)),
-        branch,
-        sha,
-      }),
+      body: JSON.stringify(payload),
     });
   }
 
-  async function currentSha(): Promise<string | undefined> {
-    const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
-    const existing = await fetch(getUrl, { headers: githubHeaders(token) });
-    if (existing.ok) {
-      const payload = (await existing.json()) as { sha?: string };
-      return payload.sha;
+  let sha = rememberedSha.get(fileKey(target));
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    if (!sha) {
+      sha = (await readRemoteFile(target))?.sha;
     }
-    if (existing.status === 404) return undefined;
-    throw new Error(`Could not read the GitHub file (${existing.status}).`);
-  }
 
-  let sha = await currentSha();
-  let res = await putWithSha(sha);
-  // Another device saved first — retry once with the fresh SHA
-  if (res.status === 409) {
-    sha = await currentSha();
-    res = await putWithSha(sha);
-  }
+    const res = await putWithSha(sha);
+    if (res.ok) {
+      const saved = (await res.json()) as { content?: { sha?: string } };
+      rememberSha(target, saved.content?.sha);
+      return;
+    }
 
-  if (!res.ok) {
+    if (res.status === 409 || res.status === 422) {
+      rememberSha(target, undefined);
+      sha = undefined;
+      await sleep(200 * 2 ** attempt);
+      continue;
+    }
+
     const detail = await res.text();
     throw new Error(`Could not save to GitHub (${res.status}). ${detail.slice(0, 180)}`);
   }
+
+  throw new Error(
+    "GitHub still had a newer copy from another device. Your edits are on this phone — wait a second and tap Save to GitHub now.",
+  );
+}
+
+let pushChain: Promise<void> = Promise.resolve();
+
+export function pushToGithub(target: GithubTarget, data: WeddingData): Promise<void> {
+  const run = pushChain.then(() => pushToGithubOnce(target, data));
+  pushChain = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
 }
 
 export function targetFromSettings(settings: WeddingData["settings"]): GithubTarget {
