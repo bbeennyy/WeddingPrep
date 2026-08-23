@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:49:59.368Z",
+  "updatedAt": "2026-08-23T22:50:27.831Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -774,7 +774,7 @@
       "id": "0f5d982b-4ef9-4698-9a27-d42f30071296",
       "name": "Karyn Michel",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
