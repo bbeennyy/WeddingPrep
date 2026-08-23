@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:47.086Z",
+  "updatedAt": "2026-08-23T22:50:50.227Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -924,7 +924,7 @@
       "id": "3f9cd5e7-e8cf-4db3-be57-11398a19eb70",
       "name": "Jay Blanchard",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
