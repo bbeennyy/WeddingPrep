@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:31:25.313Z",
+  "updatedAt": "2026-08-23T22:32:13.096Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -724,7 +724,7 @@
       "id": "ddb105aa-cd7c-4819-b0f9-58b4e7df0631",
       "name": "Clay Joseph",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
