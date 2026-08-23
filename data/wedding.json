@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:33:43.015Z",
+  "updatedAt": "2026-08-23T23:33:46.678Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -954,7 +954,7 @@
       "id": "4ce171be-8b57-4352-918a-c28b11ea29c0",
       "name": "Kaylee Clark",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
