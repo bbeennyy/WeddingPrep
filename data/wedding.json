@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:32.273Z",
+  "updatedAt": "2026-08-23T22:51:44.210Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1619,16 +1619,6 @@
       "notes": "",
       "tableId": null,
       "group": "Ima Umoh"
-    },
-    {
-      "id": "4f1dafa1-496f-4f25-b21b-dfb32591149f",
-      "name": "Alaina Howland",
-      "side": "b",
-      "rsvp": "pending",
-      "dietary": "",
-      "notes": "",
-      "tableId": null,
-      "group": "Alaina & Marjory Howland"
     },
     {
       "id": "56da1eca-9f34-4b82-80f9-e83b0cb247c5",
