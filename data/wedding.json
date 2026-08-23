@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:46:03.678Z",
+  "updatedAt": "2026-08-23T22:46:12.338Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1974,7 +1974,7 @@
       "id": "6e810e96-91d9-4a7c-b064-26f6b2710698",
       "name": "Jamie Costea",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
