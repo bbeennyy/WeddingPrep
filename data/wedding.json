@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:04.381Z",
+  "updatedAt": "2026-08-23T22:51:06.896Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1084,7 +1084,7 @@
       "id": "18bfd9ee-5352-42de-af44-21d6bdc68959",
       "name": "Byron Spear",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
