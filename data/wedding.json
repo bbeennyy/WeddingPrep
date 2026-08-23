@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:58:59.965Z",
+  "updatedAt": "2026-08-23T22:59:04.720Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2722,7 +2722,7 @@
     },
     {
       "id": "ddedf703-8ba4-4334-a763-311e20b03998",
-      "name": "Lazy RS",
+      "name": "Table 1",
       "seats": 8,
       "shape": "round"
     }
