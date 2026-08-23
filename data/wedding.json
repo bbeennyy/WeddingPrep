@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-20T23:09:46.590Z",
+  "updatedAt": "2026-08-23T17:23:22.131Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2545,7 +2545,7 @@
       "id": "5b9464f2-6a1d-40bf-b4bb-9c941f11de1f",
       "name": "Ariel Cocian",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
