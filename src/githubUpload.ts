@@ -16,20 +16,20 @@ export interface GithubTarget {
   token: string;
 }
 
-function headers(token: string): Headers {
+function headers(token: string, jsonBody = false): Headers {
   const h = new Headers();
   h.set("Accept", "application/vnd.github+json");
-  h.set("X-GitHub-Api-Version", "2022-11-28");
   h.set("Authorization", `Bearer ${token}`);
-  h.set("Content-Type", "application/json");
+  if (jsonBody) h.set("Content-Type", "application/json");
   return h;
 }
 
 async function api<T>(token: string, url: string, init?: RequestInit): Promise<T> {
+  const jsonBody = Boolean(init?.body);
   const res = await fetch(url, {
     ...init,
     cache: "no-store",
-    headers: headers(token),
+    headers: headers(token, jsonBody),
   });
   if (!res.ok) {
     const detail = await res.text();
@@ -88,7 +88,7 @@ export async function commitWeddingJson(target: GithubTarget, data: WeddingData)
     const moved = await fetch(`${root}/git/refs/heads/${encodeURIComponent(branch)}`, {
       method: "PATCH",
       cache: "no-store",
-      headers: headers(token),
+      headers: headers(token, true),
       body: JSON.stringify({ sha: next.sha, force: false }),
     });
 
