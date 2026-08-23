@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:03:16.495Z",
+  "updatedAt": "2026-08-23T23:03:24.735Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -587,7 +587,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "69fe4338-72bb-4979-9e1b-759a96e47806",
       "group": "Stilwell Family"
     },
     {
