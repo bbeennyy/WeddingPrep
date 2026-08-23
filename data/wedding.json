@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:37.852Z",
+  "updatedAt": "2026-08-23T22:52:39.852Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2184,7 +2184,7 @@
       "id": "d5f78883-6892-4119-9e68-d91d4c5470fe",
       "name": "Stacy Birau",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
