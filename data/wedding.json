@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:28:34.000Z",
+  "updatedAt": "2026-08-23T23:33:33.844Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -934,7 +934,7 @@
       "id": "74b959ce-3eb0-4510-9db7-05c125542c9d",
       "name": "Hong Clark",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
