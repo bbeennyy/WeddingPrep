@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:15.374Z",
+  "updatedAt": "2026-08-23T22:52:27.540Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2074,7 +2074,7 @@
       "id": "7d244f26-3c5d-4db5-9a89-80d1c9e5cad9",
       "name": "Luca Tuplea",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
