@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:47.407Z",
+  "updatedAt": "2026-08-23T22:52:50.318Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2234,7 +2234,7 @@
       "id": "c0129c68-150b-40e3-ae67-f177a609ba3c",
       "name": "Rosie Jurma",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
