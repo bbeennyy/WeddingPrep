@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:09.614Z",
+  "updatedAt": "2026-08-23T22:51:12.192Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1104,7 +1104,7 @@
       "id": "4d541840-df04-451f-9d71-ecb79c0a494d",
       "name": "Bailey Milroy",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
