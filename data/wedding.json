@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:33.222Z",
+  "updatedAt": "2026-08-23T22:50:39.478Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -844,7 +844,7 @@
       "id": "957b473e-821f-46fc-b25c-593ec521ea52",
       "name": "Ben Kitchen",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
