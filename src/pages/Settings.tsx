@@ -4,7 +4,7 @@ import { createDefaultData } from "../defaults";
 import { downloadData, hasGithubTarget, parseWeddingData } from "../storage";
 
 export function SettingsPage() {
-  const { data, patch, setData, syncState, syncMessage, syncNow, refreshFromGithub } = useWedding();
+  const { data, patch, setData, setGithubToken, syncState, syncMessage, syncNow, refreshFromGithub } = useWedding();
   const { settings } = data;
   const fileRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
@@ -86,9 +86,9 @@ export function SettingsPage() {
         <h2 className="font-serif text-2xl">Live sync through GitHub</h2>
         <p className="text-sm text-muted">
           A save on your PC only stays in that browser unless GitHub sync is on. Paste the same fine-grained token on{" "}
-          <em>each</em> phone/computer (Contents read/write on this repo only). After that, checklist and guest RSVP
-          changes write to <code>data/wedding.json</code> in about a second, and the other device picks them up when you
-          open or return to the site.
+          <em>each</em> phone/computer (Contents read/write on this repo only), then wait a moment — you do not have to
+          mash Save. After that, checklist and guest RSVP changes write to <code>data/wedding.json</code>, and the other
+          device picks them up when you open or return to the site.
         </p>
         <p
           className={`rounded-xl px-3 py-2 text-sm ${
@@ -127,7 +127,7 @@ export function SettingsPage() {
               type="password"
               autoComplete="off"
               value={settings.githubToken}
-              onChange={(e) => update("githubToken", e.target.value)}
+              onChange={(e) => setGithubToken(e.target.value)}
               placeholder="github_pat_…"
             />
             <p className="mt-2 text-xs text-muted">

@@ -30,6 +30,7 @@ interface WeddingContextValue {
   data: WeddingData;
   setData: Dispatch<SetStateAction<WeddingData>>;
   patch: <K extends keyof WeddingData>(key: K, value: WeddingData[K]) => void;
+  setGithubToken: (token: string) => void;
   reset: () => void;
   syncState: SyncState;
   syncMessage: string;
@@ -53,9 +54,11 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
   const dataRef = useRef(data);
   const dirtyRef = useRef(false);
   const pushingRef = useRef(false);
+  const pendingPushRef = useRef(false);
+  const connectedTokenRef = useRef(data.settings.githubToken.trim());
   const fileTimer = useRef(0);
   const gitTimer = useRef(0);
-  const saveGen = useRef(0);
+  const connectTimer = useRef(0);
 
   dataRef.current = data;
 
@@ -67,26 +70,43 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  function setGithubToken(token: string) {
+    setState((current) => ({
+      ...current,
+      settings: { ...current.settings, githubToken: token },
+    }));
+  }
+
   async function pushCurrent(reason: string): Promise<void> {
-    const current = dataRef.current;
-    if (!hasGithubTarget(current.settings)) {
+    const snapshot = dataRef.current;
+    if (!hasGithubTarget(snapshot.settings)) {
       setSyncState("off");
       setSyncMessage("Add a GitHub token in Settings to save to the shared JSON file.");
       return;
     }
 
-    const gen = ++saveGen.current;
+    if (pushingRef.current) {
+      pendingPushRef.current = true;
+      return;
+    }
+
     pushingRef.current = true;
     setSyncState("saving");
     setSyncMessage(reason);
     try {
-      await pushToGithub(targetFromSettings(current.settings), current);
-      if (gen !== saveGen.current) return;
-      dirtyRef.current = false;
+      while (true) {
+        pendingPushRef.current = false;
+        const current = dataRef.current;
+        const stamped = current.updatedAt;
+        await pushToGithub(targetFromSettings(current.settings), current);
+        if (dataRef.current.updatedAt === stamped && !pendingPushRef.current) {
+          dirtyRef.current = false;
+          break;
+        }
+      }
       setSyncState("saved");
       setSyncMessage(`Saved to GitHub at ${new Date().toLocaleTimeString()}`);
     } catch (error) {
-      if (gen !== saveGen.current) return;
       setSyncState("error");
       setSyncMessage(error instanceof Error ? error.message : "Could not save to GitHub.");
     } finally {
@@ -129,6 +149,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
       setState(next);
       saveLocal(next);
       if (hasGithubTarget(next.settings)) {
+        connectedTokenRef.current = token.trim();
         setSyncState("idle");
         setSyncMessage("GitHub sync is on — edits save to data/wedding.json.");
       } else {
@@ -146,6 +167,46 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!ready) return;
+    const token = data.settings.githubToken.trim();
+    if (!token || !hasGithubTarget(data.settings)) {
+      connectedTokenRef.current = "";
+      return;
+    }
+    if (token === connectedTokenRef.current) return;
+
+    window.clearTimeout(connectTimer.current);
+    connectTimer.current = window.setTimeout(() => {
+      void (async () => {
+        const current = dataRef.current;
+        const nextToken = current.settings.githubToken.trim();
+        if (!nextToken || nextToken === connectedTokenRef.current) return;
+        setSyncState("saving");
+        setSyncMessage("Connecting to the shared file…");
+        try {
+          const remote = await pullLatestShared(current.settings);
+          connectedTokenRef.current = nextToken;
+          if (remote && !dirtyRef.current) {
+            const chosen = chooseWeddingData(current, null, remote);
+            const next = withLocalToken(chosen, nextToken);
+            setState(next);
+            saveLocal(next);
+          }
+          setSyncState("idle");
+          setSyncMessage("GitHub sync is on — edits save to data/wedding.json.");
+        } catch (error) {
+          setSyncState("error");
+          setSyncMessage(error instanceof Error ? error.message : "Could not connect to GitHub.");
+        }
+      })();
+    }, 500);
+
+    return () => {
+      window.clearTimeout(connectTimer.current);
+    };
+  }, [data.settings.githubToken, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
 
     saveLocal(data);
 
@@ -160,7 +221,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
       gitTimer.current = window.setTimeout(() => {
         if (!dirtyRef.current) return;
         void pushCurrent("Saving to GitHub…");
-      }, 700);
+      }, 1100);
     } else {
       setSyncState("off");
     }
@@ -181,11 +242,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
       saveLocal(current);
       void saveFileData(current);
       if (dirtyRef.current && hasGithubTarget(current.settings)) {
-        void pushToGithub(targetFromSettings(current.settings), current)
-          .then(() => {
-            dirtyRef.current = false;
-          })
-          .catch(() => undefined);
+        void pushCurrent("Saving to GitHub…");
       }
     }
 
@@ -222,6 +279,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
       data,
       setData,
       patch: (key, value) => setData((current) => ({ ...current, [key]: value })),
+      setGithubToken,
       reset: () => {
         const token = data.settings.githubToken;
         const next = createDefaultData();
