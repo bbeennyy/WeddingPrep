@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:16:32.643Z",
+  "updatedAt": "2026-08-23T23:16:37.534Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2257,7 +2257,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "8be90a8d-ca42-4545-b666-e5416b9fe34d",
       "group": "Nathan & Nickole Nicoara"
     },
     {
