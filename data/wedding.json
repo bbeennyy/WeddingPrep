@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:45:27.004Z",
+  "updatedAt": "2026-08-23T22:45:49.335Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2164,7 +2164,7 @@
       "id": "c4573f92-fda2-48ff-ac97-36dd4a283cff",
       "name": "Eugen Istoc",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
