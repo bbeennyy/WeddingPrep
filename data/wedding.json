@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:16.622Z",
+  "updatedAt": "2026-08-23T22:51:21.749Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1334,7 +1334,7 @@
       "id": "e90b46aa-600e-4494-b946-c96d7395e39f",
       "name": "Heitor Marques",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
