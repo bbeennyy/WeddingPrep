@@ -37,7 +37,7 @@ Then open the local URL Vite prints.
 
 The website is only the planner. Guest names and your notes stay in **this browser** unless you sync them.
 
-**Live sync (recommended):** In Settings, paste a [fine-grained personal access token](https://github.com/settings/personal-access-tokens) with **Contents: Read and write** on **only this repo**, on each phone/computer, then wait a moment. You do not have to mash Save. Edits then update `data/wedding.json` on GitHub, and the other device loads that file when you open or return to the site. If two devices save at once, the app retries with the latest file SHA.
+**Share checks:** the site PIN only unlocks the page. A write key lets the app commit `data/wedding.json` (blob → commit → main). Paste that key once in Settings on a phone. After that, ticking a task uploads the file. Optional: add repo secret `WEDDING_SYNC_TOKEN` so every phone gets the key from the Pages build.
 
 Other options:
 

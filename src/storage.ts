@@ -1,5 +1,7 @@
 import { createDefaultData, ensureCoupleGuests, uid } from "./defaults";
 import { TAG_BY_ID } from "./constants";
+import { commitWeddingJson } from "./githubUpload";
+import { getWriteToken } from "./writeToken";
 import type { Guest, PhotoShot, ProgramItem, ProgramSection, ProgramTag, WeddingData } from "./types";
 
 const STORAGE_KEY = "wedding-prep-data-v1";
@@ -162,7 +164,11 @@ export function hasGithubRepo(settings: WeddingData["settings"]): boolean {
 }
 
 export function hasGithubTarget(settings: WeddingData["settings"]): boolean {
-  return hasGithubRepo(settings) && Boolean(settings.githubToken.trim());
+  return hasGithubRepo(settings) && hasWriteKey(settings);
+}
+
+export function hasWriteKey(settings: WeddingData["settings"]): boolean {
+  return Boolean(getWriteToken(settings.githubToken));
 }
 
 async function readWeddingPayload(url: string): Promise<WeddingData | null> {
@@ -336,15 +342,6 @@ export function downloadData(data: WeddingData): void {
   URL.revokeObjectURL(url);
 }
 
-function encodeContent(text: string): string {
-  const bytes = new TextEncoder().encode(text);
-  let binary = "";
-  bytes.forEach((byte) => {
-    binary += String.fromCharCode(byte);
-  });
-  return btoa(binary);
-}
-
 function decodeContent(base64: string): string {
   const binary = atob(base64.replace(/\n/g, ""));
   const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
@@ -368,25 +365,6 @@ function githubHeaders(token: string, extra?: HeadersInit): Headers {
   return headers;
 }
 
-function fileKey(target: GithubTarget): string {
-  return `${target.owner}/${target.repo}/${target.branch}/${target.path}`.toLowerCase();
-}
-
-const rememberedSha = new Map<string, string>();
-const lastPushedText = new Map<string, string>();
-
-function rememberSha(target: GithubTarget, sha?: string): void {
-  const key = fileKey(target);
-  if (sha) rememberedSha.set(key, sha);
-  else rememberedSha.delete(key);
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => {
-    window.setTimeout(resolve, ms);
-  });
-}
-
 interface RemoteFile {
   sha?: string;
   content?: string;
@@ -402,9 +380,7 @@ async function readRemoteFile(target: GithubTarget): Promise<RemoteFile | null> 
   if (!res.ok) {
     throw new Error(`Could not read the GitHub file (${res.status}). Check owner, repo, path, and token.`);
   }
-  const payload = (await res.json()) as RemoteFile;
-  if (payload.sha) rememberSha(target, payload.sha);
-  return payload;
+  return (await res.json()) as RemoteFile;
 }
 
 export async function pullFromGithub(target: GithubTarget): Promise<WeddingData> {
@@ -416,111 +392,15 @@ export async function pullFromGithub(target: GithubTarget): Promise<WeddingData>
   return parseWeddingData(JSON.parse(decodeContent(remote.content)));
 }
 
-function remoteText(remote: RemoteFile | null): string | null {
-  if (!remote?.content) return null;
-  try {
-    return decodeContent(remote.content);
-  } catch {
-    return null;
-  }
-}
-
-function alreadySaved(remote: RemoteFile | null, text: string): boolean {
-  const current = remoteText(remote);
-  return current !== null && current.trim() === text.trim();
-}
-
-async function pushToGithubOnce(target: GithubTarget, data: WeddingData): Promise<void> {
-  const { owner, repo, path, branch, token } = target;
-  if (!token) throw new Error("Add a GitHub token in Settings first.");
-
-  const text = serializeRemote(data);
-  if (lastPushedText.get(fileKey(target)) === text) {
-    return;
-  }
-
-  const body = encodeContent(text);
-  const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-  async function putWithSha(sha?: string): Promise<Response> {
-    const payload: Record<string, string> = {
-      message: "Update wedding planner data",
-      content: body,
-      branch,
-    };
-    if (sha) payload.sha = sha;
-    return fetch(putUrl, {
-      method: "PUT",
-      headers: githubHeaders(token, { "Content-Type": "application/json" }),
-      body: JSON.stringify(payload),
-    });
-  }
-
-  let sha = rememberedSha.get(fileKey(target));
-  for (let attempt = 0; attempt < 6; attempt += 1) {
-    const remote = await readRemoteFile(target);
-    if (alreadySaved(remote, text)) {
-      if (remote?.sha) rememberSha(target, remote.sha);
-      lastPushedText.set(fileKey(target), text);
-      return;
-    }
-    sha = remote?.sha ?? sha;
-
-    const res = await putWithSha(sha);
-    if (res.ok) {
-      const saved = (await res.json()) as { content?: { sha?: string } };
-      rememberSha(target, saved.content?.sha ?? remote?.sha);
-      lastPushedText.set(fileKey(target), text);
-      return;
-    }
-
-    const detail = await res.text();
-    const sameContent =
-      /already exists|same content|no changes|does not match/i.test(detail) &&
-      alreadySaved(await readRemoteFile(target), text);
-    if (sameContent) {
-      lastPushedText.set(fileKey(target), text);
-      return;
-    }
-
-    if (res.status === 409 || res.status === 422) {
-      rememberSha(target, undefined);
-      sha = undefined;
-      await sleep(250 * (attempt + 1));
-      continue;
-    }
-
-    if (res.status === 401 || res.status === 403) {
-      throw new Error("GitHub rejected the token. Create a new fine-grained token with Contents: Read and write on this repo only, then paste it in Settings.");
-    }
-
-    throw new Error(`Could not save to GitHub (${res.status}). ${detail.slice(0, 180)}`);
-  }
-
-  const latest = await readRemoteFile(target);
-  if (alreadySaved(latest, text)) {
-    lastPushedText.set(fileKey(target), text);
-    return;
-  }
-
-  throw new Error(
-    "GitHub still had a newer copy from another device. Your check is saved on this phone — wait a second and tap Save to GitHub now.",
-  );
-}
-
 let pushChain: Promise<void> = Promise.resolve();
 
 export function pushToGithub(target: GithubTarget, data: WeddingData): Promise<void> {
-  const run = pushChain.then(() => pushToGithubOnce(target, data));
+  const run = pushChain.then(() => commitWeddingJson(target, data));
   pushChain = run.then(
     () => undefined,
     () => undefined,
   );
   return run;
-}
-
-export function markGithubInSync(target: GithubTarget, data: WeddingData): void {
-  lastPushedText.set(fileKey(target), serializeRemote(data));
 }
 
 export function targetFromSettings(settings: WeddingData["settings"]): GithubTarget {
@@ -529,6 +409,6 @@ export function targetFromSettings(settings: WeddingData["settings"]): GithubTar
     repo: settings.githubRepo.trim(),
     branch: settings.githubBranch.trim() || "main",
     path: settings.githubPath.trim() || "data/wedding.json",
-    token: settings.githubToken.trim(),
+    token: getWriteToken(settings.githubToken),
   };
 }
