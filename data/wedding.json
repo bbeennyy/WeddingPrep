@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:16:17.118Z",
+  "updatedAt": "2026-08-23T23:16:20.318Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1857,7 +1857,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "8be90a8d-ca42-4545-b666-e5416b9fe34d",
       "group": "Nicoara Family"
     },
     {
