@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:37:14.929Z",
+  "updatedAt": "2026-08-23T22:37:21.595Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1204,7 +1204,7 @@
       "id": "f72a1716-54ba-4e79-af41-c57cbc55ddb1",
       "name": "Reid Manring",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
