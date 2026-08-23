@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:30:25.485Z",
+  "updatedAt": "2026-08-23T22:30:31.413Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -584,7 +584,7 @@
       "id": "fff4b4c7-b120-4ac6-a55b-476caa783c69",
       "name": "Autumn Stilwell",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
