@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:41:39.897Z",
+  "updatedAt": "2026-08-23T22:42:52.343Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1534,7 +1534,7 @@
       "id": "21b42288-bdaf-4236-a5ad-11d368ba675d",
       "name": "Bill Joseph",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
