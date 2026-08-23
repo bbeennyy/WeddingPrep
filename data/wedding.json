@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:26:27.304Z",
+  "updatedAt": "2026-08-23T23:26:30.370Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2017,7 +2017,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "5b62c457-29b6-4730-a959-15946675a300",
       "group": "Duane Jurma"
     },
     {
