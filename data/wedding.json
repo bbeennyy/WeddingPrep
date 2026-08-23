@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:37:21.595Z",
+  "updatedAt": "2026-08-23T22:37:52.502Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1214,7 +1214,7 @@
       "id": "609351c9-7a7d-4a85-b533-736b14a2692c",
       "name": "Grace Manring",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
