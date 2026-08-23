@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:34:24.348Z",
+  "updatedAt": "2026-08-23T22:34:41.891Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1034,7 +1034,7 @@
       "id": "734c2a3e-c364-4bd6-b444-99a84e54abf6",
       "name": "Hannah LaMay",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
