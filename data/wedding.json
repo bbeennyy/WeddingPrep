@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:34:50.731Z",
+  "updatedAt": "2026-08-23T23:35:18.587Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2607,7 +2607,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Scott Hinkle"
     }
   ],
