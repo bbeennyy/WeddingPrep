@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:30:39.386Z",
+  "updatedAt": "2026-08-23T22:30:47.707Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -604,7 +604,7 @@
       "id": "36d43c13-faf4-4cba-a281-6100c46933bd",
       "name": "Hunter Stilwell",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
