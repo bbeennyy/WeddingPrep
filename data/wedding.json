@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:45:49.335Z",
+  "updatedAt": "2026-08-23T22:45:56.729Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2174,7 +2174,7 @@
       "id": "97f62c15-3c28-4884-95ab-87bc07a839c5",
       "name": "Ana Istoc",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
