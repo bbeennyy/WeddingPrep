@@ -182,11 +182,11 @@ async function readWeddingPayload(url: string): Promise<WeddingData | null> {
 }
 
 export async function loadFileData(): Promise<WeddingData | null> {
-  // Local Vite API (writes the same data/wedding.json on disk while developing)
-  const fromApi = await readWeddingPayload("/api/wedding-data");
-  if (fromApi) return fromApi;
+  if (import.meta.env.DEV) {
+    const fromApi = await readWeddingPayload("/api/wedding-data");
+    if (fromApi) return fromApi;
+  }
 
-  // GitHub Pages / static hosting: ship a copy of data/wedding.json with the build
   const base = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
@@ -204,19 +204,22 @@ export async function pullFromGithubRaw(settings: WeddingData["settings"]): Prom
   return readWeddingPayload(url);
 }
 
-/** Prefer authenticated API; fall back to public raw for read-only devices. */
+/** Public raw file first — no custom headers, so GitHub Pages is not blocked by CORS. */
 export async function pullLatestShared(settings: WeddingData["settings"]): Promise<WeddingData | null> {
+  const fromRaw = await pullFromGithubRaw(settings);
+  if (fromRaw) return fromRaw;
   if (hasGithubTarget(settings)) {
     try {
       return await pullFromGithub(targetFromSettings(settings));
     } catch {
-      /* try raw next */
+      return null;
     }
   }
-  return pullFromGithubRaw(settings);
+  return null;
 }
 
 export async function saveFileData(data: WeddingData): Promise<boolean> {
+  if (!import.meta.env.DEV) return false;
   try {
     const res = await fetch("/api/wedding-data", {
       method: "PUT",
@@ -356,11 +359,9 @@ export interface GithubTarget {
   token: string;
 }
 
-function githubHeaders(token: string, extra?: HeadersInit): Headers {
-  const headers = new Headers(extra);
+function githubHeaders(token: string): Headers {
+  const headers = new Headers();
   headers.set("Accept", "application/vnd.github+json");
-  headers.set("X-GitHub-Api-Version", "2022-11-28");
-  headers.set("Cache-Control", "no-cache");
   if (token) headers.set("Authorization", `Bearer ${token}`);
   return headers;
 }
