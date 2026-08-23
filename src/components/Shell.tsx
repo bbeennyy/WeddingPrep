@@ -21,7 +21,7 @@ const links = [
 ];
 
 export function Shell() {
-  const { data, syncState, syncMessage } = useWedding();
+  const { data, syncState, syncMessage, syncNow } = useWedding();
   const location = useLocation();
   const names = coupleLabel(data.settings);
   const syncHint =
@@ -30,7 +30,7 @@ export function Shell() {
       : syncState === "saved"
         ? "Saved to GitHub"
         : syncState === "error"
-          ? "GitHub save failed"
+          ? syncMessage || "GitHub save failed"
           : syncState === "off"
             ? "This device only"
             : "";
@@ -78,6 +78,16 @@ export function Shell() {
           })}
         </nav>
       </header>
+      {syncState === "error" && syncMessage ? (
+        <div className="no-print border-b border-rose/20 bg-rose-soft px-4 py-2 text-sm text-rose">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2">
+            <p>{syncMessage}</p>
+            <button className="btn-ghost !py-1 text-rose" onClick={() => void syncNow()}>
+              Try again
+            </button>
+          </div>
+        </div>
+      ) : null}
       <main className="mx-auto max-w-6xl px-4 py-6 pb-16">
         <Outlet key={location.pathname} />
       </main>

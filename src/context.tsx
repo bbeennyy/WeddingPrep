@@ -15,6 +15,7 @@ import {
   hasGithubTarget,
   loadFileData,
   loadLocal,
+  markGithubInSync,
   pullLatestShared,
   pushToGithub,
   saveFileData,
@@ -99,9 +100,9 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
         const current = dataRef.current;
         const stamped = current.updatedAt;
         await pushToGithub(targetFromSettings(current.settings), current);
-        if (dataRef.current.updatedAt === stamped && !pendingPushRef.current) {
-          dirtyRef.current = false;
-          break;
+        if (dataRef.current.updatedAt === stamped) {
+          dirtyRef.current = pendingPushRef.current;
+          if (!pendingPushRef.current) break;
         }
       }
       setSyncState("saved");
@@ -125,6 +126,9 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
     const next = withLocalToken(remote, token);
     setState(next);
     saveLocal(next);
+    if (hasGithubTarget(next.settings)) {
+      markGithubInSync(targetFromSettings(next.settings), next);
+    }
     setSyncState(hasGithubTarget(next.settings) ? "idle" : "off");
     setSyncMessage("Loaded the latest shared file from GitHub.");
   }
@@ -150,6 +154,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
       saveLocal(next);
       if (hasGithubTarget(next.settings)) {
         connectedTokenRef.current = token.trim();
+        markGithubInSync(targetFromSettings(next.settings), next);
         setSyncState("idle");
         setSyncMessage("GitHub sync is on — edits save to data/wedding.json.");
       } else {
@@ -190,6 +195,7 @@ export function WeddingProvider({ children }: { children: ReactNode }) {
             const next = withLocalToken(chosen, nextToken);
             setState(next);
             saveLocal(next);
+            markGithubInSync(targetFromSettings(next.settings), next);
           }
           setSyncState("idle");
           setSyncMessage("GitHub sync is on — edits save to data/wedding.json.");
