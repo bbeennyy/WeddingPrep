@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:58:43.384Z",
+  "updatedAt": "2026-08-23T22:58:53.966Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2718,6 +2718,12 @@
       "id": "80c21768-8924-477a-aedc-0ef69373e89c",
       "name": "Swearheart Table",
       "seats": 2,
+      "shape": "round"
+    },
+    {
+      "id": "ddedf703-8ba4-4334-a763-311e20b03998",
+      "name": "Table 19",
+      "seats": 8,
       "shape": "round"
     }
   ],
