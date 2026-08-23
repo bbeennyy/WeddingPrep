@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:39.852Z",
+  "updatedAt": "2026-08-23T22:52:42.314Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2194,7 +2194,7 @@
       "id": "86dcc3a8-c262-4d33-824e-02cc41c01e77",
       "name": "Zayne Birau",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
