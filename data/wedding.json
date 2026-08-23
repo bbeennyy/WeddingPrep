@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:33:49.989Z",
+  "updatedAt": "2026-08-23T22:34:21.565Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1014,7 +1014,7 @@
       "id": "71378be1-48f9-43ca-b384-9ba062cd48d7",
       "name": "Grace Acosta",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
