@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:46:33.091Z",
+  "updatedAt": "2026-08-23T22:46:47.228Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2044,7 +2044,7 @@
       "id": "a8fb52bc-e0a2-4308-9c4b-6a960d22ad10",
       "name": "Floriana Costea Kenelley",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
