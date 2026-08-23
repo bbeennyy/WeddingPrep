@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:06.896Z",
+  "updatedAt": "2026-08-23T22:51:09.614Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1094,7 +1094,7 @@
       "id": "73b56c54-5acb-4d5d-a4e9-dedd6cfd8be7",
       "name": "Maya Spear",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
