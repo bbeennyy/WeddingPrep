@@ -113,6 +113,10 @@ export function withoutToken(data: WeddingData): WeddingData {
   };
 }
 
+export function serializeRemote(data: WeddingData): string {
+  return JSON.stringify(withoutToken(data), null, 2);
+}
+
 export function stampData(data: WeddingData): WeddingData {
   return { ...data, updatedAt: new Date().toISOString() };
 }
@@ -369,6 +373,7 @@ function fileKey(target: GithubTarget): string {
 }
 
 const rememberedSha = new Map<string, string>();
+const lastPushedText = new Map<string, string>();
 
 function rememberSha(target: GithubTarget, sha?: string): void {
   const key = fileKey(target);
@@ -411,11 +416,30 @@ export async function pullFromGithub(target: GithubTarget): Promise<WeddingData>
   return parseWeddingData(JSON.parse(decodeContent(remote.content)));
 }
 
+function remoteText(remote: RemoteFile | null): string | null {
+  if (!remote?.content) return null;
+  try {
+    return decodeContent(remote.content);
+  } catch {
+    return null;
+  }
+}
+
+function alreadySaved(remote: RemoteFile | null, text: string): boolean {
+  const current = remoteText(remote);
+  return current !== null && current.trim() === text.trim();
+}
+
 async function pushToGithubOnce(target: GithubTarget, data: WeddingData): Promise<void> {
   const { owner, repo, path, branch, token } = target;
   if (!token) throw new Error("Add a GitHub token in Settings first.");
 
-  const body = encodeContent(JSON.stringify(withoutToken(data), null, 2));
+  const text = serializeRemote(data);
+  if (lastPushedText.get(fileKey(target)) === text) {
+    return;
+  }
+
+  const body = encodeContent(text);
   const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
   async function putWithSha(sha?: string): Promise<Response> {
@@ -434,30 +458,53 @@ async function pushToGithubOnce(target: GithubTarget, data: WeddingData): Promis
 
   let sha = rememberedSha.get(fileKey(target));
   for (let attempt = 0; attempt < 6; attempt += 1) {
-    if (!sha) {
-      sha = (await readRemoteFile(target))?.sha;
+    const remote = await readRemoteFile(target);
+    if (alreadySaved(remote, text)) {
+      if (remote?.sha) rememberSha(target, remote.sha);
+      lastPushedText.set(fileKey(target), text);
+      return;
     }
+    sha = remote?.sha ?? sha;
 
     const res = await putWithSha(sha);
     if (res.ok) {
       const saved = (await res.json()) as { content?: { sha?: string } };
-      rememberSha(target, saved.content?.sha);
+      rememberSha(target, saved.content?.sha ?? remote?.sha);
+      lastPushedText.set(fileKey(target), text);
+      return;
+    }
+
+    const detail = await res.text();
+    const sameContent =
+      /already exists|same content|no changes|does not match/i.test(detail) &&
+      alreadySaved(await readRemoteFile(target), text);
+    if (sameContent) {
+      lastPushedText.set(fileKey(target), text);
       return;
     }
 
     if (res.status === 409 || res.status === 422) {
       rememberSha(target, undefined);
       sha = undefined;
-      await sleep(200 * 2 ** attempt);
+      await sleep(250 * (attempt + 1));
       continue;
     }
 
-    const detail = await res.text();
+    if (res.status === 401 || res.status === 403) {
+      throw new Error("GitHub rejected the token. Create a new fine-grained token with Contents: Read and write on this repo only, then paste it in Settings.");
+    }
+
     throw new Error(`Could not save to GitHub (${res.status}). ${detail.slice(0, 180)}`);
   }
 
+  const latest = await readRemoteFile(target);
+  if (alreadySaved(latest, text)) {
+    lastPushedText.set(fileKey(target), text);
+    return;
+  }
+
   throw new Error(
-    "GitHub still had a newer copy from another device. Your edits are on this phone — wait a second and tap Save to GitHub now.",
+    "GitHub still had a newer copy from another device. Your check is saved on this phone — wait a second and tap Save to GitHub now.",
   );
 }
 
@@ -470,6 +517,10 @@ export function pushToGithub(target: GithubTarget, data: WeddingData): Promise<v
     () => undefined,
   );
   return run;
+}
+
+export function markGithubInSync(target: GithubTarget, data: WeddingData): void {
+  lastPushedText.set(fileKey(target), serializeRemote(data));
 }
 
 export function targetFromSettings(settings: WeddingData["settings"]): GithubTarget {
