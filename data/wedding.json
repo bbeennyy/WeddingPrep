@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:41.966Z",
+  "updatedAt": "2026-08-23T22:50:44.450Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -904,7 +904,7 @@
       "id": "d2d5f421-9bb7-46b6-9d0a-119432f32ef4",
       "name": "Charlie Blanchard",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
