@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:31:01.378Z",
+  "updatedAt": "2026-08-23T22:31:07.178Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -624,7 +624,7 @@
       "id": "3022b976-948d-4e08-923c-84612e687626",
       "name": "Bri Joseph",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
