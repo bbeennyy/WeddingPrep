@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:47:11.061Z",
+  "updatedAt": "2026-08-23T22:47:17.254Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2514,7 +2514,7 @@
       "id": "d5257361-551f-4123-811a-38137c48fcd3",
       "name": "James Little",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
