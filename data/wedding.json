@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:06.193Z",
+  "updatedAt": "2026-08-23T22:52:12.730Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1884,7 +1884,7 @@
       "id": "06938205-34fd-4b7a-aa50-dda1edee568f",
       "name": "Thomas Berar",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
