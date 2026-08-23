@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:52:27.540Z",
+  "updatedAt": "2026-08-23T22:52:37.852Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2174,7 +2174,7 @@
       "id": "1c6a3de2-b66c-4a61-9147-68402dcb2e99",
       "name": "Oni Birau",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
