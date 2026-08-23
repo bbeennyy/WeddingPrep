@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:46:47.228Z",
+  "updatedAt": "2026-08-23T22:46:48.710Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2054,7 +2054,7 @@
       "id": "b7e67ca3-5cbe-4a77-a64d-feb1e3097e3c",
       "name": "Connor Kenelley",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
