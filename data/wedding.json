@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:06:53.655Z",
+  "updatedAt": "2026-08-23T23:07:00.828Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1287,7 +1287,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "6071ae84-49de-4797-bf04-945fe6983d94",
       "group": "David & Barb McCune"
     },
     {
