@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:35:18.587Z",
+  "updatedAt": "2026-08-23T23:39:00.977Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -218,7 +218,7 @@
     {
       "title": "Evie ring",
       "category": "Attire",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "2026-08-20",
       "notes": "",
