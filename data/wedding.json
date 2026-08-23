@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:57:41.963Z",
+  "updatedAt": "2026-08-23T22:57:55.579Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -467,7 +467,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "Groom",
-      "tableId": "bb7b2c22-b20f-42ca-9d25-e274ba267b8c",
+      "tableId": null,
       "group": "The couple"
     },
     {
@@ -477,7 +477,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "Bride",
-      "tableId": "bb7b2c22-b20f-42ca-9d25-e274ba267b8c",
+      "tableId": null,
       "group": "The couple"
     },
     {
@@ -2623,12 +2623,6 @@
       "name": "Table 2",
       "seats": 8,
       "shape": "round"
-    },
-    {
-      "id": "bb7b2c22-b20f-42ca-9d25-e274ba267b8c",
-      "name": "Sweetheart Table",
-      "seats": 2,
-      "shape": "rect"
     },
     {
       "id": "0c22ab89-7b81-45a1-b7e7-e2bfc1b90037",
