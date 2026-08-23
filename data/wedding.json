@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:02:30.310Z",
+  "updatedAt": "2026-08-23T23:02:36.142Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -727,7 +727,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "c211c85f-4634-4617-a700-46c9002fbc87",
       "group": "Joseph Family"
     },
     {
