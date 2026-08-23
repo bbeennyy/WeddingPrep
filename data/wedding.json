@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:59:21.295Z",
+  "updatedAt": "2026-08-23T22:59:33.428Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -467,7 +467,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "Groom",
-      "tableId": null,
+      "tableId": "80c21768-8924-477a-aedc-0ef69373e89c",
       "group": "The couple"
     },
     {
