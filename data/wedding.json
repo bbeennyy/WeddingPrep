@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:14.343Z",
+  "updatedAt": "2026-08-23T22:51:16.622Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1124,7 +1124,7 @@
       "id": "7b412520-bace-488a-bfe4-7ad13a4ae778",
       "name": "Mike Perpich",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
