@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:39.478Z",
+  "updatedAt": "2026-08-23T22:50:41.966Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -894,7 +894,7 @@
       "id": "07fbb4ac-1e30-4f54-835b-00ca6c1e9494",
       "name": "Hayden Blanchard",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
