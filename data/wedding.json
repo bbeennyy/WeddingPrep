@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:31:07.178Z",
+  "updatedAt": "2026-08-23T22:31:13.194Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -634,7 +634,7 @@
       "id": "839b2cc7-1ee7-403e-8d2b-e4c6b673a741",
       "name": "Tobie Joseph",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
