@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:50:44.450Z",
+  "updatedAt": "2026-08-23T22:50:47.086Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -914,7 +914,7 @@
       "id": "24b3943a-ae13-43f2-bcb7-23abe8e1a33f",
       "name": "Wimmer Blanchard",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
