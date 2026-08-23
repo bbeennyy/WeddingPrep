@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:33:38.076Z",
+  "updatedAt": "2026-08-23T22:33:39.972Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -874,7 +874,7 @@
       "id": "816073e6-92b2-41ac-b864-ece73f06c44d",
       "name": "Arno Muller",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
