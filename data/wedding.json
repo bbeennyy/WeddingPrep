@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T22:51:29.865Z",
+  "updatedAt": "2026-08-23T22:51:32.273Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1404,7 +1404,7 @@
       "id": "80d7e01f-fb9c-45c0-ab0c-835f65e2b75a",
       "name": "Linda Evans",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
