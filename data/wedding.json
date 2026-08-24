@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T23:39:00.977Z",
+  "updatedAt": "2026-08-24T02:34:22.994Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -349,15 +349,6 @@
       "dueDate": "2026-08-18",
       "notes": "use a 3rd party to mass text an automated reminder for RSVP. \nCollect phone numbers.",
       "id": "bc1ce9c6-247a-4e84-803a-0bfcaea73510"
-    },
-    {
-      "title": "Testing",
-      "category": "Legal",
-      "done": false,
-      "owner": "both",
-      "dueDate": "",
-      "notes": "",
-      "id": "678ffb2f-0bb0-41a8-8372-db5ebbfd59d9"
     }
   ],
   "vendors": [
