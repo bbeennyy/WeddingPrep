@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T02:43:49.464Z",
+  "updatedAt": "2026-08-24T02:44:32.438Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2458,7 +2458,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "5b62c457-29b6-4730-a959-15946675a300",
+      "tableId": null,
       "group": "Mark Rodila"
     },
     {
