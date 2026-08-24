@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T02:47:22.917Z",
+  "updatedAt": "2026-08-24T02:47:27.679Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2488,7 +2488,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ce81908e-b5f3-4eca-88a0-9f6504c617bb",
       "group": "Little Family"
     },
     {
