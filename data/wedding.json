@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T02:34:22.994Z",
+  "updatedAt": "2026-08-24T02:36:55.201Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2768,7 +2768,7 @@
     {
       "id": "750b1583-7231-4251-ac2a-bb3e0f2e13ab",
       "name": "Ph",
-      "notes": "behind the blocks",
+      "notes": "",
       "guestIds": [
         "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
         "45a80b41-5b3b-4d99-9b11-ac6378505e50"
