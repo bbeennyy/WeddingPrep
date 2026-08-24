@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T02:44:51.288Z",
+  "updatedAt": "2026-08-24T02:45:05.016Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2538,7 +2538,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "5b62c457-29b6-4730-a959-15946675a300",
       "group": "Ariel & Zamfira Cocian"
     },
     {
