@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:01:34.671Z",
+  "updatedAt": "2026-08-25T20:04:28.997Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -355,7 +355,13 @@
       "owner": "both",
       "dueDate": "2026-08-20",
       "notes": "Emma, Daria, Kellyn, Mackenzie, Norah, Katrina, Ellis, Autumn, \nSavannah",
-      "subtasks": []
+      "subtasks": [
+        {
+          "id": "464a1321-421a-4616-b4de-368d475f1219",
+          "title": "Emma",
+          "done": false
+        }
+      ]
     },
     {
       "id": "38ef0088-3722-47f0-947a-933bb70bc450",
