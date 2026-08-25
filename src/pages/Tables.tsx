@@ -10,8 +10,8 @@ export function TablesPage() {
   const { data, patch } = useWedding();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  const seatable = data.guests.filter((guest) => guest.rsvp !== "declined");
-  const unseated = seatable.filter((guest) => !guest.tableId);
+  const attending = data.guests.filter((guest) => guest.rsvp === "attending");
+  const unseated = attending.filter((guest) => !guest.tableId);
   const selected = unseated.find((guest) => guest.id === selectedId) ?? null;
 
   const filtered = useMemo(() => {
@@ -67,7 +67,7 @@ export function TablesPage() {
         <div>
           <h1 className="font-serif text-4xl">Table formations</h1>
           <p className="mt-1 text-sm text-muted">
-            Pick a name on the side, then tap an empty seat. Or tap a seat and type. Declined guests stay off the list.
+            Pick a name on the side, then tap an empty seat. Only people marked attending show up here.
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted">
             <span className="inline-flex items-center gap-1.5">
@@ -103,7 +103,7 @@ export function TablesPage() {
           <div className="border-b border-gold/15 px-4 py-3">
             <h2 className="text-xs uppercase tracking-[0.16em] text-muted">Available to seat</h2>
             <p className="mt-1 text-sm text-ink">
-              {unseated.length} {unseated.length === 1 ? "name" : "names"}
+              {unseated.length} attending {unseated.length === 1 ? "guest" : "guests"} not seated yet
             </p>
             <input
               className="field mt-3"
@@ -113,10 +113,10 @@ export function TablesPage() {
             />
           </div>
           <div className="max-h-[calc(40vh-7rem)] overflow-y-auto p-3 lg:max-h-[calc(100vh-14rem)]">
-            {seatable.length === 0 ? (
-              <p className="px-1 py-6 text-sm text-muted">Add guests first. They show up here once they are not declined.</p>
+            {attending.length === 0 ? (
+              <p className="px-1 py-6 text-sm text-muted">Mark people as attending on the Guests page first.</p>
             ) : unseated.length === 0 ? (
-              <p className="px-1 py-6 text-sm text-muted">Everyone who can be seated has a place.</p>
+              <p className="px-1 py-6 text-sm text-muted">Every attending guest has a seat.</p>
             ) : filtered.length === 0 ? (
               <p className="px-1 py-6 text-sm text-muted">No names match that filter.</p>
             ) : (
@@ -180,7 +180,7 @@ export function TablesPage() {
 
         <div className="order-2 min-w-0 flex-1 space-y-4 lg:order-1">
           {data.tables.length === 0 ? (
-            <EmptyState title="No tables yet" body="Add round or long tables, then pick a name and tap a seat." />
+            <EmptyState title="No tables yet" body="Add round or long tables, then pick an attending guest and tap a seat." />
           ) : (
             <div className="grid items-start gap-4 md:grid-cols-2">
               {data.tables.map((table) => (
