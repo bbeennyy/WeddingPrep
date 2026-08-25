@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:56:22.998Z",
+  "updatedAt": "2026-08-25T19:56:25.681Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -443,7 +443,7 @@
       "id": "f6790a78-3e90-4a9b-b345-54efadeb4f19",
       "name": "Food & cake",
       "category": "Food",
-      "estimate": 4,
+      "estimate": 400,
       "actual": 4500,
       "paid": false
     },
