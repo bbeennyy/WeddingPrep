@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:04:28.997Z",
+  "updatedAt": "2026-08-25T20:04:35.097Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -359,6 +359,11 @@
         {
           "id": "464a1321-421a-4616-b4de-368d475f1219",
           "title": "Emma",
+          "done": false
+        },
+        {
+          "id": "9edb1234-96c2-4aeb-a3ec-c1c475764110",
+          "title": "Daria",
           "done": false
         }
       ]
