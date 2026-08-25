@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:50:51.388Z",
+  "updatedAt": "2026-08-25T19:51:02.878Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -477,6 +477,14 @@
       "category": "Photo",
       "estimate": 3000,
       "actual": 3000,
+      "paid": false
+    },
+    {
+      "id": "38e488a3-6c47-4e43-817b-652acc23f3d2",
+      "name": "New item",
+      "category": "Other",
+      "estimate": 0,
+      "actual": 0,
       "paid": false
     }
   ],
