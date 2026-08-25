@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:25:00.166Z",
+  "updatedAt": "2026-08-25T19:25:01.302Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -508,7 +508,7 @@
       "notes": "Bride",
       "tableId": "80c21768-8924-477a-aedc-0ef69373e89c",
       "group": "The couple",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "79201c2d-6d80-4c49-88a2-fa4b3bc748dd",
