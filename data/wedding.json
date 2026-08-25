@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:07:55.164Z",
+  "updatedAt": "2026-08-25T20:08:41.225Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -559,6 +559,14 @@
       "estimate": 1670,
       "actual": 1670,
       "paid": true
+    },
+    {
+      "id": "cc0f2e62-e246-4ca0-a8ec-a5133ebf81b6",
+      "name": "New item",
+      "category": "Other",
+      "estimate": 0,
+      "actual": 0,
+      "paid": false
     }
   ],
   "notes": [
