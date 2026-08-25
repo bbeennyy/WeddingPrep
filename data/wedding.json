@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T18:26:01.813Z",
+  "updatedAt": "2026-08-25T18:28:14.431Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1888,7 +1888,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "6beca16d-e4b3-4533-b777-cbc6af34984b",
       "group": "Berar Family"
     },
     {
