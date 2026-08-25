@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:51:33.150Z",
+  "updatedAt": "2026-08-25T19:51:37.064Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -485,7 +485,7 @@
       "category": "Decor",
       "estimate": 25,
       "actual": 25,
-      "paid": false
+      "paid": true
     }
   ],
   "notes": [
