@@ -8,8 +8,25 @@ import type { Guest, Owner, Table, TableShape } from "../types";
 
 export function TablesPage() {
   const { data, patch } = useWedding();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
   const seatable = data.guests.filter((guest) => guest.rsvp !== "declined");
   const unseated = seatable.filter((guest) => !guest.tableId);
+  const selected = unseated.find((guest) => guest.id === selectedId) ?? null;
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return unseated;
+    return unseated.filter((guest) => [guest.name, guest.group].join(" ").toLowerCase().includes(q));
+  }, [query, unseated]);
+
+  const bySide = (
+    [
+      { side: "a" as const, label: ownerName(data.settings, "a"), guests: filtered.filter((guest) => guest.side === "a") },
+      { side: "b" as const, label: ownerName(data.settings, "b"), guests: filtered.filter((guest) => guest.side === "b") },
+      { side: "both" as const, label: "Together", guests: filtered.filter((guest) => guest.side === "both") },
+    ] satisfies Array<{ side: Owner; label: string; guests: Guest[] }>
+  ).filter((group) => group.guests.length > 0);
 
   function addTable() {
     const next: Table = {
@@ -33,6 +50,7 @@ export function TablesPage() {
       "guests",
       data.guests.map((guest) => (guest.id === guestId ? { ...guest, tableId } : guest)),
     );
+    setSelectedId(null);
   }
 
   function removeTable(id: string) {
@@ -49,7 +67,7 @@ export function TablesPage() {
         <div>
           <h1 className="font-serif text-4xl">Table formations</h1>
           <p className="mt-1 text-sm text-muted">
-            Tap an empty seat, then type a name. Declined guests stay off the list.
+            Pick a name on the side, then tap an empty seat. Or tap a seat and type. Declined guests stay off the list.
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted">
             <span className="inline-flex items-center gap-1.5">
@@ -71,39 +89,117 @@ export function TablesPage() {
         </button>
       </div>
 
-      <section className="card p-4">
-        <h2 className="text-xs uppercase tracking-[0.16em] text-muted">Unseated guests</h2>
-        {unseated.length === 0 ? (
-          <p className="mt-2 text-sm text-muted">
-            {seatable.length === 0
-              ? "Add guests first, then tap a seat and type a name."
-              : "Everyone who can be seated has a place."}
-          </p>
-        ) : (
-          <p className="mt-2 text-sm text-muted">
-            {unseated.length} still need a seat. Tap an empty spot on a table and start typing.
-          </p>
-        )}
-      </section>
-
-      {data.tables.length === 0 ? (
-        <EmptyState title="No tables yet" body="Add round or long tables, then tap a seat and type who sits there." />
-      ) : (
-        <div className="grid items-start gap-4 md:grid-cols-2">
-          {data.tables.map((table) => (
-            <TableCard
-              key={table.id}
-              table={table}
-              guests={data.guests.filter((guest) => guest.tableId === table.id)}
-              candidates={unseated}
-              onSeat={(guestId) => seat(guestId, table.id)}
-              onUnseat={(guestId) => seat(guestId, null)}
-              onChange={(next) => updateTable(table.id, next)}
-              onDelete={() => removeTable(table.id)}
-            />
-          ))}
+      {selected ? (
+        <div className="rounded-2xl px-4 py-3 text-sm" style={{ backgroundColor: sideColors(selected.side).fill }}>
+          Seating <strong>{selected.name}</strong> — tap an empty seat, or{" "}
+          <button className="underline" onClick={() => setSelectedId(null)}>
+            cancel
+          </button>
         </div>
-      )}
+      ) : null}
+
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+        <aside className="card order-1 max-h-[40vh] overflow-hidden p-0 lg:sticky lg:top-24 lg:order-2 lg:w-72 lg:shrink-0 lg:max-h-[calc(100vh-8rem)]">
+          <div className="border-b border-gold/15 px-4 py-3">
+            <h2 className="text-xs uppercase tracking-[0.16em] text-muted">Available to seat</h2>
+            <p className="mt-1 text-sm text-ink">
+              {unseated.length} {unseated.length === 1 ? "name" : "names"}
+            </p>
+            <input
+              className="field mt-3"
+              placeholder="Filter names…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+          <div className="max-h-[calc(40vh-7rem)] overflow-y-auto p-3 lg:max-h-[calc(100vh-14rem)]">
+            {seatable.length === 0 ? (
+              <p className="px-1 py-6 text-sm text-muted">Add guests first. They show up here once they are not declined.</p>
+            ) : unseated.length === 0 ? (
+              <p className="px-1 py-6 text-sm text-muted">Everyone who can be seated has a place.</p>
+            ) : filtered.length === 0 ? (
+              <p className="px-1 py-6 text-sm text-muted">No names match that filter.</p>
+            ) : (
+              <div className="space-y-4">
+                {bySide.map((group) => (
+                  <section key={group.side}>
+                    <h3 className="mb-2 flex items-center gap-2 px-1 text-[11px] uppercase tracking-[0.14em] text-muted">
+                      <span
+                        className="h-2.5 w-2.5 rounded-full"
+                        style={{ backgroundColor: sideColors(group.side).line }}
+                      />
+                      {group.label}
+                    </h3>
+                    <ul className="space-y-1">
+                      {group.guests
+                        .slice()
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map((guest) => {
+                          const colors = sideColors(guest.side);
+                          const active = selectedId === guest.id;
+                          return (
+                            <li key={guest.id}>
+                              <button
+                                type="button"
+                                className="flex w-full items-center gap-2 rounded-xl px-2 py-2 text-left text-sm"
+                                style={{
+                                  backgroundColor: active ? colors.line : colors.fill,
+                                  color: active ? "#fbf8f1" : colors.text,
+                                }}
+                                onClick={() => setSelectedId(active ? null : guest.id)}
+                              >
+                                <span
+                                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold"
+                                  style={{
+                                    backgroundColor: active ? colors.fill : "#fff",
+                                    color: colors.text,
+                                    border: `2px solid ${colors.line}`,
+                                  }}
+                                >
+                                  {initials(guest.name)}
+                                </span>
+                                <span className="min-w-0">
+                                  <span className="block truncate font-medium">{guest.name}</span>
+                                  {guest.group ? (
+                                    <span className={`block truncate text-xs ${active ? "text-cream/80" : "opacity-70"}`}>
+                                      {guest.group}
+                                    </span>
+                                  ) : null}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </section>
+                ))}
+              </div>
+            )}
+          </div>
+        </aside>
+
+        <div className="order-2 min-w-0 flex-1 space-y-4 lg:order-1">
+          {data.tables.length === 0 ? (
+            <EmptyState title="No tables yet" body="Add round or long tables, then pick a name and tap a seat." />
+          ) : (
+            <div className="grid items-start gap-4 md:grid-cols-2">
+              {data.tables.map((table) => (
+                <TableCard
+                  key={table.id}
+                  table={table}
+                  guests={data.guests.filter((guest) => guest.tableId === table.id)}
+                  candidates={unseated}
+                  selected={selected}
+                  onSeat={(guestId) => seat(guestId, table.id)}
+                  onUnseat={(guestId) => seat(guestId, null)}
+                  onChange={(next) => updateTable(table.id, next)}
+                  onDelete={() => removeTable(table.id)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -112,6 +208,7 @@ function TableCard({
   table,
   guests,
   candidates,
+  selected,
   onSeat,
   onUnseat,
   onChange,
@@ -120,6 +217,7 @@ function TableCard({
   table: Table;
   guests: Guest[];
   candidates: Guest[];
+  selected: Guest | null;
   onSeat: (guestId: string) => void;
   onUnseat: (guestId: string) => void;
   onChange: (next: Partial<Table>) => void;
@@ -136,7 +234,7 @@ function TableCard({
   const over = guests.length > table.seats;
 
   return (
-    <article className={`card overflow-visible p-4 ${pickingSeat !== null ? "relative z-20" : ""}`}>
+    <article className={`card overflow-visible p-4 ${pickingSeat !== null || selected ? "relative z-20" : ""}`}>
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="grid flex-1 grid-cols-2 gap-2">
           <input className="field" value={table.name} onChange={(e) => onChange({ name: e.target.value })} />
@@ -176,7 +274,7 @@ function TableCard({
           const x = 50 + 42 * Math.cos(angle);
           const y = 50 + 42 * Math.sin(angle);
           const picking = pickingSeat === index;
-          const colors = guest ? sideColors(guest.side) : picking ? pickingColors : emptyColors;
+          const colors = guest ? sideColors(guest.side) : picking || selected ? pickingColors : emptyColors;
           return (
             <button
               key={guest?.id ?? `empty-${index}`}
@@ -185,7 +283,7 @@ function TableCard({
                 left: `${x}%`,
                 top: `${y}%`,
                 backgroundColor: colors.fill,
-                border: `2px ${guest || picking ? "solid" : "dashed"} ${colors.line}`,
+                border: `2px ${guest || picking || selected ? "solid" : "dashed"} ${colors.line}`,
                 color: colors.text,
               }}
               title={guest?.name ?? "Empty seat"}
@@ -193,9 +291,14 @@ function TableCard({
                 if (guest) {
                   onUnseat(guest.id);
                   setPickingSeat(null);
-                } else {
-                  setPickingSeat(picking ? null : index);
+                  return;
                 }
+                if (selected) {
+                  onSeat(selected.id);
+                  setPickingSeat(null);
+                  return;
+                }
+                setPickingSeat(picking ? null : index);
               }}
             >
               {guest ? initials(guest.name) : picking ? "+" : ""}
@@ -204,7 +307,7 @@ function TableCard({
         })}
       </div>
 
-      {pickingSeat !== null ? (
+      {pickingSeat !== null && !selected ? (
         <div className="mt-4">
           <label className="label">Seat this person</label>
           <NameSearch
