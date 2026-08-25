@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:18:32.955Z",
+  "updatedAt": "2026-08-25T19:20:02.061Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2115,7 +2115,7 @@
       "id": "ebe2ebf4-fa67-499e-af59-9314a5552d54",
       "name": "Dan Azemar",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
