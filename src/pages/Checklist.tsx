@@ -1,5 +1,5 @@
-import { useMemo, useRef, useState, type FormEvent } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { Check, ListTodo, Plus, Trash2, X } from "lucide-react";
 import { CHECKLIST_CATEGORIES } from "../constants";
 import { useWedding } from "../context";
 import { ownerName, uid } from "../defaults";
@@ -16,10 +16,10 @@ const emptyItem = (): Omit<ChecklistItem, "id"> => ({
   subtasks: [],
 });
 
-function subtaskProgress(item: ChecklistItem): string | null {
-  if (!item.subtasks.length) return null;
+function subtaskCounts(item: ChecklistItem) {
+  const total = item.subtasks.length;
   const done = item.subtasks.filter((step) => step.done).length;
-  return `${done} of ${item.subtasks.length} steps`;
+  return { done, total };
 }
 
 export function ChecklistPage() {
@@ -97,7 +97,7 @@ export function ChecklistPage() {
           <h1 className="font-serif text-4xl">Checklist</h1>
           <p className="mt-1 text-sm text-muted">
             {doneCount} of {data.checklist.length} done
-            {openSubtasks ? ` · ${openSubtasks} open steps` : ""}
+            {openSubtasks ? ` · ${openSubtasks} open subtasks` : ""}
           </p>
         </div>
         <button
@@ -241,15 +241,16 @@ function TaskRow({
   onDelete: () => void;
 }) {
   const [step, setStep] = useState("");
-  const progress = subtaskProgress(item);
+  const { done, total } = subtaskCounts(item);
+
+  function updateSubtasks(subtasks: Subtask[]) {
+    onChange({ ...item, subtasks });
+  }
 
   function addStep() {
     const title = step.trim();
     if (!title) return;
-    onChange({
-      ...item,
-      subtasks: [...item.subtasks, { id: uid(), title, done: false }],
-    });
+    updateSubtasks([...item.subtasks, { id: uid(), title, done: false }]);
     setStep("");
   }
 
@@ -264,10 +265,17 @@ function TaskRow({
         />
         <button className="min-w-0 flex-1 text-left" onClick={onEdit}>
           <p className={`text-sm ${item.done ? "text-muted line-through" : ""}`}>{item.title}</p>
-          <p className="mt-1 text-xs text-muted">
-            {ownerLabel}
-            {item.dueDate ? ` · due ${item.dueDate}` : ""}
-            {progress ? ` · ${progress}` : ""}
+          <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted">
+            <span>
+              {ownerLabel}
+              {item.dueDate ? ` · due ${item.dueDate}` : ""}
+            </span>
+            {total > 0 ? (
+              <span className="inline-flex items-center gap-1 text-muted">
+                <ListTodo className="h-3 w-3" />
+                {done}/{total}
+              </span>
+            ) : null}
           </p>
         </button>
         <button className="text-muted hover:text-rose" aria-label="Delete task" onClick={onDelete}>
@@ -275,53 +283,13 @@ function TaskRow({
         </button>
       </div>
 
-      <div className="ml-7 mt-2 space-y-1.5">
-        {item.subtasks.map((sub) => (
-          <div key={sub.id} className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              className="h-3.5 w-3.5 accent-sage"
-              checked={sub.done}
-              onChange={() =>
-                onChange({
-                  ...item,
-                  subtasks: item.subtasks.map((row) => (row.id === sub.id ? { ...row, done: !row.done } : row)),
-                })
-              }
-            />
-            <p className={`min-w-0 flex-1 text-sm ${sub.done ? "text-muted line-through" : "text-ink/80"}`}>{sub.title}</p>
-            <button
-              className="text-muted hover:text-rose"
-              aria-label={`Delete ${sub.title}`}
-              onClick={() =>
-                onChange({
-                  ...item,
-                  subtasks: item.subtasks.filter((row) => row.id !== sub.id),
-                })
-              }
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </button>
-          </div>
-        ))}
-        <form
-          className="flex gap-2"
-          onSubmit={(event) => {
-            event.preventDefault();
-            addStep();
-          }}
-        >
-          <input
-            className="field !py-1 text-sm"
-            placeholder="Add a step"
-            value={step}
-            onChange={(e) => setStep(e.target.value)}
-          />
-          <button type="submit" className="btn-ghost !px-2 !py-1" disabled={!step.trim()} aria-label="Add step">
-            <Plus className="h-4 w-4" />
-          </button>
-        </form>
-      </div>
+      <SubtaskList
+        subtasks={item.subtasks}
+        pending={step}
+        onPendingChange={setStep}
+        onSubmit={addStep}
+        onChange={updateSubtasks}
+      />
     </div>
   );
 }
@@ -337,6 +305,11 @@ function SubtaskEditor({
   pending: string;
   onPendingChange: (value: string) => void;
 }) {
+  const { done, total } = {
+    done: subtasks.filter((step) => step.done).length,
+    total: subtasks.length,
+  };
+
   function addStep() {
     const title = pending.trim();
     if (!title) return;
@@ -346,52 +319,209 @@ function SubtaskEditor({
 
   return (
     <div>
-      <label className="label">Steps</label>
-      <div className="space-y-1.5">
-        {subtasks.map((sub) => (
-          <div key={sub.id} className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              className="h-3.5 w-3.5 accent-sage"
-              checked={sub.done}
-              onChange={() =>
-                onChange(subtasks.map((row) => (row.id === sub.id ? { ...row, done: !row.done } : row)))
-              }
-            />
-            <input
-              className="field !py-1 text-sm"
-              value={sub.title}
-              onChange={(e) =>
-                onChange(subtasks.map((row) => (row.id === sub.id ? { ...row, title: e.target.value } : row)))
-              }
-            />
-            <button
-              className="text-muted hover:text-rose"
-              aria-label="Delete step"
-              onClick={() => onChange(subtasks.filter((row) => row.id !== sub.id))}
-            >
-              <Trash2 className="h-4 w-4" />
-            </button>
-          </div>
-        ))}
-        <div className="flex gap-2">
-          <input
-            name="newStep"
-            className="field !py-1 text-sm"
-            placeholder="Add a step"
-            value={pending}
-            onChange={(e) => onPendingChange(e.target.value)}
-            onKeyDown={(event) => {
-              if (event.key !== "Enter") return;
-              event.preventDefault();
-              addStep();
-            }}
-          />
-          <button type="button" className="btn-ghost !px-2 !py-1" disabled={!pending.trim()} onClick={addStep}>
-            <Plus className="h-4 w-4" />
-          </button>
-        </div>
+      <div className="mb-1 flex items-center justify-between">
+        <label className="label !mb-0">Subtasks</label>
+        {total > 0 ? (
+          <span className="inline-flex items-center gap-1 text-[11px] text-muted">
+            <ListTodo className="h-3 w-3" />
+            {done}/{total}
+          </span>
+        ) : null}
       </div>
+      <SubtaskList
+        subtasks={subtasks}
+        pending={pending}
+        onPendingChange={onPendingChange}
+        onSubmit={addStep}
+        onChange={onChange}
+        inputName="newStep"
+        className="ml-0 mt-1 border-l-0 pl-0"
+      />
     </div>
+  );
+}
+
+function SubtaskList({
+  subtasks,
+  pending,
+  onPendingChange,
+  onSubmit,
+  onChange,
+  inputName,
+  className = "",
+}: {
+  subtasks: Subtask[];
+  pending: string;
+  onPendingChange: (value: string) => void;
+  onSubmit: () => void;
+  onChange: (subtasks: Subtask[]) => void;
+  inputName?: string;
+  className?: string;
+}) {
+  return (
+    <div className={`ml-[26px] mt-1 border-l border-gold/20 pl-3 ${className}`}>
+      {subtasks.map((sub) => (
+        <SubtaskRow
+          key={sub.id}
+          sub={sub}
+          onToggle={() =>
+            onChange(subtasks.map((row) => (row.id === sub.id ? { ...row, done: !row.done } : row)))
+          }
+          onRename={(title) =>
+            onChange(subtasks.map((row) => (row.id === sub.id ? { ...row, title } : row)))
+          }
+          onDelete={() => onChange(subtasks.filter((row) => row.id !== sub.id))}
+        />
+      ))}
+      <AddSubtaskRow
+        value={pending}
+        onChange={onPendingChange}
+        onSubmit={onSubmit}
+        inputName={inputName}
+      />
+    </div>
+  );
+}
+
+function SubtaskRow({
+  sub,
+  onToggle,
+  onRename,
+  onDelete,
+}: {
+  sub: Subtask;
+  onToggle: () => void;
+  onRename: (title: string) => void;
+  onDelete: () => void;
+}) {
+  return (
+    <div className="group -ml-1 flex items-center gap-2.5 rounded-lg px-1 py-1 hover:bg-ink/[0.04]">
+      <RoundCheck checked={sub.done} onToggle={onToggle} label={sub.title} />
+      <input
+        className={`min-w-0 flex-1 bg-transparent text-sm outline-none ${
+          sub.done ? "text-muted line-through" : "text-ink"
+        }`}
+        value={sub.title}
+        onChange={(e) => onRename(e.target.value)}
+        onBlur={() => {
+          if (!sub.title.trim()) onDelete();
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            event.currentTarget.blur();
+          }
+        }}
+      />
+      <button
+        type="button"
+        className="rounded p-0.5 text-muted opacity-50 hover:text-rose md:opacity-0 md:transition md:group-hover:opacity-100"
+        aria-label={`Delete ${sub.title}`}
+        onClick={onDelete}
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
+}
+
+function AddSubtaskRow({
+  value,
+  onChange,
+  onSubmit,
+  inputName,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  onSubmit: () => void;
+  inputName?: string;
+}) {
+  const [open, setOpen] = useState(Boolean(value));
+  const inputRef = useRef<HTMLInputElement>(null);
+  const keepingFocus = useRef(false);
+
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
+
+  function submit() {
+    if (!value.trim()) return;
+    keepingFocus.current = true;
+    onSubmit();
+    requestAnimationFrame(() => {
+      inputRef.current?.focus();
+      keepingFocus.current = false;
+    });
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        className="-ml-1 flex w-full items-center gap-2.5 rounded-lg px-1 py-1.5 text-left text-sm text-muted transition hover:bg-ink/[0.04] hover:text-ink"
+        onClick={() => setOpen(true)}
+      >
+        <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center">
+          <Plus className="h-3.5 w-3.5" strokeWidth={2} />
+        </span>
+        Add subtask
+      </button>
+    );
+  }
+
+  return (
+    <div className="-ml-1 flex items-center gap-2.5 rounded-lg px-1 py-1.5">
+      <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center text-muted">
+        <Plus className="h-3.5 w-3.5" strokeWidth={2} />
+      </span>
+      <input
+        ref={inputRef}
+        name={inputName}
+        className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted/70"
+        placeholder="Write a subtask"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            event.stopPropagation();
+            submit();
+          }
+          if (event.key === "Escape") {
+            onChange("");
+            setOpen(false);
+          }
+        }}
+        onBlur={() => {
+          if (keepingFocus.current) return;
+          if (!value.trim()) setOpen(false);
+        }}
+      />
+    </div>
+  );
+}
+
+function RoundCheck({
+  checked,
+  onToggle,
+  label,
+}: {
+  checked: boolean;
+  onToggle: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="checkbox"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={onToggle}
+      className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] transition ${
+        checked ? "border-sage bg-sage text-white" : "border-ink/30 bg-white/80 hover:border-sage"
+      }`}
+    >
+      {checked ? <Check className="h-2.5 w-2.5" strokeWidth={3} /> : null}
+    </button>
   );
 }
