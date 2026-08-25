@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:56:07.129Z",
+  "updatedAt": "2026-08-25T19:56:08.128Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -509,7 +509,7 @@
       "category": "Venue",
       "estimate": 160,
       "actual": 160,
-      "paid": false
+      "paid": true
     }
   ],
   "notes": [
