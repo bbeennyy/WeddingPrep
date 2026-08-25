@@ -25,6 +25,7 @@ function task(
     owner,
     dueDate: "",
     notes: "",
+    subtasks: [],
   };
 }
 
@@ -293,6 +294,7 @@ export function coupleGuests(): Guest[] {
       notes: "Groom",
       tableId: null,
       group: "The couple",
+      rehearsalDinner: true,
     },
     {
       id: uid(),
@@ -303,6 +305,7 @@ export function coupleGuests(): Guest[] {
       notes: "Bride",
       tableId: null,
       group: "The couple",
+      rehearsalDinner: true,
     },
   ];
 }
