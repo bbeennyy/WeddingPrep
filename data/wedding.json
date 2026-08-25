@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:51:14.861Z",
+  "updatedAt": "2026-08-25T19:51:17.596Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -481,8 +481,8 @@
     },
     {
       "id": "38e488a3-6c47-4e43-817b-652acc23f3d2",
-      "name": "Table Cloth",
-      "category": "Other",
+      "name": "Table Cloths",
+      "category": "",
       "estimate": 0,
       "actual": 0,
       "paid": false
