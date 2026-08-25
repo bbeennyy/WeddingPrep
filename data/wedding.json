@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:53:00.632Z",
+  "updatedAt": "2026-08-25T19:53:03.859Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -500,7 +500,7 @@
       "name": "Stamps",
       "category": "Venue",
       "estimate": 165,
-      "actual": 165,
+      "actual": 0,
       "paid": false
     }
   ],
