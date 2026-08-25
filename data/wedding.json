@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:07:18.057Z",
+  "updatedAt": "2026-08-25T20:07:44.292Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -493,7 +493,7 @@
       "name": "Evie’s Dress ",
       "category": "Attire",
       "estimate": 2209,
-      "actual": 0,
+      "actual": 20,
       "paid": false
     },
     {
