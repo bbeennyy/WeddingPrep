@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { CHECKLIST_CATEGORIES } from "../constants";
 import { useWedding } from "../context";
@@ -29,6 +29,10 @@ export function ChecklistPage() {
   const [draft, setDraft] = useState<Omit<ChecklistItem, "id"> | null>(null);
   const [draftStep, setDraftStep] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
+  const draftRef = useRef(draft);
+  const draftStepRef = useRef(draftStep);
+  draftRef.current = draft;
+  draftStepRef.current = draftStep;
 
   const items = useMemo(() => {
     return data.checklist.filter((item) => {
@@ -44,14 +48,19 @@ export function ChecklistPage() {
     items: items.filter((item) => item.category === cat),
   })).filter((group) => group.items.length);
 
-  function saveDraft() {
-    if (!draft?.title.trim()) return;
-    const pending = draftStep.trim();
+  function saveDraft(event?: FormEvent<HTMLFormElement>) {
+    event?.preventDefault();
+    const current = draftRef.current;
+    if (!current?.title.trim()) return;
+    const fromForm = event
+      ? String(new FormData(event.currentTarget).get("newStep") ?? "")
+      : "";
+    const pending = fromForm.trim() || draftStepRef.current.trim();
     const next = {
-      ...draft,
-      title: draft.title.trim(),
+      ...current,
+      title: current.title.trim(),
       subtasks: [
-        ...draft.subtasks.filter((step) => step.title.trim()),
+        ...current.subtasks.filter((step) => step.title.trim()),
         ...(pending ? [{ id: uid(), title: pending, done: false }] : []),
       ],
     };
@@ -164,7 +173,7 @@ export function ChecklistPage() {
             setEditingId(null);
           }}
         >
-          <div className="space-y-3">
+          <form className="space-y-3" onSubmit={saveDraft}>
             <div>
               <label className="label">What needs doing</label>
               <input className="field" value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} />
@@ -201,14 +210,17 @@ export function ChecklistPage() {
             </div>
             <SubtaskEditor
               subtasks={draft.subtasks}
-              onChange={(subtasks) => setDraft({ ...draft, subtasks })}
+              onChange={(subtasks) => setDraft((current) => (current ? { ...current, subtasks } : current))}
               pending={draftStep}
-              onPendingChange={setDraftStep}
+              onPendingChange={(value) => {
+                draftStepRef.current = value;
+                setDraftStep(value);
+              }}
             />
-            <button className="btn-primary w-full" onClick={saveDraft}>
+            <button className="btn-primary w-full" type="submit">
               Save task
             </button>
-          </div>
+          </form>
         </Modal>
       ) : null}
     </div>
@@ -362,24 +374,23 @@ function SubtaskEditor({
             </button>
           </div>
         ))}
-        <form
-          className="flex gap-2"
-          onSubmit={(event) => {
-            event.preventDefault();
-            addStep();
-          }}
-        >
+        <div className="flex gap-2">
           <input
+            name="newStep"
             className="field !py-1 text-sm"
             placeholder="Add a step"
             value={pending}
             onChange={(e) => onPendingChange(e.target.value)}
-            onBlur={addStep}
+            onKeyDown={(event) => {
+              if (event.key !== "Enter") return;
+              event.preventDefault();
+              addStep();
+            }}
           />
-          <button type="submit" className="btn-ghost !px-2 !py-1" disabled={!pending.trim()}>
+          <button type="button" className="btn-ghost !px-2 !py-1" disabled={!pending.trim()} onClick={addStep}>
             <Plus className="h-4 w-4" />
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
