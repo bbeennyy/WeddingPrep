@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:05:53.830Z",
+  "updatedAt": "2026-08-25T20:07:18.057Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -459,7 +459,7 @@
       "name": "Lauran Stevens",
       "role": "Food Caterer",
       "contact": "678 790 6184",
-      "status": "contacted",
+      "status": "booked",
       "notes": ""
     }
   ],
