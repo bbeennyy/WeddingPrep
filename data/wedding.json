@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:04:35.097Z",
+  "updatedAt": "2026-08-25T20:05:53.830Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -348,7 +348,6 @@
       "subtasks": []
     },
     {
-      "id": "4bcb69a0-46b3-484f-8213-8456d44cb639",
       "title": "Flower Girls Choices",
       "category": "Church",
       "done": false,
@@ -359,14 +358,45 @@
         {
           "id": "464a1321-421a-4616-b4de-368d475f1219",
           "title": "Emma",
-          "done": false
+          "done": true
         },
         {
           "id": "9edb1234-96c2-4aeb-a3ec-c1c475764110",
           "title": "Daria",
+          "done": true
+        },
+        {
+          "id": "2d717d9a-8c6b-41be-b7f8-8688d7ff0396",
+          "title": "Kellyn",
+          "done": true
+        },
+        {
+          "id": "6e14711d-381c-43a3-9c0e-1419b3b099c2",
+          "title": "Mackenzie",
+          "done": true
+        },
+        {
+          "id": "d8f52c37-dffb-41ea-8695-352b4b4fde62",
+          "title": "Norah",
+          "done": false
+        },
+        {
+          "id": "3dc6021c-97d6-40cf-a443-2d95045a3928",
+          "title": "Katrina",
+          "done": false
+        },
+        {
+          "id": "d4c6d536-b42c-48db-be3b-e9be00769aad",
+          "title": "Ellis",
+          "done": false
+        },
+        {
+          "id": "1c8d24f5-aaf6-439e-a8e1-ddcbe7345f82",
+          "title": "Autumn",
           "done": false
         }
-      ]
+      ],
+      "id": "4bcb69a0-46b3-484f-8213-8456d44cb639"
     },
     {
       "id": "38ef0088-3722-47f0-947a-933bb70bc450",
