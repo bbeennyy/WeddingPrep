@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:52:07.969Z",
+  "updatedAt": "2026-08-25T19:52:13.008Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -492,7 +492,7 @@
       "name": "Eucalyptus",
       "category": "Decor",
       "estimate": 25,
-      "actual": 0,
+      "actual": 250,
       "paid": false
     }
   ],
