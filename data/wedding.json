@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:08:55.536Z",
+  "updatedAt": "2026-08-25T20:08:56.636Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -562,7 +562,7 @@
     },
     {
       "id": "cc0f2e62-e246-4ca0-a8ec-a5133ebf81b6",
-      "name": "Marriage Licence",
+      "name": "Marriage License",
       "category": "Other",
       "estimate": 0,
       "actual": 0,
