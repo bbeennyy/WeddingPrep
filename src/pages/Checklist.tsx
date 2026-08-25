@@ -27,6 +27,7 @@ export function ChecklistPage() {
   const [filter, setFilter] = useState<"all" | "open" | "done">("all");
   const [category, setCategory] = useState("all");
   const [draft, setDraft] = useState<Omit<ChecklistItem, "id"> | null>(null);
+  const [draftStep, setDraftStep] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const items = useMemo(() => {
@@ -45,10 +46,14 @@ export function ChecklistPage() {
 
   function saveDraft() {
     if (!draft?.title.trim()) return;
+    const pending = draftStep.trim();
     const next = {
       ...draft,
       title: draft.title.trim(),
-      subtasks: draft.subtasks.filter((step) => step.title.trim()),
+      subtasks: [
+        ...draft.subtasks.filter((step) => step.title.trim()),
+        ...(pending ? [{ id: uid(), title: pending, done: false }] : []),
+      ],
     };
     if (editingId) {
       patch(
@@ -59,6 +64,7 @@ export function ChecklistPage() {
       patch("checklist", [...data.checklist, { ...next, id: uid() }]);
     }
     setDraft(null);
+    setDraftStep("");
     setEditingId(null);
   }
 
@@ -89,6 +95,7 @@ export function ChecklistPage() {
           className="btn-primary"
           onClick={() => {
             setEditingId(null);
+            setDraftStep("");
             setDraft(emptyItem());
           }}
         >
@@ -132,6 +139,7 @@ export function ChecklistPage() {
                   onEdit={() => {
                     const { id, ...rest } = item;
                     setEditingId(id);
+                    setDraftStep("");
                     setDraft(rest);
                   }}
                   onDelete={() =>
@@ -152,6 +160,7 @@ export function ChecklistPage() {
           title={editingId ? "Edit task" : "New task"}
           onClose={() => {
             setDraft(null);
+            setDraftStep("");
             setEditingId(null);
           }}
         >
@@ -193,6 +202,8 @@ export function ChecklistPage() {
             <SubtaskEditor
               subtasks={draft.subtasks}
               onChange={(subtasks) => setDraft({ ...draft, subtasks })}
+              pending={draftStep}
+              onPendingChange={setDraftStep}
             />
             <button className="btn-primary w-full" onClick={saveDraft}>
               Save task
@@ -306,17 +317,19 @@ function TaskRow({
 function SubtaskEditor({
   subtasks,
   onChange,
+  pending,
+  onPendingChange,
 }: {
   subtasks: Subtask[];
   onChange: (subtasks: Subtask[]) => void;
+  pending: string;
+  onPendingChange: (value: string) => void;
 }) {
-  const [step, setStep] = useState("");
-
   function addStep() {
-    const title = step.trim();
+    const title = pending.trim();
     if (!title) return;
     onChange([...subtasks, { id: uid(), title, done: false }]);
-    setStep("");
+    onPendingChange("");
   }
 
   return (
@@ -359,10 +372,11 @@ function SubtaskEditor({
           <input
             className="field !py-1 text-sm"
             placeholder="Add a step"
-            value={step}
-            onChange={(e) => setStep(e.target.value)}
+            value={pending}
+            onChange={(e) => onPendingChange(e.target.value)}
+            onBlur={addStep}
           />
-          <button type="submit" className="btn-ghost !px-2 !py-1" disabled={!step.trim()}>
+          <button type="submit" className="btn-ghost !px-2 !py-1" disabled={!pending.trim()}>
             <Plus className="h-4 w-4" />
           </button>
         </form>
