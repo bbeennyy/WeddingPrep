@@ -89,6 +89,7 @@ export function HomePage() {
           <ul className="mt-4 space-y-2 text-sm">
             <li>{done} of {checklist.length} preparation tasks done</li>
             <li>{guests.length} guests · {attending} attending · {pending} waiting</li>
+            <li>{guests.filter((guest) => guest.rsvp === "attending" && guest.rehearsalDinner).length} invited to the rehearsal dinner</li>
             <li>{seated} seated at {tables.length} tables</li>
             <li>{program.length} moments on the wedding-day timeline</li>
           </ul>

@@ -2,7 +2,17 @@ import { createDefaultData, ensureCoupleGuests, uid } from "./defaults";
 import { TAG_BY_ID } from "./constants";
 import { commitWeddingJson } from "./githubUpload";
 import { getWriteToken } from "./writeToken";
-import type { Guest, PhotoShot, ProgramItem, ProgramSection, ProgramTag, WeddingData } from "./types";
+import type {
+  ChecklistItem,
+  Guest,
+  PhotoShot,
+  ProgramItem,
+  ProgramSection,
+  ProgramTag,
+  Rsvp,
+  Subtask,
+  WeddingData,
+} from "./types";
 
 const STORAGE_KEY = "wedding-prep-data-v1";
 
@@ -11,6 +21,53 @@ function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 const PROGRAM_SECTION_IDS = new Set<ProgramSection>(["pre-ceremony", "ceremony", "reception"]);
+
+const RSVP_VALUES = new Set<Rsvp>(["pending", "attending", "declined", "maybe"]);
+
+function normalizeSubtask(raw: unknown): Subtask | null {
+  const row = isObject(raw) ? raw : {};
+  const title = String(row.title ?? "").trim();
+  if (!title) return null;
+  return {
+    id: String(row.id || uid()),
+    title,
+    done: Boolean(row.done),
+  };
+}
+
+function normalizeChecklistItem(raw: unknown): ChecklistItem {
+  const row = isObject(raw) ? raw : {};
+  const owner = row.owner === "a" || row.owner === "b" || row.owner === "both" ? row.owner : "both";
+  return {
+    id: String(row.id || uid()),
+    title: String(row.title ?? ""),
+    category: String(row.category ?? "Other") || "Other",
+    done: Boolean(row.done),
+    owner,
+    dueDate: typeof row.dueDate === "string" ? row.dueDate : "",
+    notes: String(row.notes ?? ""),
+    subtasks: Array.isArray(row.subtasks)
+      ? row.subtasks.map(normalizeSubtask).filter((item): item is Subtask => item !== null)
+      : [],
+  };
+}
+
+function normalizeGuest(raw: unknown): Guest {
+  const row = isObject(raw) ? raw : {};
+  const rsvp = RSVP_VALUES.has(row.rsvp as Rsvp) ? (row.rsvp as Rsvp) : "pending";
+  const side = row.side === "a" || row.side === "b" || row.side === "both" ? row.side : "both";
+  return {
+    id: String(row.id || uid()),
+    name: String(row.name ?? ""),
+    side,
+    rsvp,
+    dietary: String(row.dietary ?? ""),
+    notes: String(row.notes ?? ""),
+    tableId: typeof row.tableId === "string" && row.tableId ? row.tableId : null,
+    group: String(row.group ?? ""),
+    rehearsalDinner: rsvp === "attending" && Boolean(row.rehearsalDinner),
+  };
+}
 
 function normalizePhotoShot(raw: unknown): PhotoShot {
   const row = isObject(raw) ? raw : {};
@@ -48,7 +105,7 @@ export function parseWeddingData(raw: unknown): WeddingData {
 
   const settings = isObject(raw.settings) ? { ...fallback.settings, ...raw.settings } : fallback.settings;
 
-  const guests = ensureCoupleGuests(Array.isArray(raw.guests) ? (raw.guests as WeddingData["guests"]) : []);
+  const guests = ensureCoupleGuests(Array.isArray(raw.guests) ? raw.guests.map(normalizeGuest) : []);
   const photoShots = Array.isArray(raw.photoShots)
     ? raw.photoShots.map(normalizePhotoShot)
     : fallback.photoShots;
@@ -63,7 +120,7 @@ export function parseWeddingData(raw: unknown): WeddingData {
       partnerB: partnerBName(settings.partnerB, fallback.settings.partnerB),
       totalBudget: Number(settings.totalBudget) || 0,
     },
-    checklist: Array.isArray(raw.checklist) ? (raw.checklist as WeddingData["checklist"]) : fallback.checklist,
+    checklist: Array.isArray(raw.checklist) ? raw.checklist.map(normalizeChecklistItem) : fallback.checklist,
     vendors: Array.isArray(raw.vendors) ? (raw.vendors as WeddingData["vendors"]) : fallback.vendors,
     budget: Array.isArray(raw.budget) ? (raw.budget as WeddingData["budget"]) : fallback.budget,
     notes: Array.isArray(raw.notes) ? (raw.notes as WeddingData["notes"]) : fallback.notes,
@@ -329,6 +386,7 @@ export function parseGuestCsv(text: string): Guest[] {
       notes: "",
       tableId: null,
       group: party,
+      rehearsalDinner: false,
     });
   }
 

@@ -43,6 +43,12 @@ export interface Settings {
   githubToken: string;
 }
 
+export interface Subtask {
+  id: string;
+  title: string;
+  done: boolean;
+}
+
 export interface ChecklistItem {
   id: string;
   title: string;
@@ -51,6 +57,7 @@ export interface ChecklistItem {
   owner: Owner;
   dueDate: string;
   notes: string;
+  subtasks: Subtask[];
 }
 
 export interface Vendor {
@@ -86,6 +93,8 @@ export interface Guest {
   notes: string;
   tableId: string | null;
   group: string;
+  /** Only used when rsvp is "attending". Hidden from the rehearsal list otherwise. */
+  rehearsalDinner: boolean;
 }
 
 export interface Table {

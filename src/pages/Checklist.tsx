@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { CHECKLIST_CATEGORIES } from "../constants";
 import { useWedding } from "../context";
 import { ownerName, uid } from "../defaults";
-import type { ChecklistItem, Owner } from "../types";
+import type { ChecklistItem, Owner, Subtask } from "../types";
 import { EmptyState, Modal } from "../components/Ui";
 
 const emptyItem = (): Omit<ChecklistItem, "id"> => ({
@@ -13,14 +13,26 @@ const emptyItem = (): Omit<ChecklistItem, "id"> => ({
   owner: "both",
   dueDate: "",
   notes: "",
+  subtasks: [],
 });
+
+function subtaskProgress(item: ChecklistItem): string | null {
+  if (!item.subtasks.length) return null;
+  const done = item.subtasks.filter((step) => step.done).length;
+  return `${done} of ${item.subtasks.length} steps`;
+}
 
 export function ChecklistPage() {
   const { data, patch } = useWedding();
   const [filter, setFilter] = useState<"all" | "open" | "done">("all");
   const [category, setCategory] = useState("all");
   const [draft, setDraft] = useState<Omit<ChecklistItem, "id"> | null>(null);
+  const [draftStep, setDraftStep] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
+  const draftRef = useRef(draft);
+  const draftStepRef = useRef(draftStep);
+  draftRef.current = draft;
+  draftStepRef.current = draftStep;
 
   const items = useMemo(() => {
     return data.checklist.filter((item) => {
@@ -36,21 +48,47 @@ export function ChecklistPage() {
     items: items.filter((item) => item.category === cat),
   })).filter((group) => group.items.length);
 
-  function saveDraft() {
-    if (!draft?.title.trim()) return;
+  function saveDraft(event?: FormEvent<HTMLFormElement>) {
+    event?.preventDefault();
+    const current = draftRef.current;
+    if (!current?.title.trim()) return;
+    const fromForm = event
+      ? String(new FormData(event.currentTarget).get("newStep") ?? "")
+      : "";
+    const pending = fromForm.trim() || draftStepRef.current.trim();
+    const next = {
+      ...current,
+      title: current.title.trim(),
+      subtasks: [
+        ...current.subtasks.filter((step) => step.title.trim()),
+        ...(pending ? [{ id: uid(), title: pending, done: false }] : []),
+      ],
+    };
     if (editingId) {
       patch(
         "checklist",
-        data.checklist.map((item) => (item.id === editingId ? { ...draft, id: editingId } : item)),
+        data.checklist.map((item) => (item.id === editingId ? { ...next, id: editingId } : item)),
       );
     } else {
-      patch("checklist", [...data.checklist, { ...draft, id: uid() }]);
+      patch("checklist", [...data.checklist, { ...next, id: uid() }]);
     }
     setDraft(null);
+    setDraftStep("");
     setEditingId(null);
   }
 
+  function updateItem(id: string, next: ChecklistItem) {
+    patch(
+      "checklist",
+      data.checklist.map((row) => (row.id === id ? next : row)),
+    );
+  }
+
   const doneCount = data.checklist.filter((item) => item.done).length;
+  const openSubtasks = data.checklist.reduce(
+    (sum, item) => sum + item.subtasks.filter((step) => !step.done).length,
+    0,
+  );
 
   return (
     <div className="space-y-5">
@@ -59,12 +97,14 @@ export function ChecklistPage() {
           <h1 className="font-serif text-4xl">Checklist</h1>
           <p className="mt-1 text-sm text-muted">
             {doneCount} of {data.checklist.length} done
+            {openSubtasks ? ` · ${openSubtasks} open steps` : ""}
           </p>
         </div>
         <button
           className="btn-primary"
           onClick={() => {
             setEditingId(null);
+            setDraftStep("");
             setDraft(emptyItem());
           }}
         >
@@ -100,47 +140,24 @@ export function ChecklistPage() {
             <h2 className="text-xs uppercase tracking-[0.18em] text-muted">{group.cat}</h2>
             <div className="card divide-y divide-gold/10 overflow-hidden">
               {group.items.map((item) => (
-                <div key={item.id} className="flex items-start gap-3 px-4 py-3">
-                  <input
-                    type="checkbox"
-                    className="mt-1 h-4 w-4 accent-sage"
-                    checked={item.done}
-                    onChange={() =>
-                      patch(
-                        "checklist",
-                        data.checklist.map((row) =>
-                          row.id === item.id ? { ...row, done: !row.done } : row,
-                        ),
-                      )
-                    }
-                  />
-                  <button
-                    className="min-w-0 flex-1 text-left"
-                    onClick={() => {
-                      const { id, ...rest } = item;
-                      setEditingId(id);
-                      setDraft(rest);
-                    }}
-                  >
-                    <p className={`text-sm ${item.done ? "text-muted line-through" : ""}`}>{item.title}</p>
-                    <p className="mt-1 text-xs text-muted">
-                      {ownerName(data.settings, item.owner)}
-                      {item.dueDate ? ` · due ${item.dueDate}` : ""}
-                    </p>
-                  </button>
-                  <button
-                    className="text-muted hover:text-rose"
-                    aria-label="Delete task"
-                    onClick={() =>
-                      patch(
-                        "checklist",
-                        data.checklist.filter((row) => row.id !== item.id),
-                      )
-                    }
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
+                <TaskRow
+                  key={item.id}
+                  item={item}
+                  ownerLabel={ownerName(data.settings, item.owner)}
+                  onChange={(next) => updateItem(item.id, next)}
+                  onEdit={() => {
+                    const { id, ...rest } = item;
+                    setEditingId(id);
+                    setDraftStep("");
+                    setDraft(rest);
+                  }}
+                  onDelete={() =>
+                    patch(
+                      "checklist",
+                      data.checklist.filter((row) => row.id !== item.id),
+                    )
+                  }
+                />
               ))}
             </div>
           </section>
@@ -152,10 +169,11 @@ export function ChecklistPage() {
           title={editingId ? "Edit task" : "New task"}
           onClose={() => {
             setDraft(null);
+            setDraftStep("");
             setEditingId(null);
           }}
         >
-          <div className="space-y-3">
+          <form className="space-y-3" onSubmit={saveDraft}>
             <div>
               <label className="label">What needs doing</label>
               <input className="field" value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} />
@@ -190,12 +208,190 @@ export function ChecklistPage() {
               <label className="label">Notes</label>
               <textarea className="field min-h-24" value={draft.notes} onChange={(e) => setDraft({ ...draft, notes: e.target.value })} />
             </div>
-            <button className="btn-primary w-full" onClick={saveDraft}>
+            <SubtaskEditor
+              subtasks={draft.subtasks}
+              onChange={(subtasks) => setDraft((current) => (current ? { ...current, subtasks } : current))}
+              pending={draftStep}
+              onPendingChange={(value) => {
+                draftStepRef.current = value;
+                setDraftStep(value);
+              }}
+            />
+            <button className="btn-primary w-full" type="submit">
               Save task
             </button>
-          </div>
+          </form>
         </Modal>
       ) : null}
+    </div>
+  );
+}
+
+function TaskRow({
+  item,
+  ownerLabel,
+  onChange,
+  onEdit,
+  onDelete,
+}: {
+  item: ChecklistItem;
+  ownerLabel: string;
+  onChange: (item: ChecklistItem) => void;
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
+  const [step, setStep] = useState("");
+  const progress = subtaskProgress(item);
+
+  function addStep() {
+    const title = step.trim();
+    if (!title) return;
+    onChange({
+      ...item,
+      subtasks: [...item.subtasks, { id: uid(), title, done: false }],
+    });
+    setStep("");
+  }
+
+  return (
+    <div className="px-4 py-3">
+      <div className="flex items-start gap-3">
+        <input
+          type="checkbox"
+          className="mt-1 h-4 w-4 accent-sage"
+          checked={item.done}
+          onChange={() => onChange({ ...item, done: !item.done })}
+        />
+        <button className="min-w-0 flex-1 text-left" onClick={onEdit}>
+          <p className={`text-sm ${item.done ? "text-muted line-through" : ""}`}>{item.title}</p>
+          <p className="mt-1 text-xs text-muted">
+            {ownerLabel}
+            {item.dueDate ? ` · due ${item.dueDate}` : ""}
+            {progress ? ` · ${progress}` : ""}
+          </p>
+        </button>
+        <button className="text-muted hover:text-rose" aria-label="Delete task" onClick={onDelete}>
+          <Trash2 className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="ml-7 mt-2 space-y-1.5">
+        {item.subtasks.map((sub) => (
+          <div key={sub.id} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              className="h-3.5 w-3.5 accent-sage"
+              checked={sub.done}
+              onChange={() =>
+                onChange({
+                  ...item,
+                  subtasks: item.subtasks.map((row) => (row.id === sub.id ? { ...row, done: !row.done } : row)),
+                })
+              }
+            />
+            <p className={`min-w-0 flex-1 text-sm ${sub.done ? "text-muted line-through" : "text-ink/80"}`}>{sub.title}</p>
+            <button
+              className="text-muted hover:text-rose"
+              aria-label={`Delete ${sub.title}`}
+              onClick={() =>
+                onChange({
+                  ...item,
+                  subtasks: item.subtasks.filter((row) => row.id !== sub.id),
+                })
+              }
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ))}
+        <form
+          className="flex gap-2"
+          onSubmit={(event) => {
+            event.preventDefault();
+            addStep();
+          }}
+        >
+          <input
+            className="field !py-1 text-sm"
+            placeholder="Add a step"
+            value={step}
+            onChange={(e) => setStep(e.target.value)}
+          />
+          <button type="submit" className="btn-ghost !px-2 !py-1" disabled={!step.trim()} aria-label="Add step">
+            <Plus className="h-4 w-4" />
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function SubtaskEditor({
+  subtasks,
+  onChange,
+  pending,
+  onPendingChange,
+}: {
+  subtasks: Subtask[];
+  onChange: (subtasks: Subtask[]) => void;
+  pending: string;
+  onPendingChange: (value: string) => void;
+}) {
+  function addStep() {
+    const title = pending.trim();
+    if (!title) return;
+    onChange([...subtasks, { id: uid(), title, done: false }]);
+    onPendingChange("");
+  }
+
+  return (
+    <div>
+      <label className="label">Steps</label>
+      <div className="space-y-1.5">
+        {subtasks.map((sub) => (
+          <div key={sub.id} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              className="h-3.5 w-3.5 accent-sage"
+              checked={sub.done}
+              onChange={() =>
+                onChange(subtasks.map((row) => (row.id === sub.id ? { ...row, done: !row.done } : row)))
+              }
+            />
+            <input
+              className="field !py-1 text-sm"
+              value={sub.title}
+              onChange={(e) =>
+                onChange(subtasks.map((row) => (row.id === sub.id ? { ...row, title: e.target.value } : row)))
+              }
+            />
+            <button
+              className="text-muted hover:text-rose"
+              aria-label="Delete step"
+              onClick={() => onChange(subtasks.filter((row) => row.id !== sub.id))}
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </div>
+        ))}
+        <div className="flex gap-2">
+          <input
+            name="newStep"
+            className="field !py-1 text-sm"
+            placeholder="Add a step"
+            value={pending}
+            onChange={(e) => onPendingChange(e.target.value)}
+            onKeyDown={(event) => {
+              if (event.key !== "Enter") return;
+              event.preventDefault();
+              addStep();
+            }}
+          />
+          <button type="button" className="btn-ghost !px-2 !py-1" disabled={!pending.trim()} onClick={addStep}>
+            <Plus className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
