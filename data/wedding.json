@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:54:59.087Z",
+  "updatedAt": "2026-08-25T19:55:00.676Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -506,7 +506,7 @@
     {
       "id": "fa276cf9-e2b7-4e53-b920-3358d761ce5d",
       "name": "Invitations",
-      "category": "",
+      "category": "Venue",
       "estimate": 0,
       "actual": 0,
       "paid": false
