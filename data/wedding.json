@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:50:27.168Z",
+  "updatedAt": "2026-08-25T19:50:28.961Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -461,7 +461,7 @@
       "category": "Attire",
       "estimate": 100,
       "actual": 0,
-      "paid": false
+      "paid": true
     },
     {
       "id": "d04afe04-39db-40c3-8bfd-454a1165d600",
