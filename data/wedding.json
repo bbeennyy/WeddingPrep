@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:49:22.815Z",
+  "updatedAt": "2026-08-25T19:50:19.184Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -459,7 +459,7 @@
       "id": "a6d1d1d8-3253-4316-be88-fcde15dc2b90",
       "name": "Rings",
       "category": "Attire",
-      "estimate": 0,
+      "estimate": 100,
       "actual": 0,
       "paid": false
     },
