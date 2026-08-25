@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T02:48:03.864Z",
+  "updatedAt": "2026-08-25T18:26:01.813Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -164,7 +164,7 @@
     {
       "title": "Lock the menu, cake, and drinks",
       "category": "Food",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-08-15",
       "notes": "",
