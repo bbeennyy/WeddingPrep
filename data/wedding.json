@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:09:48.340Z",
+  "updatedAt": "2026-08-25T20:09:53.403Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -565,7 +565,7 @@
       "name": "Marriage License",
       "category": "Bureaucracy",
       "estimate": 20,
-      "actual": 0,
+      "actual": 20,
       "paid": false
     }
   ],
