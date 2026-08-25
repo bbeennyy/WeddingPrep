@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:53:15.930Z",
+  "updatedAt": "2026-08-25T19:53:39.290Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -467,7 +467,7 @@
       "id": "d04afe04-39db-40c3-8bfd-454a1165d600",
       "name": "Flowers & decor",
       "category": "Decor",
-      "estimate": 0,
+      "estimate": 190,
       "actual": 0,
       "paid": false
     },
