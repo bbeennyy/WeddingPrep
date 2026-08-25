@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:01:06.939Z",
+  "updatedAt": "2026-08-25T20:01:08.089Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -515,7 +515,7 @@
       "id": "3af66a05-32b9-4a7e-abbe-d560a1a32091",
       "name": "Beni Suit+ shoes",
       "category": "Attire",
-      "estimate": 167,
+      "estimate": 1670,
       "actual": 0,
       "paid": false
     }
