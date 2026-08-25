@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T19:20:02.061Z",
+  "updatedAt": "2026-08-25T19:20:06.525Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2125,7 +2125,7 @@
       "id": "cdc4fee5-4188-4c57-b257-ae3fbca9dace",
       "name": "Lori Azemar",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
