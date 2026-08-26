@@ -293,12 +293,18 @@ function MoneyField({
   return (
     <input
       className={className}
-      type="number"
-      min={0}
+      type="text"
       inputMode="decimal"
-      placeholder="0"
-      value={value || ""}
-      onChange={(e) => onChange(parseMoney(e.target.value))}
+      value={value === 0 ? "" : String(value)}
+      onChange={(e) => {
+        const raw = e.target.value.trim();
+        if (raw === "") {
+          onChange(0);
+          return;
+        }
+        if (!/^\d*\.?\d*$/.test(raw)) return;
+        onChange(parseMoney(raw));
+      }}
     />
   );
 }
