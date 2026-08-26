@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T16:30:12.262Z",
+  "updatedAt": "2026-08-26T16:30:48.112Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3282,16 +3282,6 @@
       "subtitle": "",
       "body": "Give thanks for the covenant made, and pray for the home they will make.",
       "people": "Minister"
-    },
-    {
-      "id": "977a034d-e1c6-43f0-bacd-47a6dbb2a7ae",
-      "tag": "lords-prayer",
-      "section": "ceremony",
-      "time": "",
-      "title": "The Lord’s Prayer",
-      "subtitle": "",
-      "body": "Our Father, who art in heaven,\nhallowed be thy name.\nThy kingdom come,\nthy will be done,\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our debts,\nas we forgive our debtors.\nAnd lead us not into temptation,\nbut deliver us from evil.\nFor thine is the kingdom, and the power, and the glory, forever. Amen.",
-      "people": "All"
     },
     {
       "id": "5fb43e2f-615c-4ae2-93ce-075bb445ab9f",
