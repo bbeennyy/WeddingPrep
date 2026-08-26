@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:47:49.218Z",
+  "updatedAt": "2026-08-26T15:47:51.752Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -570,7 +570,7 @@
     },
     {
       "id": "d4015c9f-d2a1-4260-9ece-72ab232d6e05",
-      "name": "New ite",
+      "name": "Testing",
       "category": "Other",
       "estimate": 0,
       "actual": 0,
