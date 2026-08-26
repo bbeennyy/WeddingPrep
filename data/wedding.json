@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:11:06.644Z",
+  "updatedAt": "2026-08-26T15:11:47.728Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -572,7 +572,7 @@
       "id": "391462d3-244e-48ea-8fe4-95482c375a26",
       "name": "New item",
       "category": "Other",
-      "estimate": 3243,
+      "estimate": 0,
       "actual": 0,
       "paid": false
     }
@@ -2440,7 +2440,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "63309292-a0c4-4e1b-b9bf-4034a414d920",
       "group": "Istoc Family",
       "rehearsalDinner": false
     },
