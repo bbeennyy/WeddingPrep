@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T16:34:05.529Z",
+  "updatedAt": "2026-08-26T16:36:22.987Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3312,6 +3312,16 @@
       "subtitle": "",
       "body": "Music as they leave. Note the piece here.",
       "people": "The couple, then the wedding party"
+    },
+    {
+      "id": "8a41c9fe-c199-4b33-9c9b-e2cf628023a0",
+      "tag": "custom",
+      "section": "reception",
+      "time": "",
+      "title": "Grand entrance",
+      "subtitle": "",
+      "body": "",
+      "people": ""
     }
   ]
 }
