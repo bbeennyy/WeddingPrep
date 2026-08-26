@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T16:30:48.112Z",
+  "updatedAt": "2026-08-26T16:31:08.246Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3302,16 +3302,6 @@
       "subtitle": "",
       "body": "",
       "people": ""
-    },
-    {
-      "id": "acacf66f-4813-44ff-ad20-ac4531d57dae",
-      "tag": "benediction",
-      "section": "ceremony",
-      "time": "",
-      "title": "Benediction",
-      "subtitle": "",
-      "body": "The Lord bless you and keep you;\nthe Lord make his face to shine upon you and be gracious to you;\nthe Lord lift up his countenance upon you and give you peace. Amen.",
-      "people": "Minister"
     },
     {
       "id": "ddd713d1-fe0c-41d0-ba9a-691a50d8808e",
