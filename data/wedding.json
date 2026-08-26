@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:54:24.243Z",
+  "updatedAt": "2026-08-26T15:55:08.523Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -18,14 +18,20 @@
   },
   "checklist": [
     {
-      "id": "e6ecc712-dd50-4c88-b3a5-87ed9891d15a",
       "title": "Confirm you can legally marry (documents, waiting period)",
       "category": "Legal",
       "done": false,
       "owner": "a",
       "dueDate": "",
       "notes": "",
-      "subtasks": []
+      "subtasks": [
+        {
+          "id": "02d006b8-d30d-4713-b716-c3b74d2352ea",
+          "title": "File the Documents to gwinnett court",
+          "done": false
+        }
+      ],
+      "id": "e6ecc712-dd50-4c88-b3a5-87ed9891d15a"
     },
     {
       "id": "d49045db-da09-4ae2-a153-9c8d06fac49c",
