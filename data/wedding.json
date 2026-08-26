@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:45:09.564Z",
+  "updatedAt": "2026-08-26T15:47:45.208Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -566,6 +566,14 @@
       "category": "Bureaucracy",
       "estimate": 20,
       "actual": 20,
+      "paid": false
+    },
+    {
+      "id": "d4015c9f-d2a1-4260-9ece-72ab232d6e05",
+      "name": "New item",
+      "category": "Other",
+      "estimate": 0,
+      "actual": 0,
       "paid": false
     }
   ],
