@@ -1,5 +1,6 @@
 name: Deploy GitHub Pages
 
+# Push to main rebuilds the site. Ignore data-only commits so guest-list saves do not redeploy the app.
 on:
   push:
     branches: [main]
