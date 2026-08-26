@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:12:01.668Z",
+  "updatedAt": "2026-08-26T15:12:04.316Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2440,7 +2440,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "63309292-a0c4-4e1b-b9bf-4034a414d920",
+      "tableId": null,
       "group": "Istoc Family",
       "rehearsalDinner": false
     },
