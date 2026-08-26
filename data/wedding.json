@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:12:19.398Z",
+  "updatedAt": "2026-08-26T15:12:23.129Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2594,7 +2594,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "fbf7e7e1-2eab-4ab0-9fb5-e8efcf2fa745",
       "group": "Nishad Shah",
       "rehearsalDinner": false
     },
