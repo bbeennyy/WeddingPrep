@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:48:02.389Z",
+  "updatedAt": "2026-08-26T15:54:20.578Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -33,16 +33,6 @@
       "category": "Legal",
       "done": false,
       "owner": "a",
-      "dueDate": "",
-      "notes": "",
-      "subtasks": []
-    },
-    {
-      "id": "047900af-fa10-4ef3-a137-cc7ab6edcc45",
-      "title": "Gather birth certificates / IDs / divorce decrees if needed",
-      "category": "Legal",
-      "done": false,
-      "owner": "both",
       "dueDate": "",
       "notes": "",
       "subtasks": []
