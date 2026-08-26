@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:55:12.287Z",
+  "updatedAt": "2026-08-26T15:55:14.131Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -28,11 +28,6 @@
         {
           "id": "02d006b8-d30d-4713-b716-c3b74d2352ea",
           "title": "File the Documents to gwinnett court",
-          "done": false
-        },
-        {
-          "id": "9c3a0a0f-92ac-4cd7-a90e-9e4fe2466fc3",
-          "title": "file the documents to gwinnett County",
           "done": false
         }
       ],
