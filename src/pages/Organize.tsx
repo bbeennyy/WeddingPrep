@@ -69,18 +69,10 @@ export function OrganizePage() {
               <label className="label">Total we can spend</label>
               <div className="flex items-center gap-1">
                 <span className="font-serif text-2xl text-muted">{data.settings.currency}</span>
-                <input
+                <MoneyField
                   className="field font-serif text-2xl"
-                  type="number"
-                  min={0}
-                  value={data.settings.totalBudget || ""}
-                  placeholder="0"
-                  onChange={(e) =>
-                    patch("settings", {
-                      ...data.settings,
-                      totalBudget: Math.max(0, Number(e.target.value) || 0),
-                    })
-                  }
+                  value={data.settings.totalBudget}
+                  onChange={(totalBudget) => patch("settings", { ...data.settings, totalBudget })}
                 />
               </div>
             </div>
@@ -265,20 +257,10 @@ function BudgetRow({
         <input className="field" value={row.category} onChange={(e) => onChange({ ...row, category: e.target.value })} />
       </td>
       <td className="px-3 py-2">
-        <input
-          className="field"
-          type="number"
-          value={row.estimate}
-          onChange={(e) => onChange({ ...row, estimate: Number(e.target.value) })}
-        />
+        <MoneyField value={row.estimate} onChange={(estimate) => onChange({ ...row, estimate })} />
       </td>
       <td className="px-3 py-2">
-        <input
-          className="field"
-          type="number"
-          value={row.actual}
-          onChange={(e) => onChange({ ...row, actual: Number(e.target.value) })}
-        />
+        <MoneyField value={row.actual} onChange={(actual) => onChange({ ...row, actual })} />
       </td>
       <td className="px-3 py-2">
         <input type="checkbox" className="accent-sage" checked={row.paid} onChange={(e) => onChange({ ...row, paid: e.target.checked })} />
@@ -289,5 +271,34 @@ function BudgetRow({
         </button>
       </td>
     </tr>
+  );
+}
+
+function parseMoney(raw: string): number {
+  if (raw.trim() === "") return 0;
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return n;
+}
+
+function MoneyField({
+  value,
+  onChange,
+  className = "field",
+}: {
+  value: number;
+  onChange: (value: number) => void;
+  className?: string;
+}) {
+  return (
+    <input
+      className={className}
+      type="number"
+      min={0}
+      inputMode="decimal"
+      placeholder="0"
+      value={value || ""}
+      onChange={(e) => onChange(parseMoney(e.target.value))}
+    />
   );
 }
