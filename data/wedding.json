@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T16:32:22.482Z",
+  "updatedAt": "2026-08-26T16:32:24.164Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3207,7 +3207,7 @@
       "id": "6bd495fb-1af7-46a7-ba6a-e341861ccd92",
       "tag": "song",
       "section": "ceremony",
-      "time": "15:41",
+      "time": "15:40",
       "title": "Song",
       "subtitle": "Title · number if you use a hymnal",
       "body": "Verse 1\n\nVerse 2\n\nVerse 3",
