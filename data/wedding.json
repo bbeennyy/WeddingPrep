@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T15:54:20.578Z",
+  "updatedAt": "2026-08-26T15:54:24.243Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -20,16 +20,6 @@
     {
       "id": "e6ecc712-dd50-4c88-b3a5-87ed9891d15a",
       "title": "Confirm you can legally marry (documents, waiting period)",
-      "category": "Legal",
-      "done": false,
-      "owner": "a",
-      "dueDate": "",
-      "notes": "",
-      "subtasks": []
-    },
-    {
-      "id": "ef34ca27-b910-4fa7-a65a-77dbd3d0fb54",
-      "title": "Book the civil appointment if required besides church",
       "category": "Legal",
       "done": false,
       "owner": "a",
