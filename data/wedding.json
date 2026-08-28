@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T21:11:14.939Z",
+  "updatedAt": "2026-08-28T21:11:20.568Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3204,6 +3204,16 @@
       "people": "Bob Carter"
     },
     {
+      "id": "1fca6d4c-c394-4e56-8ba3-4b9a97ae2c3e",
+      "tag": "custom",
+      "section": "ceremony",
+      "time": "",
+      "title": "Giving Away of Bride",
+      "subtitle": "",
+      "body": "",
+      "people": "Dad"
+    },
+    {
       "id": "6bd495fb-1af7-46a7-ba6a-e341861ccd92",
       "tag": "song",
       "section": "ceremony",
@@ -3242,16 +3252,6 @@
       "subtitle": "",
       "body": "N., will you have N. to be your wife/husband, and will you love, honor, and be faithful to her/him, as long as you both shall live?\nI will.",
       "people": "Couple & minister"
-    },
-    {
-      "id": "1fca6d4c-c394-4e56-8ba3-4b9a97ae2c3e",
-      "tag": "custom",
-      "section": "ceremony",
-      "time": "",
-      "title": "Giving Away of Bride",
-      "subtitle": "",
-      "body": "",
-      "people": "Dad"
     },
     {
       "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
