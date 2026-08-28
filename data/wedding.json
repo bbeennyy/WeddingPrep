@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T21:15:12.159Z",
+  "updatedAt": "2026-08-28T21:15:49.809Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3088,7 +3088,16 @@
       "guestIds": [
         "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
         "45a80b41-5b3b-4d99-9b11-ac6378505e50",
-        "a619d62f-a1b7-46b9-a261-70775c2f8865"
+        "a619d62f-a1b7-46b9-a261-70775c2f8865",
+        "c4573f92-fda2-48ff-ac97-36dd4a283cff",
+        "410f0a44-c0ef-4747-bb2c-f7b48be5f7a3",
+        "61d02fa0-6627-4f40-9f8b-d86d358548a4",
+        "203268df-32d5-4261-94d0-f74c61b81fa6",
+        "b82d406d-cf2c-4089-b36c-ee5dce3a446f",
+        "ac308a30-596c-40bf-895f-8f292671a1d1",
+        "4ecc7244-6a3f-464d-be51-661a8ae38ab8",
+        "51b59351-4ad0-4aae-9900-fb6185ce9254",
+        "e3842b8e-7ff4-462a-88ca-9439e46ede67"
       ]
     },
     {
