@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T21:11:24.579Z",
+  "updatedAt": "2026-08-28T21:11:44.644Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3244,21 +3244,11 @@
       "people": "Minister"
     },
     {
-      "id": "bec2a783-8e58-4ab0-8e0e-a953e49a9902",
-      "tag": "intent",
-      "section": "ceremony",
-      "time": "",
-      "title": "Declaration of Intent",
-      "subtitle": "",
-      "body": "N., will you have N. to be your wife/husband, and will you love, honor, and be faithful to her/him, as long as you both shall live?\nI will.",
-      "people": "Couple & minister"
-    },
-    {
       "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
       "tag": "affirmation",
       "section": "ceremony",
       "time": "",
-      "title": "Affirmation of Families and Congregation",
+      "title": "Affirmation of Families",
       "subtitle": "",
       "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
       "people": "Families & church"
