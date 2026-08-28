@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T16:36:22.987Z",
+  "updatedAt": "2026-08-28T21:09:06.057Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -18,6 +18,7 @@
   },
   "checklist": [
     {
+      "id": "e6ecc712-dd50-4c88-b3a5-87ed9891d15a",
       "title": "Confirm you can legally marry (documents, waiting period)",
       "category": "Legal",
       "done": false,
@@ -30,8 +31,7 @@
           "title": "File the Documents to gwinnett court",
           "done": false
         }
-      ],
-      "id": "e6ecc712-dd50-4c88-b3a5-87ed9891d15a"
+      ]
     },
     {
       "id": "d49045db-da09-4ae2-a153-9c8d06fac49c",
@@ -3188,7 +3188,7 @@
       "tag": "purpose",
       "section": "ceremony",
       "time": "15:37",
-      "title": "Statement of Purpose",
+      "title": "Statement of ",
       "subtitle": "",
       "body": "Marriage is a gift of God, sealed by promises made before God and this congregation. Today N. and N. come to give themselves to one another, and to seek the grace of Christ for the life they will share.",
       "people": "Bob Carter"
