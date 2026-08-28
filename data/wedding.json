@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T21:12:01.105Z",
+  "updatedAt": "2026-08-28T21:12:42.707Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3184,6 +3184,16 @@
       "people": "Congregation lead by a Joseph"
     },
     {
+      "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
+      "tag": "affirmation",
+      "section": "ceremony",
+      "time": "",
+      "title": "Creed",
+      "subtitle": "",
+      "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
+      "people": "Couple and believers"
+    },
+    {
       "id": "bba66956-84eb-445e-aa17-2ac89f6dce19",
       "tag": "purpose",
       "section": "ceremony",
@@ -3208,7 +3218,7 @@
       "tag": "prayer",
       "section": "ceremony",
       "time": "15:38",
-      "title": "Opening Prayer",
+      "title": "Welcome & Opening Prayer",
       "subtitle": "",
       "body": "Write or paste the invocation here.",
       "people": "Bob Carter"
@@ -3242,16 +3252,6 @@
       "subtitle": "",
       "body": "A short meditation on the Word — notes for the minister, or leave blank in the printed program.",
       "people": "Minister"
-    },
-    {
-      "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
-      "tag": "affirmation",
-      "section": "ceremony",
-      "time": "",
-      "title": "Creed",
-      "subtitle": "",
-      "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
-      "people": "Could"
     },
     {
       "id": "48f55049-2f28-4514-b1bf-670589ce76ba",
