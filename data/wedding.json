@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T21:12:42.707Z",
+  "updatedAt": "2026-08-28T21:12:50.797Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3174,6 +3174,16 @@
       "people": "Grandparents, parents, wedding party, then the couple — edit the order here."
     },
     {
+      "id": "9499a3ac-a99c-4933-93ac-d6aacae1ea05",
+      "tag": "prayer",
+      "section": "ceremony",
+      "time": "15:38",
+      "title": "Welcome & Opening Prayer",
+      "subtitle": "",
+      "body": "Write or paste the invocation here.",
+      "people": "Bob Carter"
+    },
+    {
       "id": "bc50992c-6d3c-4678-8982-427b2d0108ad",
       "tag": "welcome",
       "section": "ceremony",
@@ -3212,16 +3222,6 @@
       "subtitle": "",
       "body": "",
       "people": "Dad"
-    },
-    {
-      "id": "9499a3ac-a99c-4933-93ac-d6aacae1ea05",
-      "tag": "prayer",
-      "section": "ceremony",
-      "time": "15:38",
-      "title": "Welcome & Opening Prayer",
-      "subtitle": "",
-      "body": "Write or paste the invocation here.",
-      "people": "Bob Carter"
     },
     {
       "id": "6bd495fb-1af7-46a7-ba6a-e341861ccd92",
