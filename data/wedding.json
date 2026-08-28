@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T21:11:03.976Z",
+  "updatedAt": "2026-08-28T21:11:05.927Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3304,16 +3304,6 @@
       "people": ""
     },
     {
-      "id": "ddd713d1-fe0c-41d0-ba9a-691a50d8808e",
-      "tag": "recession",
-      "section": "ceremony",
-      "time": "",
-      "title": "Recession",
-      "subtitle": "",
-      "body": "Music as they leave. Note the piece here.",
-      "people": "The couple, then the wedding party"
-    },
-    {
       "id": "1fca6d4c-c394-4e56-8ba3-4b9a97ae2c3e",
       "tag": "custom",
       "section": "ceremony",
@@ -3322,6 +3312,16 @@
       "subtitle": "",
       "body": "",
       "people": "Dad"
+    },
+    {
+      "id": "ddd713d1-fe0c-41d0-ba9a-691a50d8808e",
+      "tag": "recession",
+      "section": "ceremony",
+      "time": "",
+      "title": "Recession",
+      "subtitle": "",
+      "body": "Music as they leave. Note the piece here.",
+      "people": "The couple, then the wedding party"
     },
     {
       "id": "8a41c9fe-c199-4b33-9c9b-e2cf628023a0",
