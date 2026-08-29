@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:11:59.896Z",
+  "updatedAt": "2026-08-29T19:14:37.378Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2927,6 +2927,16 @@
       "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Scott Hinkle",
       "rehearsalDinner": false
+    },
+    {
+      "id": "ebc2ba38-b239-4986-be0a-154a8be438dd",
+      "name": "Mei Fan",
+      "side": "b",
+      "rsvp": "pending",
+      "dietary": "",
+      "notes": "",
+      "tableId": null,
+      "group": ""
     }
   ],
   "tables": [
