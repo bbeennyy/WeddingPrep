@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:18:44.994Z",
+  "updatedAt": "2026-08-29T19:20:28.869Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -944,7 +944,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Messler Family",
       "rehearsalDinner": false
     },
@@ -955,7 +955,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Messler Family",
       "rehearsalDinner": false
     },
@@ -966,7 +966,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Messler Family",
       "rehearsalDinner": false
     },
@@ -977,7 +977,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Hannah Howland & Ben Kitchen",
       "rehearsalDinner": false
     },
@@ -1175,7 +1175,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Grace Acosta & Suraj Nair",
       "rehearsalDinner": false
     },
@@ -1197,7 +1197,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Hannah & Andrew LaMay",
       "rehearsalDinner": false
     },
@@ -1208,7 +1208,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Hannah & Andrew LaMay",
       "rehearsalDinner": false
     },
