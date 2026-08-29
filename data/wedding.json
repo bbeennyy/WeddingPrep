@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:21:33.399Z",
+  "updatedAt": "2026-08-29T19:22:09.653Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2902,7 +2902,7 @@
       "rsvp": "pending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": "Bob & Debby Carter",
       "rehearsalDinner": false
     },
