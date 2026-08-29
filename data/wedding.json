@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:20:28.869Z",
+  "updatedAt": "2026-08-29T19:20:33.508Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1186,7 +1186,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Grace Acosta & Suraj Nair",
       "rehearsalDinner": false
     },
