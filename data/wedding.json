@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:22:38.265Z",
+  "updatedAt": "2026-08-29T19:23:29.314Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3061,6 +3061,12 @@
     {
       "id": "ddedf703-8ba4-4334-a763-311e20b03998",
       "name": "Table 18",
+      "seats": 8,
+      "shape": "round"
+    },
+    {
+      "id": "95f3da4b-95b4-4de0-8045-479529a4eb60",
+      "name": "Table 20",
       "seats": 8,
       "shape": "round"
     }
