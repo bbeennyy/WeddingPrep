@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:20:56.694Z",
+  "updatedAt": "2026-08-29T19:21:28.744Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1131,7 +1131,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
       "group": "Katie & Aaron Jeter",
       "rehearsalDinner": false
     },
@@ -1142,7 +1142,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
       "group": "Katie & Aaron Jeter",
       "rehearsalDinner": false
     },
@@ -1351,7 +1351,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
       "group": "Genie Grace Buchanan",
       "rehearsalDinner": false
     },
@@ -1835,7 +1835,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
       "group": "Ima Umoh",
       "rehearsalDinner": false
     },
