@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:20:44.645Z",
+  "updatedAt": "2026-08-29T19:20:53.925Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1087,7 +1087,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
       "group": "Clark Family",
       "rehearsalDinner": false
     },
