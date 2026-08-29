@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:14:37.378Z",
+  "updatedAt": "2026-08-29T19:14:45.462Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2931,6 +2931,16 @@
     {
       "id": "ebc2ba38-b239-4986-be0a-154a8be438dd",
       "name": "Mei Fan",
+      "side": "b",
+      "rsvp": "pending",
+      "dietary": "",
+      "notes": "",
+      "tableId": null,
+      "group": ""
+    },
+    {
+      "id": "0071e221-0c09-435d-b877-2522d662163c",
+      "name": "Steven Fan",
       "side": "b",
       "rsvp": "pending",
       "dietary": "",
