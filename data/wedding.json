@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:22:09.653Z",
+  "updatedAt": "2026-08-29T19:22:34.898Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1307,7 +1307,7 @@
       "rsvp": "pending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": "John Hester",
       "rehearsalDinner": false
     },
@@ -1318,7 +1318,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": "Rhonda & Allen Sells",
       "rehearsalDinner": false
     },
@@ -1329,7 +1329,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": "Rhonda & Allen Sells",
       "rehearsalDinner": false
     },
@@ -2913,7 +2913,7 @@
       "rsvp": "pending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": "Bob & Debby Carter",
       "rehearsalDinner": false
     },
@@ -2935,7 +2935,7 @@
       "rsvp": "pending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": ""
     },
     {
