@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:18:28.999Z",
+  "updatedAt": "2026-08-29T19:18:44.994Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1362,7 +1362,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "69fe4338-72bb-4979-9e1b-759a96e47806",
       "group": "Manring Family",
       "rehearsalDinner": false
     },
@@ -1373,7 +1373,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "69fe4338-72bb-4979-9e1b-759a96e47806",
       "group": "Manring Family",
       "rehearsalDinner": false
     },
