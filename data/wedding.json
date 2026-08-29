@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:17:12.881Z",
+  "updatedAt": "2026-08-29T19:17:14.291Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1032,7 +1032,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
+      "tableId": null,
       "group": "Blanchard Family",
       "rehearsalDinner": false
     },
@@ -2924,7 +2924,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
+      "tableId": null,
       "group": "Scott Hinkle",
       "rehearsalDinner": false
     },
