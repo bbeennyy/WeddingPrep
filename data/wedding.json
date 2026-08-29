@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:17:28.478Z",
+  "updatedAt": "2026-08-29T19:17:55.254Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -845,7 +845,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "298b77fa-2f83-4e1a-88dd-04627c6fbe67",
+      "tableId": null,
       "group": "Ethan Joseph & Samantha Cunningham",
       "rehearsalDinner": false
     },
