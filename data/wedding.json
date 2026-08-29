@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:20:38.030Z",
+  "updatedAt": "2026-08-29T19:20:44.645Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1032,7 +1032,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "b64e142e-cdbd-4acc-9eed-89805d0034b3",
       "group": "Blanchard Family",
       "rehearsalDinner": false
     },
