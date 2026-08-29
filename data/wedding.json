@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T19:11:50.513Z",
+  "updatedAt": "2026-08-29T19:11:59.896Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1832,7 +1832,7 @@
       "id": "c3f5d705-fdaa-45bb-beb3-d2793dd9e8dc",
       "name": "Ima Umoh",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
