@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:04:03.734Z",
+  "updatedAt": "2026-08-30T20:04:07.368Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -812,7 +812,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "c211c85f-4634-4617-a700-46c9002fbc87",
+      "tableId": null,
       "group": "Joseph Family",
       "rehearsalDinner": false
     },
@@ -823,7 +823,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "c211c85f-4634-4617-a700-46c9002fbc87",
+      "tableId": null,
       "group": "Joseph Family",
       "rehearsalDinner": false
     },
@@ -900,7 +900,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "c211c85f-4634-4617-a700-46c9002fbc87",
+      "tableId": null,
       "group": "Priscilla Joseph",
       "rehearsalDinner": false
     },
