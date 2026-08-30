@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:07:29.078Z",
+  "updatedAt": "2026-08-30T20:07:31.447Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1164,7 +1164,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
       "group": "Laura & Ryan Hunter",
       "rehearsalDinner": false
     },
