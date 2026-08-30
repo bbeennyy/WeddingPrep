@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:06:30.855Z",
+  "updatedAt": "2026-08-30T20:06:41.745Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1417,7 +1417,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "dac082d0-2bc1-4c52-97eb-5c64f68e0a35",
       "group": "Burke & Lily Manring",
       "rehearsalDinner": false
     },
