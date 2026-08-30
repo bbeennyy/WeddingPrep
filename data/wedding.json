@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:07:48.705Z",
+  "updatedAt": "2026-08-30T20:07:51.226Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1010,7 +1010,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "95f3da4b-95b4-4de0-8045-479529a4eb60",
       "group": "Meredith & Arno Muller",
       "rehearsalDinner": false
     },
