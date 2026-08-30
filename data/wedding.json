@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:04:53.993Z",
+  "updatedAt": "2026-08-30T20:04:56.753Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -647,7 +647,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "c211c85f-4634-4617-a700-46c9002fbc87",
       "group": "Lynch Family",
       "rehearsalDinner": false
     },
