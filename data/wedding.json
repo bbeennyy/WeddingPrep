@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:09:52.848Z",
+  "updatedAt": "2026-08-30T20:10:00.347Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3048,7 +3048,7 @@
     },
     {
       "id": "fbf7e7e1-2eab-4ab0-9fb5-e8efcf2fa745",
-      "name": "Table 17",
+      "name": "Table 18",
       "seats": 8,
       "shape": "round"
     },
@@ -3060,13 +3060,13 @@
     },
     {
       "id": "ddedf703-8ba4-4334-a763-311e20b03998",
-      "name": "Table 1",
+      "name": "Table 17",
       "seats": 8,
       "shape": "round"
     },
     {
       "id": "95f3da4b-95b4-4de0-8045-479529a4eb60",
-      "name": "Table 20",
+      "name": "Table 19",
       "seats": 8,
       "shape": "round"
     }
