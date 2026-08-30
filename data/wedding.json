@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:06:45.804Z",
+  "updatedAt": "2026-08-30T20:07:26.113Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -977,7 +977,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "0156a789-f4f7-456c-9f92-5b398a614e62",
+      "tableId": null,
       "group": "Hannah Howland & Ben Kitchen",
       "rehearsalDinner": false
     },
