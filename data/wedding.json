@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T20:10:00.347Z",
+  "updatedAt": "2026-09-02T20:39:08.803Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -380,7 +380,7 @@
         {
           "id": "1c8d24f5-aaf6-439e-a8e1-ddcbe7345f82",
           "title": "Autumn",
-          "done": false
+          "done": true
         }
       ]
     },
@@ -2936,7 +2936,8 @@
       "dietary": "",
       "notes": "",
       "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
-      "group": ""
+      "group": "",
+      "rehearsalDinner": false
     },
     {
       "id": "0071e221-0c09-435d-b877-2522d662163c",
@@ -2946,7 +2947,8 @@
       "dietary": "",
       "notes": "",
       "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
-      "group": ""
+      "group": "",
+      "rehearsalDinner": false
     }
   ],
   "tables": [
