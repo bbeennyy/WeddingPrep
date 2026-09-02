@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-02T20:58:55.741Z",
+  "updatedAt": "2026-09-02T21:00:15.830Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -565,6 +565,11 @@
       "id": "445895c0-e728-4d43-839c-1744e7510422",
       "title": "How we want the day to feel",
       "body": "Write the atmosphere you both want — quiet, joyful, simple, full of singing…\nMaybe seprate video diary like 1-2 min selfie video"
+    },
+    {
+      "id": "449a69be-3201-4369-9238-82b7693e60ac",
+      "title": "Romanian bible",
+      "body": "Send Caroline 1 john 4 7-21  Romanian passage"
     }
   ],
   "guests": [
