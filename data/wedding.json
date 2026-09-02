@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-02T20:39:08.803Z",
+  "updatedAt": "2026-09-02T20:39:10.352Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -370,12 +370,12 @@
         {
           "id": "3dc6021c-97d6-40cf-a443-2d95045a3928",
           "title": "Katrina",
-          "done": false
+          "done": true
         },
         {
           "id": "d4c6d536-b42c-48db-be3b-e9be00769aad",
           "title": "Ellis",
-          "done": false
+          "done": true
         },
         {
           "id": "1c8d24f5-aaf6-439e-a8e1-ddcbe7345f82",
