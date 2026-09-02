@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-02T21:00:15.830Z",
+  "updatedAt": "2026-09-02T21:27:44.946Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -570,6 +570,11 @@
       "id": "449a69be-3201-4369-9238-82b7693e60ac",
       "title": "Romanian bible",
       "body": "Send Caroline 1 john 4 7-21  Romanian passage"
+    },
+    {
+      "id": "4077fb87-abd2-4e3e-a7bb-f08eb7e57e10",
+      "title": "Songs lists to caroline",
+      "body": "Prelude- groomsman\nPrelude - bridesmaid\nPrelude - parents "
     }
   ],
   "guests": [
