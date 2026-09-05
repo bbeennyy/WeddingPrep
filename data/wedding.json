@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:23:52.123Z",
+  "updatedAt": "2026-09-05T22:21:37.307Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -74,20 +74,20 @@
       "subtasks": []
     },
     {
+      "id": "1e21ac68-64c8-462a-a516-d26bb8f252ab",
       "title": "Choose hymns / songs and collect lyrics",
       "category": "Church",
       "done": true,
       "owner": "both",
       "dueDate": "",
       "notes": "144B \n45C",
-      "subtasks": [],
-      "id": "1e21ac68-64c8-462a-a516-d26bb8f252ab"
+      "subtasks": []
     },
     {
       "id": "0eee78f5-580f-4068-9591-d98deb15bf15",
       "title": "Confirm musicians, sound, and rehearsal time",
       "category": "Church",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "",
       "notes": "",
@@ -274,14 +274,14 @@
       "subtasks": []
     },
     {
+      "id": "09d1a072-ed56-4f1f-a662-09318f0e7482",
       "title": "Wedding Arch",
       "category": "Decor",
       "done": false,
       "owner": "both",
       "dueDate": "2026-08-25",
       "notes": "in progress",
-      "subtasks": [],
-      "id": "09d1a072-ed56-4f1f-a662-09318f0e7482"
+      "subtasks": []
     },
     {
       "id": "2b908675-7c73-4522-ad6f-737c514521a5",
@@ -410,14 +410,14 @@
       "subtasks": []
     },
     {
+      "id": "711dfc23-f60f-47d6-903a-b0319f149701",
       "title": "Send spotify lists to Caroline",
       "category": "Church",
       "done": false,
       "owner": "both",
       "dueDate": "2026-09-21",
       "notes": "",
-      "subtasks": [],
-      "id": "711dfc23-f60f-47d6-903a-b0319f149701"
+      "subtasks": []
     }
   ],
   "vendors": [
@@ -3168,7 +3168,8 @@
       "title": "Pre-Getting ready",
       "subtitle": "",
       "body": "makeup, hair, nails",
-      "people": "Couple, Wedding Party"
+      "people": "Couple, Wedding Party",
+      "mcNotes": ""
     },
     {
       "id": "4b43e474-ba96-4ab2-857a-a5959d03af28",
@@ -3178,7 +3179,8 @@
       "title": "Food",
       "subtitle": "Small Snack",
       "body": "",
-      "people": "bride and groom"
+      "people": "bride and groom",
+      "mcNotes": ""
     },
     {
       "id": "47ca4f0f-fbb1-46d5-9bf6-24785365ba1c",
@@ -3188,7 +3190,8 @@
       "title": "Getting ready Photos",
       "subtitle": "Debatable",
       "body": "Getting dress photos and close up shots of details",
-      "people": "Wedding Party"
+      "people": "Wedding Party",
+      "mcNotes": ""
     },
     {
       "id": "ac4476a2-593a-4b58-8be1-cab551f06e7c",
@@ -3198,7 +3201,8 @@
       "title": "First look Photos",
       "subtitle": "Timeline TBD",
       "body": "First photos together",
-      "people": "Chelsea With Couple"
+      "people": "Chelsea With Couple",
+      "mcNotes": ""
     },
     {
       "id": "5c6a1839-d4f6-4974-b3cf-bca2fb21bdba",
@@ -3208,7 +3212,8 @@
       "title": "Wedding Party Photos",
       "subtitle": "chick moment for chick people",
       "body": "Groomsmen and Bridesmaids",
-      "people": "Wedding Party"
+      "people": "Wedding Party",
+      "mcNotes": ""
     },
     {
       "id": "14f21d53-d500-4090-8673-baa85f3068cc",
@@ -3218,7 +3223,8 @@
       "title": "Family Photos",
       "subtitle": "",
       "body": "",
-      "people": "Parents"
+      "people": "Parents",
+      "mcNotes": ""
     },
     {
       "id": "f8181ba6-e464-4b1c-9690-e0531b2e969d",
@@ -3228,7 +3234,8 @@
       "title": "Procession",
       "subtitle": "Entrance of the wedding party",
       "body": "Note who walks with whom, and which piece of music is playing.",
-      "people": "Grandparents, parents, wedding party, then the couple — edit the order here."
+      "people": "Grandparents, parents, wedding party, then the couple — edit the order here.",
+      "mcNotes": ""
     },
     {
       "id": "9499a3ac-a99c-4933-93ac-d6aacae1ea05",
@@ -3238,7 +3245,8 @@
       "title": "Welcome & Opening Prayer",
       "subtitle": "",
       "body": "Write or paste the invocation here.",
-      "people": "Bob Carter"
+      "people": "Bob Carter",
+      "mcNotes": ""
     },
     {
       "id": "bba66956-84eb-445e-aa17-2ac89f6dce19",
@@ -3248,7 +3256,8 @@
       "title": "Statement of Intent",
       "subtitle": "",
       "body": "Marriage is a gift of God, sealed by promises made before God and this congregation. Today N. and N. come to give themselves to one another, and to seek the grace of Christ for the life they will share.",
-      "people": "Bob Carter"
+      "people": "Bob Carter",
+      "mcNotes": ""
     },
     {
       "id": "1fca6d4c-c394-4e56-8ba3-4b9a97ae2c3e",
@@ -3258,7 +3267,8 @@
       "title": "Giving Away of Bride",
       "subtitle": "",
       "body": "",
-      "people": "Dad"
+      "people": "Dad",
+      "mcNotes": ""
     },
     {
       "id": "bc50992c-6d3c-4678-8982-427b2d0108ad",
@@ -3268,7 +3278,8 @@
       "title": "Psalm 144B",
       "subtitle": "",
       "body": "",
-      "people": "Congregation lead by a Joseph"
+      "people": "Congregation lead by a Joseph",
+      "mcNotes": ""
     },
     {
       "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
@@ -3278,7 +3289,8 @@
       "title": "Creed",
       "subtitle": "",
       "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
-      "people": "Couple and believers"
+      "people": "Couple and believers",
+      "mcNotes": ""
     },
     {
       "id": "c8600809-37c4-4afb-96b4-544eb48340f8",
@@ -3288,7 +3300,8 @@
       "title": "Scripture",
       "subtitle": "1 John 4:7-21",
       "body": "God Is Love\n7 Beloved, let’s love one another; for love is from God, and everyone who loves has been born of God and knows God. 8 The one who does not love does not know God, because God is love. 9 By this the love of God was revealed in us, that God has sent His only Son into the world so that we may live through Him. 10 In this is love, not that we loved God, but that He loved us and sent His Son to be the propitiation for our sins. 11 Beloved, if God so loved us, we also ought to love one another. 12 No one has ever seen God; if we love one another, God remains in us, and His love is perfected in us. 13 By this we know that we remain in Him and He in us, because He has given to us of His Spirit. 14 We have seen and testify that the Father has sent the Son to be the Savior of the world.\n\n15 Whoever confesses that Jesus is the Son of God, God remains in him, and he in God. 16 We have come to know and have believed the love which God has for us. God is love, and the one who remains in love remains in God, and God remains in him. 17 By this, love is perfected with us, so that we may have confidence in the day of judgment; because as He is, we also are in this world. 18 There is no fear in love, but perfect love drives out fear, because fear involves punishment, and the one who fears is not perfected in love. 19 We love, because He first loved us. 20 If someone says, “I love God,” and yet he hates his brother or sister, he is a liar; for the one who does not love his brother and sister whom he has seen, cannot love God, whom he has not seen. 21 And this commandment we have from Him, that the one who loves God must also love his brother and sister.\n\n\nPreaiubiților, să ne iubim unii pe alții; căci dragostea este de la Dumnezeu. Și oricine iubește este născut din Dumnezeu și cunoaște pe Dumnezeu. Cine nu iubește n-a cunoscut pe Dumnezeu, pentru că Dumnezeu este dragoste. Dragostea lui Dumnezeu față de noi s-a arătat prin faptul că Dumnezeu a trimis în lume pe singurul Său Fiu, ca noi să trăim prin El. Și dragostea stă nu în faptul că noi am iubit pe Dumnezeu, ci în faptul că El ne-a iubit pe noi și a trimis pe Fiul Său ca jertfă de ispășire pentru păcatele noastre. Preaiubiților, dacă astfel ne-a iubit Dumnezeu pe noi, trebuie să ne iubim și noi unii pe alții. Nimeni n-a văzut vreodată pe Dumnezeu; dacă ne iubim unii pe alții, Dumnezeu rămâne în noi și dragostea Lui a ajuns desăvârșită în noi. Cunoaștem că rămânem în El și că El rămâne în noi prin faptul că ne-a dat din Duhul Său. Și noi am văzut și mărturisim că Tatăl a trimis pe Fiul ca să fie Mântuitorul lumii. Cine va mărturisi că Isus este Fiul lui Dumnezeu, Dumnezeu rămâne în el, și el, în Dumnezeu. Și noi am cunoscut și am crezut dragostea pe care o are Dumnezeu față de noi. Dumnezeu este dragoste și cine rămâne în dragoste rămâne în Dumnezeu, și Dumnezeu rămâne în el. Cum este El, așa suntem și noi în lumea aceasta, astfel se face că dragostea este desăvârșită în noi, pentru ca să avem deplină încredere în ziua judecății. În dragoste nu este frică, ci dragostea desăvârșită izgonește frica, pentru că frica are cu ea pedeapsa; și cine se teme n-a ajuns desăvârșit în dragoste. Noi Îl iubim pentru că El ne-a iubit întâi. Dacă zice cineva: „Eu iubesc pe Dumnezeu” și urăște pe fratele său este un mincinos, căci cine nu iubește pe fratele său pe care-l vede cum poate să iubească pe Dumnezeu, pe care nu-L vede? Și aceasta este porunca pe care o avem de la El: cine iubește pe Dumnezeu iubește și pe fratele său.",
-      "people": "Kenny(English) and   Ciprian Costea(Romanian)"
+      "people": "Kenny(English) and   Ciprian Costea(Romanian)",
+      "mcNotes": ""
     },
     {
       "id": "6bd495fb-1af7-46a7-ba6a-e341861ccd92",
@@ -3298,7 +3311,8 @@
       "title": "Psalm 45B",
       "subtitle": "Title · number if you use a hymnal",
       "body": "Verse 1\n\nVerse 2\n\nVerse 3",
-      "people": "Congregation lead by a Joseph"
+      "people": "Congregation lead by a Joseph",
+      "mcNotes": ""
     },
     {
       "id": "f4397fe6-c3b4-4ce3-8e5e-656edc5ce328",
@@ -3308,7 +3322,8 @@
       "title": "Homily",
       "subtitle": "",
       "body": "A short meditation on the Word — notes for the minister, or leave blank in the printed program.",
-      "people": "Minister"
+      "people": "Minister",
+      "mcNotes": ""
     },
     {
       "id": "48f55049-2f28-4514-b1bf-670589ce76ba",
@@ -3318,7 +3333,8 @@
       "title": "Vows",
       "subtitle": "",
       "body": "I, N., take you, N., to be my wife/husband;\nand I promise, before God and these witnesses,\nto be your loving and faithful husband/wife,\nin plenty and in want,\nin joy and in sorrow,\nin sickness and in health,\nas long as we both shall live.",
-      "people": "The couple"
+      "people": "The couple",
+      "mcNotes": ""
     },
     {
       "id": "e56723d5-ce03-46d7-87e0-f5cba7f9f88c",
@@ -3328,7 +3344,8 @@
       "title": "Blessing and Exchange of Rings",
       "subtitle": "",
       "body": "These rings are a sign of the promises made today.\nN., I give you this ring as a sign of my love and faithfulness.",
-      "people": "Couple & minister"
+      "people": "Couple & minister",
+      "mcNotes": ""
     },
     {
       "id": "89a02a15-81f9-4e57-a830-29c7d1184089",
@@ -3338,7 +3355,8 @@
       "title": "Prayer of Thanksgiving",
       "subtitle": "",
       "body": "Give thanks for the covenant made, and pray for the home they will make.",
-      "people": "Minister"
+      "people": "Minister",
+      "mcNotes": ""
     },
     {
       "id": "5fb43e2f-615c-4ae2-93ce-075bb445ab9f",
@@ -3348,7 +3366,8 @@
       "title": "Pronouncement of Marriage",
       "subtitle": "",
       "body": "Before God and this congregation, N. and N. have made their promises. I declare that they are husband and wife. What God has joined together, let no one separate.",
-      "people": "Minister"
+      "people": "Minister",
+      "mcNotes": ""
     },
     {
       "id": "38a3692b-e7bf-4792-a8da-f3bf121c02e1",
@@ -3358,7 +3377,8 @@
       "title": "The Kiss",
       "subtitle": "",
       "body": "",
-      "people": ""
+      "people": "",
+      "mcNotes": ""
     },
     {
       "id": "ddd713d1-fe0c-41d0-ba9a-691a50d8808e",
@@ -3368,7 +3388,8 @@
       "title": "Recession",
       "subtitle": "",
       "body": "Music as they leave. Note the piece here.",
-      "people": "The couple, then the wedding party"
+      "people": "The couple, then the wedding party",
+      "mcNotes": ""
     },
     {
       "id": "535f040a-d0da-4779-8bbf-12d34111daa3",
@@ -3378,7 +3399,8 @@
       "title": "Announcements",
       "subtitle": "",
       "body": "",
-      "people": ""
+      "people": "",
+      "mcNotes": ""
     },
     {
       "id": "8a41c9fe-c199-4b33-9c9b-e2cf628023a0",
@@ -3388,7 +3410,8 @@
       "title": "Grand entrance",
       "subtitle": "",
       "body": "",
-      "people": ""
+      "people": "",
+      "mcNotes": ""
     }
   ]
 }
