@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T18:38:27.622Z",
+  "updatedAt": "2026-09-05T18:38:40.408Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -67,7 +67,7 @@
       "id": "e54ad2bf-6cff-4011-b787-fc87118c6c95",
       "title": "Choose readings, vows, and who will pray or speak",
       "category": "Church",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "",
       "notes": "1 John 4:7-21",
