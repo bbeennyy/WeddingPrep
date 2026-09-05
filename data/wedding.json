@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:10:41.974Z",
+  "updatedAt": "2026-09-05T20:10:57.850Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -77,7 +77,7 @@
       "id": "1e21ac68-64c8-462a-a516-d26bb8f252ab",
       "title": "Choose hymns / songs and collect lyrics",
       "category": "Church",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "",
       "notes": "",
