@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:09:29.480Z",
+  "updatedAt": "2026-09-05T20:10:13.270Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -281,16 +281,6 @@
       "owner": "both",
       "dueDate": "2026-08-25",
       "notes": "arch behind groom and bride table",
-      "subtasks": []
-    },
-    {
-      "id": "4ed8a8d2-2d37-4bce-aeb5-f85de72c5747",
-      "title": "Lights for the Reception",
-      "category": "Decor",
-      "done": false,
-      "owner": "both",
-      "dueDate": "2026-08-30",
-      "notes": "Light mesh above groom and bride table",
       "subtasks": []
     },
     {
