@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T19:36:26.399Z",
+  "updatedAt": "2026-09-05T19:36:31.914Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3271,16 +3271,6 @@
       "people": "Congregation lead by a Joseph"
     },
     {
-      "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
-      "tag": "affirmation",
-      "section": "ceremony",
-      "time": "",
-      "title": "Creed",
-      "subtitle": "",
-      "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
-      "people": "Couple and believers"
-    },
-    {
       "id": "1fca6d4c-c394-4e56-8ba3-4b9a97ae2c3e",
       "tag": "custom",
       "section": "ceremony",
@@ -3289,6 +3279,16 @@
       "subtitle": "",
       "body": "",
       "people": "Dad"
+    },
+    {
+      "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
+      "tag": "affirmation",
+      "section": "ceremony",
+      "time": "",
+      "title": "Creed",
+      "subtitle": "",
+      "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
+      "people": "Couple and believers"
     },
     {
       "id": "c8600809-37c4-4afb-96b4-544eb48340f8",
