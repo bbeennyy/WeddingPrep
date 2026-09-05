@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:41:59.683Z",
+  "updatedAt": "2026-09-05T23:02:43.292Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3193,6 +3193,12 @@
         "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
         "45a80b41-5b3b-4d99-9b11-ac6378505e50"
       ]
+    },
+    {
+      "id": "93fa331a-1634-40ee-9b56-a76203603ae4",
+      "name": "Photo 7",
+      "notes": "",
+      "guestIds": []
     }
   ],
   "program": [
