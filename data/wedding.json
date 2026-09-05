@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:26:53.282Z",
+  "updatedAt": "2026-09-05T22:27:10.238Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -283,7 +283,7 @@
       "id": "6c4d3b06-4bfd-4d70-af7e-c8324db58f6f",
       "title": "Photo Backdrop",
       "category": "Decor",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-08-18",
       "notes": "Ask Ana about the photo props",
