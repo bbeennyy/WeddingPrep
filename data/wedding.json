@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T19:40:36.313Z",
+  "updatedAt": "2026-09-05T20:09:14.732Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -147,7 +147,7 @@
       "id": "2a790984-c8a5-46ee-867e-c68a3ee69203",
       "title": "Seat guests at tables",
       "category": "Guests",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "",
       "notes": "",
