@@ -96,6 +96,7 @@ function normalizeProgramItem(raw: unknown): ProgramItem {
     subtitle: String(row.subtitle ?? ""),
     body: String(row.body ?? ""),
     people: String(row.people ?? ""),
+    mcNotes: String(row.mcNotes ?? ""),
   };
 }
 

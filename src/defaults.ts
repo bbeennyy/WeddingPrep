@@ -32,7 +32,7 @@ function task(
 function program(
   tag: ProgramTag,
   title: string,
-  extras: Partial<Pick<ProgramItem, "subtitle" | "body" | "people" | "section" | "time">> = {},
+  extras: Partial<Pick<ProgramItem, "subtitle" | "body" | "people" | "section" | "time" | "mcNotes">> = {},
 ): ProgramItem {
   return {
     id: uid(),
@@ -43,6 +43,7 @@ function program(
     subtitle: extras.subtitle ?? "",
     body: extras.body ?? "",
     people: extras.people ?? "",
+    mcNotes: extras.mcNotes ?? "",
   };
 }
 

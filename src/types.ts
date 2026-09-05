@@ -120,6 +120,8 @@ export interface ProgramItem {
   subtitle: string;
   body: string;
   people: string;
+  /** What the MC should announce, cue, or watch for at this moment. */
+  mcNotes: string;
 }
 
 export interface WeddingData {

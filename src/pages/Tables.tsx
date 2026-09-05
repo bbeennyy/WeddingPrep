@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Printer, Trash2 } from "lucide-react";
 import { NameSearch } from "../components/NameSearch";
 import { EmptyState } from "../components/Ui";
 import { useWedding } from "../context";
-import { ownerName, uid } from "../defaults";
+import { coupleLabel, ownerName, uid } from "../defaults";
+import { printTarget } from "../print";
 import type { Guest, Owner, Table, TableShape } from "../types";
 
 export function TablesPage() {
@@ -63,7 +64,7 @@ export function TablesPage() {
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
+      <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-serif text-4xl">Table formations</h1>
           <p className="mt-1 text-sm text-muted">
@@ -84,13 +85,18 @@ export function TablesPage() {
             </span>
           </div>
         </div>
-        <button className="btn-primary" onClick={addTable}>
-          <Plus className="h-4 w-4" /> Add table
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button className="btn-ghost" onClick={() => printTarget("tables")}>
+            <Printer className="h-4 w-4" /> Print / PDF
+          </button>
+          <button className="btn-primary" onClick={addTable}>
+            <Plus className="h-4 w-4" /> Add table
+          </button>
+        </div>
       </div>
 
       {selected ? (
-        <div className="rounded-2xl px-4 py-3 text-sm" style={{ backgroundColor: sideColors(selected.side).fill }}>
+        <div className="no-print rounded-2xl px-4 py-3 text-sm" style={{ backgroundColor: sideColors(selected.side).fill }}>
           Seating <strong>{selected.name}</strong> — tap an empty seat, or{" "}
           <button className="underline" onClick={() => setSelectedId(null)}>
             cancel
@@ -98,7 +104,7 @@ export function TablesPage() {
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+      <div className="no-print flex flex-col gap-5 lg:flex-row lg:items-start">
         <aside className="card order-1 max-h-[40vh] overflow-hidden p-0 lg:sticky lg:top-24 lg:order-2 lg:w-72 lg:shrink-0 lg:max-h-[calc(100vh-8rem)]">
           <div className="border-b border-gold/15 px-4 py-3">
             <h2 className="text-xs uppercase tracking-[0.16em] text-muted">Available to seat</h2>
@@ -200,7 +206,89 @@ export function TablesPage() {
           )}
         </div>
       </div>
+
+      <TablesPrintSheet />
     </div>
+  );
+}
+
+function TablesPrintSheet() {
+  const { data } = useWedding();
+  const { settings, tables, guests } = data;
+  const attending = guests.filter((guest) => guest.rsvp === "attending");
+  const unseated = attending.filter((guest) => !guest.tableId);
+
+  return (
+    <article className="print-only print-target print-sheet mx-auto max-w-3xl bg-white px-8 py-12" data-print-id="tables">
+      <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold">Seating chart</p>
+      <h2 className="mt-3 text-center font-serif text-4xl italic">{coupleLabel(settings)}</h2>
+      <p className="mt-3 text-center text-sm text-muted">
+        {[
+          settings.weddingDate &&
+            new Date(`${settings.weddingDate}T12:00:00`).toLocaleDateString(undefined, { dateStyle: "long" }),
+          settings.receptionVenue || settings.churchName,
+          settings.city,
+        ]
+          .filter(Boolean)
+          .join(" · ")}
+      </p>
+      <div className="mx-auto my-8 h-px w-24 bg-gold/50" />
+
+      {tables.length === 0 ? (
+        <p className="text-center text-sm text-muted">No tables yet.</p>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2">
+          {tables.map((table) => {
+            const seated = attending
+              .filter((guest) => guest.tableId === table.id)
+              .slice()
+              .sort((a, b) => a.name.localeCompare(b.name));
+            return (
+              <section key={table.id} className="print-break rounded-2xl border border-gold/20 p-4">
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="font-serif text-2xl">{table.name}</h3>
+                  <p className="text-xs uppercase tracking-[0.14em] text-muted">
+                    {seated.length}/{table.seats}
+                  </p>
+                </div>
+                {seated.length === 0 ? (
+                  <p className="mt-3 text-sm text-muted">Empty</p>
+                ) : (
+                  <ol className="mt-3 space-y-1.5 text-sm">
+                    {seated.map((guest) => (
+                      <li key={guest.id} className="flex items-center gap-2">
+                        <span
+                          className="h-2 w-2 shrink-0 rounded-full"
+                          style={{ backgroundColor: sideColors(guest.side).line }}
+                        />
+                        <span>{guest.name}</span>
+                        {guest.group ? <span className="text-xs text-muted">· {guest.group}</span> : null}
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </section>
+            );
+          })}
+        </div>
+      )}
+
+      {unseated.length ? (
+        <section className="print-break mt-10">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-gold">Not seated yet</p>
+          <ul className="mt-3 columns-2 gap-4 text-sm">
+            {unseated
+              .slice()
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((guest) => (
+                <li key={guest.id} className="mb-1">
+                  {guest.name}
+                </li>
+              ))}
+          </ul>
+        </section>
+      ) : null}
+    </article>
   );
 }
 

@@ -59,6 +59,7 @@
 @media print {
   body {
     background: white !important;
+    background-image: none !important;
   }
 
   .no-print {
@@ -73,6 +74,37 @@
     box-shadow: none !important;
     border: none !important;
     background: white !important;
+  }
+
+  body[data-print] *:not(.print-target):not(.print-target *) {
+    visibility: hidden !important;
+  }
+
+  body[data-print] .print-target,
+  body[data-print] .print-target * {
+    visibility: visible !important;
+  }
+
+  body[data-print] .print-target {
+    display: none !important;
+  }
+
+  body[data-print="bulletin-pre-ceremony"] .print-target[data-print-id="bulletin-pre-ceremony"],
+  body[data-print="bulletin-ceremony"] .print-target[data-print-id="bulletin-ceremony"],
+  body[data-print="bulletin-reception"] .print-target[data-print-id="bulletin-reception"],
+  body[data-print="bulletin-mc"] .print-target[data-print-id="bulletin-mc"],
+  body[data-print="tables"] .print-target[data-print-id="tables"] {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .print-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
 

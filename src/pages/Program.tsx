@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp, Clock, Plus, Printer, Trash2 } from "lucide-rea
 import { PROGRAM_SECTIONS, SECTION_PRESETS } from "../constants";
 import { useWedding } from "../context";
 import { coupleLabel, uid } from "../defaults";
+import { printTarget } from "../print";
 import type { ProgramItem, ProgramSection, ProgramTag } from "../types";
 
 const sectionTone: Record<ProgramSection, { line: string; dot: string; chip: string }> = {
@@ -39,9 +40,13 @@ function insertIndex(program: ProgramItem[], section: ProgramSection): number {
   return program.length;
 }
 
+function printIdForSection(section: ProgramSection): string {
+  return `bulletin-${section}`;
+}
+
 export function ProgramPage() {
   const { data, patch } = useWedding();
-  const [mode, setMode] = useState<"edit" | "preview">("edit");
+  const [mode, setMode] = useState<"edit" | "preview" | "mc">("edit");
   const [open, setOpen] = useState<Record<ProgramSection, boolean>>({
     "pre-ceremony": true,
     ceremony: true,
@@ -49,6 +54,7 @@ export function ProgramPage() {
   });
   const [adding, setAdding] = useState<ProgramSection | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [printMenu, setPrintMenu] = useState(false);
 
   const grouped = useMemo(
     () =>
@@ -90,6 +96,7 @@ export function ProgramPage() {
       subtitle: tag === "song" ? "Hymn / title" : "",
       body: tag === "song" ? "Paste lyrics here.\n\nVerse 1\n\nVerse 2" : "",
       people: "",
+      mcNotes: "",
     };
     const next = [...data.program];
     next.splice(insertIndex(next, section), 0, item);
@@ -107,14 +114,18 @@ export function ProgramPage() {
     patch("program", without);
   }
 
+  function runPrint(id: string) {
+    setPrintMenu(false);
+    printTarget(id);
+  }
+
   return (
     <div className="space-y-5">
       <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-serif text-4xl">Wedding day</h1>
           <p className="mt-1 max-w-xl text-sm text-muted">
-            A timeline for the whole day. Set the time on each moment, and collapse a section when you are done planning
-            it.
+            Plan the timeline, print each part as its own PDF, and hand the MC a cue sheet.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -124,14 +135,44 @@ export function ProgramPage() {
           <button className={mode === "preview" ? "btn-primary" : "btn-ghost"} onClick={() => setMode("preview")}>
             Bulletin
           </button>
-          <button className="btn-ghost" onClick={() => window.print()}>
-            <Printer className="h-4 w-4" /> Print
+          <button className={mode === "mc" ? "btn-primary" : "btn-ghost"} onClick={() => setMode("mc")}>
+            MC
           </button>
+          <div className="relative">
+            <button className="btn-ghost" onClick={() => setPrintMenu((openMenu) => !openMenu)}>
+              <Printer className="h-4 w-4" /> Print / PDF
+            </button>
+            {printMenu ? (
+              <div className="absolute right-0 z-30 mt-2 w-56 overflow-hidden rounded-2xl border border-gold/20 bg-cream shadow-paper">
+                {PROGRAM_SECTIONS.map((section) => (
+                  <button
+                    key={section.id}
+                    className="block w-full px-4 py-2.5 text-left text-sm hover:bg-gold-soft"
+                    onClick={() => runPrint(printIdForSection(section.id))}
+                  >
+                    {section.label} bulletin
+                  </button>
+                ))}
+                <button
+                  className="block w-full border-t border-gold/15 px-4 py-2.5 text-left text-sm hover:bg-gold-soft"
+                  onClick={() => runPrint("bulletin-mc")}
+                >
+                  MC cue sheet
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
 
-      <div className={mode === "preview" ? "block" : "print-only"}>
-        <Bulletin />
+      <div className={mode === "preview" ? "block space-y-8" : "print-only space-y-8"}>
+        {PROGRAM_SECTIONS.map((section) => (
+          <SectionBulletin key={section.id} section={section.id} className="print-target" />
+        ))}
+      </div>
+
+      <div className={mode === "mc" ? "block" : "print-only"}>
+        <McBulletin className="print-target" />
       </div>
 
       {mode === "edit" ? (
@@ -155,9 +196,22 @@ export function ProgramPage() {
                       <span className="text-muted">· {section.items.length}</span>
                     </p>
                   </div>
-                  <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-muted transition ${expandedSection ? "rotate-180" : ""}`}
-                  />
+                  <div className="flex shrink-0 items-center gap-1">
+                    <button
+                      className="btn-ghost !px-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        printTarget(printIdForSection(section.id));
+                      }}
+                      aria-label={`Print ${section.label}`}
+                      title={`Print ${section.label} PDF`}
+                    >
+                      <Printer className="h-4 w-4" />
+                    </button>
+                    <ChevronDown
+                      className={`h-5 w-5 shrink-0 text-muted transition ${expandedSection ? "rotate-180" : ""}`}
+                    />
+                  </div>
                 </button>
 
                 {expandedSection ? (
@@ -190,7 +244,9 @@ export function ProgramPage() {
                                     >
                                       <p className="font-serif text-xl leading-tight">{item.title || "Untitled"}</p>
                                       <p className="mt-0.5 text-xs text-muted">
-                                        {[item.people, item.subtitle].filter(Boolean).join(" · ") || "Tap to edit details"}
+                                        {[item.people, item.subtitle, item.mcNotes ? "MC notes" : ""]
+                                          .filter(Boolean)
+                                          .join(" · ") || "Tap to edit details"}
                                       </p>
                                     </button>
                                     <div className="flex shrink-0 gap-1 pr-1 pt-1">
@@ -282,6 +338,15 @@ export function ProgramPage() {
                                           onChange={(e) => update(item.id, { body: e.target.value })}
                                         />
                                       </div>
+                                      <div className="md:col-span-2">
+                                        <label className="label">MC cues</label>
+                                        <textarea
+                                          className="field min-h-20 whitespace-pre-wrap"
+                                          placeholder="What the MC should announce, watch for, or do at this moment…"
+                                          value={item.mcNotes}
+                                          onChange={(e) => update(item.id, { mcNotes: e.target.value })}
+                                        />
+                                      </div>
                                     </div>
                                   ) : null}
                                 </div>
@@ -323,13 +388,13 @@ export function ProgramPage() {
   );
 }
 
-function Bulletin() {
+function BulletinHeader({ eyebrow }: { eyebrow: string }) {
   const { data } = useWedding();
-  const { settings, program } = data;
+  const { settings } = data;
 
   return (
-    <article className="print-sheet card mx-auto max-w-2xl px-8 py-12 text-center">
-      <p className="text-[11px] uppercase tracking-[0.28em] text-gold">The wedding day</p>
+    <>
+      <p className="text-[11px] uppercase tracking-[0.28em] text-gold">{eyebrow}</p>
       <h2 className="mt-3 font-serif text-5xl italic">{coupleLabel(settings)}</h2>
       <p className="mt-3 text-sm text-muted">
         {[
@@ -343,27 +408,87 @@ function Bulletin() {
           .join(" · ")}
       </p>
       <div className="mx-auto my-8 h-px w-24 bg-gold/50" />
+    </>
+  );
+}
+
+function SectionBulletin({
+  section,
+  className = "",
+}: {
+  section: ProgramSection;
+  className?: string;
+}) {
+  const { data } = useWedding();
+  const meta = PROGRAM_SECTIONS.find((row) => row.id === section);
+  const items = data.program.filter((item) => item.section === section);
+
+  return (
+    <article
+      className={`print-sheet card mx-auto max-w-2xl px-8 py-12 text-center ${className}`}
+      data-print-id={printIdForSection(section)}
+    >
+      <BulletinHeader eyebrow={meta?.label ?? "Bulletin"} />
+      {items.length === 0 ? (
+        <p className="text-sm text-muted">No moments in this part of the day yet.</p>
+      ) : (
+        <ol className="space-y-6 text-left">
+          {items.map((item) => (
+            <li key={item.id} className="print-break grid grid-cols-[4.5rem_1fr] gap-3">
+              <p className="pt-1 text-xs tabular-nums text-muted">{formatTime(item.time) || "—"}</p>
+              <div>
+                <h3 className="font-serif text-2xl leading-tight">{item.title}</h3>
+                {item.subtitle ? <p className="text-sm italic text-muted">{item.subtitle}</p> : null}
+                {item.people ? <p className="text-sm text-muted">{item.people}</p> : null}
+                {item.body ? (
+                  <p
+                    className={`mt-2 whitespace-pre-wrap text-sm leading-relaxed ${item.tag === "song" ? "text-center italic" : ""}`}
+                  >
+                    {item.body}
+                  </p>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </article>
+  );
+}
+
+function McBulletin({ className = "" }: { className?: string }) {
+  const { data } = useWedding();
+
+  return (
+    <article
+      className={`print-sheet card mx-auto max-w-2xl px-8 py-12 text-center ${className}`}
+      data-print-id="bulletin-mc"
+    >
+      <BulletinHeader eyebrow="MC cue sheet" />
+      <p className="mb-8 text-sm text-muted">
+        Times, who is involved, and what you need to announce or watch for. Guest-facing lyrics and readings stay off
+        this sheet.
+      </p>
       {PROGRAM_SECTIONS.map((section) => {
-        const items = program.filter((item) => item.section === section.id);
+        const items = data.program.filter((item) => item.section === section.id);
         if (!items.length) return null;
         return (
           <section key={section.id} className="mb-10 text-left">
             <p className="text-[11px] uppercase tracking-[0.22em] text-gold">{section.label}</p>
-            <ol className="mt-4 space-y-6">
+            <ol className="mt-4 space-y-5">
               {items.map((item) => (
-                <li key={item.id} className="grid grid-cols-[4.5rem_1fr] gap-3">
-                  <p className="pt-1 text-xs tabular-nums text-muted">{formatTime(item.time) || "—"}</p>
+                <li key={item.id} className="print-break grid grid-cols-[4.5rem_1fr] gap-3 border-b border-gold/10 pb-4">
+                  <p className="pt-1 text-xs font-medium tabular-nums text-ink">{formatTime(item.time) || "—"}</p>
                   <div>
                     <h3 className="font-serif text-2xl leading-tight">{item.title}</h3>
-                    {item.subtitle ? <p className="text-sm italic text-muted">{item.subtitle}</p> : null}
-                    {item.people ? <p className="text-sm text-muted">{item.people}</p> : null}
-                    {item.body ? (
-                      <p
-                        className={`mt-2 whitespace-pre-wrap text-sm leading-relaxed ${item.tag === "song" ? "text-center italic" : ""}`}
-                      >
-                        {item.body}
+                    {item.people ? <p className="mt-1 text-sm text-muted">Who: {item.people}</p> : null}
+                    {item.mcNotes ? (
+                      <p className="mt-2 whitespace-pre-wrap rounded-xl bg-gold-soft/60 px-3 py-2 text-sm leading-relaxed text-ink">
+                        {item.mcNotes}
                       </p>
-                    ) : null}
+                    ) : (
+                      <p className="mt-2 text-sm italic text-muted">No MC cue yet — add one in Edit.</p>
+                    )}
                   </div>
                 </li>
               ))}
