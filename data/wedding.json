@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:10:13.270Z",
+  "updatedAt": "2026-09-05T20:10:22.775Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -274,14 +274,14 @@
       "subtasks": []
     },
     {
-      "id": "09d1a072-ed56-4f1f-a662-09318f0e7482",
       "title": "Wedding Arch",
       "category": "Decor",
       "done": false,
       "owner": "both",
       "dueDate": "2026-08-25",
-      "notes": "arch behind groom and bride table",
-      "subtasks": []
+      "notes": "in progress",
+      "subtasks": [],
+      "id": "09d1a072-ed56-4f1f-a662-09318f0e7482"
     },
     {
       "id": "2b908675-7c73-4522-ad6f-737c514521a5",
