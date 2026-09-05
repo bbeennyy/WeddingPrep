@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T18:49:27.236Z",
+  "updatedAt": "2026-09-05T18:49:32.991Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2894,7 +2894,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
       "group": "Paul & Cindy Waldo",
       "rehearsalDinner": false
     },
