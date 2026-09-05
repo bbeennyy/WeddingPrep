@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T19:21:30.468Z",
+  "updatedAt": "2026-09-05T19:29:14.929Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3261,16 +3261,6 @@
       "people": "Congregation lead by a Joseph"
     },
     {
-      "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
-      "tag": "affirmation",
-      "section": "ceremony",
-      "time": "",
-      "title": "Creed",
-      "subtitle": "",
-      "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
-      "people": "Couple and believers"
-    },
-    {
       "id": "bba66956-84eb-445e-aa17-2ac89f6dce19",
       "tag": "purpose",
       "section": "ceremony",
@@ -3279,6 +3269,16 @@
       "subtitle": "",
       "body": "Marriage is a gift of God, sealed by promises made before God and this congregation. Today N. and N. come to give themselves to one another, and to seek the grace of Christ for the life they will share.",
       "people": "Bob Carter"
+    },
+    {
+      "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
+      "tag": "affirmation",
+      "section": "ceremony",
+      "time": "",
+      "title": "Creed",
+      "subtitle": "",
+      "body": "Do you, the families of N. and N., give them your blessing and promise to support them?\nWe do.\n\nWill all of you, by God’s grace, do everything in your power to uphold these two persons in their marriage?\nWe will.",
+      "people": "Couple and believers"
     },
     {
       "id": "1fca6d4c-c394-4e56-8ba3-4b9a97ae2c3e",
@@ -3305,7 +3305,7 @@
       "tag": "song",
       "section": "ceremony",
       "time": "15:40",
-      "title": "Psalm xx:xx",
+      "title": "Psalm x",
       "subtitle": "Title · number if you use a hymnal",
       "body": "Verse 1\n\nVerse 2\n\nVerse 3",
       "people": "Congregation lead by a Joseph"
