@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:09:14.732Z",
+  "updatedAt": "2026-09-05T20:09:27.643Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -177,7 +177,7 @@
       "id": "40ffc519-c071-470f-a8d0-c746ece1338e",
       "title": "Reception music list",
       "category": "Music",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-08-20",
       "notes": "",
