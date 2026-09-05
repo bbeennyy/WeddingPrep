@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T19:36:15.539Z",
+  "updatedAt": "2026-09-05T19:36:19.853Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3251,16 +3251,6 @@
       "people": "Bob Carter"
     },
     {
-      "id": "bc50992c-6d3c-4678-8982-427b2d0108ad",
-      "tag": "welcome",
-      "section": "ceremony",
-      "time": "15:33",
-      "title": "Psalm 144B",
-      "subtitle": "",
-      "body": "",
-      "people": "Congregation lead by a Joseph"
-    },
-    {
       "id": "bba66956-84eb-445e-aa17-2ac89f6dce19",
       "tag": "purpose",
       "section": "ceremony",
@@ -3269,6 +3259,16 @@
       "subtitle": "",
       "body": "Marriage is a gift of God, sealed by promises made before God and this congregation. Today N. and N. come to give themselves to one another, and to seek the grace of Christ for the life they will share.",
       "people": "Bob Carter"
+    },
+    {
+      "id": "bc50992c-6d3c-4678-8982-427b2d0108ad",
+      "tag": "welcome",
+      "section": "ceremony",
+      "time": "15:33",
+      "title": "Psalm 144B",
+      "subtitle": "",
+      "body": "",
+      "people": "Congregation lead by a Joseph"
     },
     {
       "id": "537927f5-8a33-4e1d-b905-95074bf3fb7f",
