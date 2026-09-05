@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:26:12.729Z",
+  "updatedAt": "2026-09-05T22:26:16.756Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -287,7 +287,7 @@
       "id": "2b908675-7c73-4522-ad6f-737c514521a5",
       "title": "Boutonniere",
       "category": "Attire",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-09-05",
       "notes": "Maybe for groom and groomsmen and fathers",
