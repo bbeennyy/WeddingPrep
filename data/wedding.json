@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:25:05.123Z",
+  "updatedAt": "2026-09-05T22:25:34.631Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -257,7 +257,7 @@
       "id": "c790db54-890b-4e77-bfd4-256ea60c94bc",
       "title": "Bouquet Arrangement",
       "category": "Attire",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "2026-08-29",
       "notes": "Bridemaids and Bride",
