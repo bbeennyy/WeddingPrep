@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T23:03:07.148Z",
+  "updatedAt": "2026-09-05T23:03:11.404Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3183,7 +3183,9 @@
       "id": "5253d7ae-ba3c-4741-9e49-daa94e722652",
       "name": "First Look Photos",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
+      ]
     },
     {
       "id": "750b1583-7231-4251-ac2a-bb3e0f2e13ab",
