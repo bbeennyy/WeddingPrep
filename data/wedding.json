@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:26:48.963Z",
+  "updatedAt": "2026-09-05T22:26:53.282Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -260,6 +260,11 @@
         {
           "id": "f4d5ddf5-1169-4e7b-afbe-2341c36863f6",
           "title": "8 rectangular tables",
+          "done": false
+        },
+        {
+          "id": "47a07673-c4a2-462d-a455-0495b97f6bb7",
+          "title": "1 sweetheart table",
           "done": false
         }
       ]
