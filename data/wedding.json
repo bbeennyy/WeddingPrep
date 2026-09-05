@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:11:10.134Z",
+  "updatedAt": "2026-09-05T20:23:35.585Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3369,6 +3369,16 @@
       "subtitle": "",
       "body": "Music as they leave. Note the piece here.",
       "people": "The couple, then the wedding party"
+    },
+    {
+      "id": "535f040a-d0da-4779-8bbf-12d34111daa3",
+      "tag": "custom",
+      "section": "ceremony",
+      "time": "",
+      "title": "Custom",
+      "subtitle": "",
+      "body": "",
+      "people": ""
     },
     {
       "id": "8a41c9fe-c199-4b33-9c9b-e2cf628023a0",
