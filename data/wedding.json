@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:09:27.643Z",
+  "updatedAt": "2026-09-05T20:09:29.480Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -317,7 +317,7 @@
       "id": "8e79b9b7-b0df-4c60-92fc-6053cdf1488a",
       "title": "Ceremony spotify list",
       "category": "Music",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-09-05",
       "notes": "Prelude",
