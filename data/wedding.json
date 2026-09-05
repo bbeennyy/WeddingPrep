@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T20:10:22.775Z",
+  "updatedAt": "2026-09-05T20:10:41.974Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -107,7 +107,7 @@
       "id": "2e73a130-d692-41c5-8b02-135cd972cddc",
       "title": "Confirm catering minimums, cake, and cake cutting",
       "category": "Food",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-08-13",
       "notes": "Pick food choices for Food tasting \n",
