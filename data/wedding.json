@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:26:16.756Z",
+  "updatedAt": "2026-09-05T22:26:44.154Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -251,7 +251,13 @@
       "owner": "b",
       "dueDate": "2026-08-22",
       "notes": "",
-      "subtasks": []
+      "subtasks": [
+        {
+          "id": "4184bebb-ced0-4b7b-b8f3-ed96cea56923",
+          "title": "table cloths 20 round tables",
+          "done": false
+        }
+      ]
     },
     {
       "id": "c790db54-890b-4e77-bfd4-256ea60c94bc",
