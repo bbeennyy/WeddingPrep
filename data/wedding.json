@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-02T22:24:08.600Z",
+  "updatedAt": "2026-09-05T18:19:24.047Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -334,6 +334,7 @@
       "subtasks": []
     },
     {
+      "id": "4bcb69a0-46b3-484f-8213-8456d44cb639",
       "title": "Flower Girls Choices",
       "category": "Church",
       "done": true,
@@ -386,14 +387,13 @@
           "title": "Savannah",
           "done": true
         }
-      ],
-      "id": "4bcb69a0-46b3-484f-8213-8456d44cb639"
+      ]
     },
     {
       "id": "38ef0088-3722-47f0-947a-933bb70bc450",
       "title": "Buy Fake Petals ",
       "category": "Church",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "2026-09-05",
       "notes": "Fake stuff for  bridal procession",
