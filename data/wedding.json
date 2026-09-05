@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:24:55.317Z",
+  "updatedAt": "2026-09-05T22:25:05.123Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -428,6 +428,16 @@
       "notes": "",
       "subtasks": [],
       "id": "9875e8b7-cdcb-43c1-9b36-cf04b8a93ef1"
+    },
+    {
+      "title": "jewelrie",
+      "category": "Other",
+      "done": false,
+      "owner": "b",
+      "dueDate": "",
+      "notes": "",
+      "subtasks": [],
+      "id": "5e256b73-6afa-48a6-909f-859b9a4b2b28"
     }
   ],
   "vendors": [
