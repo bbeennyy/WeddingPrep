@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T22:26:44.154Z",
+  "updatedAt": "2026-09-05T22:26:48.963Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -255,6 +255,11 @@
         {
           "id": "4184bebb-ced0-4b7b-b8f3-ed96cea56923",
           "title": "table cloths 20 round tables",
+          "done": false
+        },
+        {
+          "id": "f4d5ddf5-1169-4e7b-afbe-2341c36863f6",
+          "title": "8 rectangular tables",
           "done": false
         }
       ]
