@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T23:03:17.202Z",
+  "updatedAt": "2026-09-06T04:20:18.110Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -290,14 +290,14 @@
       "subtasks": []
     },
     {
+      "id": "09d1a072-ed56-4f1f-a662-09318f0e7482",
       "title": "Wedding Arch",
       "category": "Decor",
       "done": false,
       "owner": "a",
       "dueDate": "2026-08-25",
       "notes": "in progress",
-      "subtasks": [],
-      "id": "09d1a072-ed56-4f1f-a662-09318f0e7482"
+      "subtasks": []
     },
     {
       "id": "2b908675-7c73-4522-ad6f-737c514521a5",
@@ -436,24 +436,24 @@
       "subtasks": []
     },
     {
+      "id": "9875e8b7-cdcb-43c1-9b36-cf04b8a93ef1",
       "title": "Hair appointment",
       "category": "Attire",
       "done": false,
       "owner": "b",
       "dueDate": "",
       "notes": "",
-      "subtasks": [],
-      "id": "9875e8b7-cdcb-43c1-9b36-cf04b8a93ef1"
+      "subtasks": []
     },
     {
+      "id": "5e256b73-6afa-48a6-909f-859b9a4b2b28",
       "title": "jewelrie",
       "category": "Other",
       "done": false,
       "owner": "b",
       "dueDate": "",
       "notes": "",
-      "subtasks": [],
-      "id": "5e256b73-6afa-48a6-909f-859b9a4b2b28"
+      "subtasks": []
     }
   ],
   "vendors": [
@@ -1817,7 +1817,7 @@
       "id": "64228182-67d6-40d7-8abb-c9684f39fad2",
       "name": "Heather Flanagan",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": "95f3da4b-95b4-4de0-8045-479529a4eb60",
