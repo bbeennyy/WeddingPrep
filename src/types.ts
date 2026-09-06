@@ -25,6 +25,7 @@ export type ProgramTag =
   | "kiss"
   | "benediction"
   | "recession"
+  | "mc"
   | "custom";
 
 export interface Settings {
@@ -142,5 +143,5 @@ export interface ProgramTagMeta {
   id: ProgramTag;
   label: string;
   hint: string;
-  group: "music" | "movement" | "word" | "covenant" | "presbyterian";
+  group: "music" | "movement" | "word" | "covenant" | "presbyterian" | "host";
 }

@@ -20,6 +20,7 @@ export const PROGRAM_TAGS: ProgramTagMeta[] = [
   { id: "kiss", label: "The Kiss", hint: "The first married kiss", group: "covenant" },
   { id: "benediction", label: "Benediction", hint: "Blessing and sending", group: "presbyterian" },
   { id: "recession", label: "Recession", hint: "How the couple and party leave", group: "movement" },
+  { id: "mc", label: "MC", hint: "Something the MC announces, cues, or runs", group: "host" },
   { id: "custom", label: "Custom", hint: "Anything else you want in the flow", group: "presbyterian" },
 ];
 
@@ -33,23 +34,33 @@ export const PROGRAM_SECTIONS: { id: ProgramSection; label: string; hint: string
   { id: "reception", label: "Reception", hint: "Dinner, toasts, dancing" },
 ];
 
+const MC_PRESET = { tag: "mc" as const, title: "MC" };
+
 export const SECTION_PRESETS: Record<ProgramSection, { tag: ProgramTag; title: string }[]> = {
   "pre-ceremony": [
+    MC_PRESET,
     { tag: "custom", title: "Getting ready" },
     { tag: "custom", title: "First look / photos" },
     { tag: "custom", title: "Guests arrive" },
     { tag: "prelude", title: "Prelude" },
     { tag: "custom", title: "Custom" },
   ],
-  ceremony: PROGRAM_TAGS.map((tag) => ({ tag: tag.id, title: tag.label })),
+  ceremony: [MC_PRESET, ...PROGRAM_TAGS.filter((tag) => tag.id !== "mc").map((tag) => ({ tag: tag.id, title: tag.label }))],
   reception: [
+    MC_PRESET,
+    { tag: "mc", title: "Welcome guests" },
+    { tag: "mc", title: "Introduce couple" },
     { tag: "custom", title: "Cocktail hour" },
     { tag: "custom", title: "Grand entrance" },
     { tag: "custom", title: "Dinner" },
+    { tag: "mc", title: "Introduce toasts" },
     { tag: "custom", title: "Toasts" },
+    { tag: "mc", title: "Announce first dance" },
     { tag: "custom", title: "First dance" },
+    { tag: "mc", title: "Announce cake" },
     { tag: "custom", title: "Cake" },
     { tag: "custom", title: "Open dancing" },
+    { tag: "mc", title: "Send-off announcement" },
     { tag: "custom", title: "Send-off" },
     { tag: "custom", title: "Custom" },
   ],

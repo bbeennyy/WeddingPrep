@@ -87,6 +87,7 @@ export function ProgramPage() {
   }
 
   function addItem(section: ProgramSection, tag: ProgramTag, title: string) {
+    const isMc = tag === "mc";
     const item: ProgramItem = {
       id: uid(),
       tag,
@@ -94,9 +95,9 @@ export function ProgramPage() {
       time: "",
       title,
       subtitle: tag === "song" ? "Hymn / title" : "",
-      body: tag === "song" ? "Paste lyrics here.\n\nVerse 1\n\nVerse 2" : "",
-      people: "",
-      mcNotes: "",
+      body: tag === "song" ? "Paste lyrics here.\n\nVerse 1\n\nVerse 2" : isMc ? "" : "",
+      people: isMc ? "MC" : "",
+      mcNotes: isMc ? "What to say or do…" : "",
     };
     const next = [...data.program];
     next.splice(insertIndex(next, section), 0, item);
@@ -242,9 +243,16 @@ export function ProgramPage() {
                                       className="min-w-0 flex-1 px-3 py-2 text-left"
                                       onClick={() => setExpanded(isOpen ? null : item.id)}
                                     >
-                                      <p className="font-serif text-xl leading-tight">{item.title || "Untitled"}</p>
+                                      <p className="font-serif text-xl leading-tight">
+                                        {item.tag === "mc" ? (
+                                          <span className="mr-2 inline-flex align-middle text-[10px] uppercase tracking-[0.16em] text-gold">
+                                            MC
+                                          </span>
+                                        ) : null}
+                                        {item.title || "Untitled"}
+                                      </p>
                                       <p className="mt-0.5 text-xs text-muted">
-                                        {[item.people, item.subtitle, item.mcNotes ? "MC notes" : ""]
+                                        {[item.people, item.subtitle, item.mcNotes ? "Has MC cue" : ""]
                                           .filter(Boolean)
                                           .join(" · ") || "Tap to edit details"}
                                       </p>
@@ -330,23 +338,40 @@ export function ProgramPage() {
                                       </div>
                                       <div className="md:col-span-2">
                                         <label className="label">
-                                          {item.tag === "song" ? "Lyrics" : item.tag === "word" ? "Reading" : "Notes"}
+                                          {item.tag === "mc"
+                                            ? "What the MC says / does"
+                                            : item.tag === "song"
+                                              ? "Lyrics"
+                                              : item.tag === "word"
+                                                ? "Reading"
+                                                : "Notes"}
                                         </label>
                                         <textarea
                                           className="field min-h-28 whitespace-pre-wrap"
-                                          value={item.body}
-                                          onChange={(e) => update(item.id, { body: e.target.value })}
+                                          placeholder={
+                                            item.tag === "mc"
+                                              ? "Exact words to announce, or the action to take…"
+                                              : undefined
+                                          }
+                                          value={item.tag === "mc" ? item.mcNotes || item.body : item.body}
+                                          onChange={(e) =>
+                                            item.tag === "mc"
+                                              ? update(item.id, { mcNotes: e.target.value, body: "" })
+                                              : update(item.id, { body: e.target.value })
+                                          }
                                         />
                                       </div>
-                                      <div className="md:col-span-2">
-                                        <label className="label">MC cues</label>
-                                        <textarea
-                                          className="field min-h-20 whitespace-pre-wrap"
-                                          placeholder="What the MC should announce, watch for, or do at this moment…"
-                                          value={item.mcNotes}
-                                          onChange={(e) => update(item.id, { mcNotes: e.target.value })}
-                                        />
-                                      </div>
+                                      {item.tag !== "mc" ? (
+                                        <div className="md:col-span-2">
+                                          <label className="label">MC cue (optional)</label>
+                                          <textarea
+                                            className="field min-h-20 whitespace-pre-wrap"
+                                            placeholder="Only if the MC needs a cue during this moment…"
+                                            value={item.mcNotes}
+                                            onChange={(e) => update(item.id, { mcNotes: e.target.value })}
+                                          />
+                                        </div>
+                                      ) : null}
                                     </div>
                                   ) : null}
                                 </div>
@@ -364,7 +389,9 @@ export function ProgramPage() {
                           {SECTION_PRESETS[section.id].map((preset) => (
                             <button
                               key={`${preset.tag}-${preset.title}`}
-                              className="btn-ghost !py-1"
+                              className={
+                                preset.tag === "mc" ? "btn-sage !py-1" : "btn-ghost !py-1"
+                              }
                               onClick={() => addItem(section.id, preset.tag, preset.title)}
                             >
                               {preset.title}
@@ -456,46 +483,84 @@ function SectionBulletin({
   );
 }
 
+function mcCue(item: ProgramItem): string {
+  return (item.mcNotes || (item.tag === "mc" ? item.body : "")).trim();
+}
+
+function isMcRelevant(item: ProgramItem): boolean {
+  return item.tag === "mc" || Boolean(mcCue(item));
+}
+
 function McBulletin({ className = "" }: { className?: string }) {
   const { data } = useWedding();
+  const cues = data.program.filter(isMcRelevant);
+  const bySection = PROGRAM_SECTIONS.map((section) => ({
+    ...section,
+    items: cues.filter((item) => item.section === section.id),
+  })).filter((section) => section.items.length > 0);
 
   return (
     <article
-      className={`print-sheet card mx-auto max-w-2xl px-8 py-12 text-center ${className}`}
+      className={`print-sheet card mx-auto max-w-xl px-8 py-12 text-center ${className}`}
       data-print-id="bulletin-mc"
     >
-      <BulletinHeader eyebrow="MC cue sheet" />
-      <p className="mb-8 text-sm text-muted">
-        Times, who is involved, and what you need to announce or watch for. Guest-facing lyrics and readings stay off
-        this sheet.
+      <p className="text-[11px] uppercase tracking-[0.28em] text-gold">For the MC only</p>
+      <h2 className="mt-3 font-serif text-5xl italic">{coupleLabel(data.settings)}</h2>
+      <p className="mt-3 text-sm text-muted">
+        {[
+          data.settings.weddingDate &&
+            new Date(`${data.settings.weddingDate}T12:00:00`).toLocaleDateString(undefined, { dateStyle: "long" }),
+          data.settings.receptionVenue || data.settings.churchName,
+          data.settings.city,
+        ]
+          .filter(Boolean)
+          .join(" · ")}
       </p>
-      {PROGRAM_SECTIONS.map((section) => {
-        const items = data.program.filter((item) => item.section === section.id);
-        if (!items.length) return null;
-        return (
+      <p className="mx-auto mt-4 max-w-sm text-sm text-muted">
+        Your run-of-show. Only moments where you speak or act.
+      </p>
+      <div className="mx-auto my-8 h-px w-24 bg-gold/50" />
+
+      {bySection.length === 0 ? (
+        <p className="text-sm text-muted">
+          No MC moments yet. In Edit, add an <strong>MC</strong> item, or put a cue on another moment.
+        </p>
+      ) : (
+        bySection.map((section) => (
           <section key={section.id} className="mb-10 text-left">
             <p className="text-[11px] uppercase tracking-[0.22em] text-gold">{section.label}</p>
-            <ol className="mt-4 space-y-5">
-              {items.map((item) => (
-                <li key={item.id} className="print-break grid grid-cols-[4.5rem_1fr] gap-3 border-b border-gold/10 pb-4">
-                  <p className="pt-1 text-xs font-medium tabular-nums text-ink">{formatTime(item.time) || "—"}</p>
-                  <div>
-                    <h3 className="font-serif text-2xl leading-tight">{item.title}</h3>
-                    {item.people ? <p className="mt-1 text-sm text-muted">Who: {item.people}</p> : null}
-                    {item.mcNotes ? (
-                      <p className="mt-2 whitespace-pre-wrap rounded-xl bg-gold-soft/60 px-3 py-2 text-sm leading-relaxed text-ink">
-                        {item.mcNotes}
+            <ol className="mt-4 space-y-6">
+              {section.items.map((item, index) => {
+                const cue = mcCue(item);
+                return (
+                  <li key={item.id} className="print-break">
+                    <div className="flex items-baseline gap-3">
+                      <p className="min-w-[4.75rem] shrink-0 font-serif text-3xl tabular-nums leading-none text-ink">
+                        {formatTime(item.time) || "—"}
                       </p>
-                    ) : (
-                      <p className="mt-2 text-sm italic text-muted">No MC cue yet — add one in Edit.</p>
-                    )}
-                  </div>
-                </li>
-              ))}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-gold">
+                          Step {index + 1}
+                          {item.tag !== "mc" ? ` · while: ${item.title}` : ""}
+                        </p>
+                        <h3 className="mt-1 font-serif text-3xl leading-tight">
+                          {item.tag === "mc" ? item.title : "MC cue"}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="mt-3 rounded-2xl border-2 border-gold/40 bg-gold-soft px-5 py-4 text-left">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold">Say or do this</p>
+                      <p className="mt-2 whitespace-pre-wrap text-lg leading-relaxed text-ink">
+                        {cue || "Add what to say in Edit."}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ol>
           </section>
-        );
-      })}
+        ))
+      )}
     </article>
   );
 }
