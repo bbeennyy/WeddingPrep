@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-06T04:20:18.110Z",
+  "updatedAt": "2026-09-06T04:26:44.331Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2983,7 +2983,7 @@
       "id": "ebc2ba38-b239-4986-be0a-154a8be438dd",
       "name": "Mei Fan",
       "side": "b",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
