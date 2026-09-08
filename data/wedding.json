@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T20:54:42.648Z",
+  "updatedAt": "2026-09-08T20:54:45.219Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2312,7 +2312,7 @@
       "id": "5eadf35d-67ab-4c77-a369-2170efcebc54",
       "name": "Austin Webster",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
