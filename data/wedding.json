@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T20:54:45.219Z",
+  "updatedAt": "2026-09-08T20:55:46.958Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2095,7 +2095,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "fbf7e7e1-2eab-4ab0-9fb5-e8efcf2fa745",
       "group": "Alex Mocuta",
       "rehearsalDinner": false
     },
