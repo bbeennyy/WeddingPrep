@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T20:54:11.451Z",
+  "updatedAt": "2026-09-08T20:54:15.831Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2664,7 +2664,7 @@
       "id": "cb674fea-d26b-4a96-9e09-234e5722c0ee",
       "name": "Luca Moldovan",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
@@ -2675,7 +2675,7 @@
       "id": "e5b8d485-109e-43de-b64a-9aad7f2e40a9",
       "name": "Kiana Moldovan",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
