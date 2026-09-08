@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T20:54:15.831Z",
+  "updatedAt": "2026-09-08T20:54:42.648Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2301,7 +2301,7 @@
       "id": "ef439798-d5de-4b6f-8765-0bf913f2de12",
       "name": "Arnav Cherian",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
