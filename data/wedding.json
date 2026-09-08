@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T20:54:09.259Z",
+  "updatedAt": "2026-09-08T20:54:11.451Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2653,7 +2653,7 @@
       "id": "008d485f-25b7-4ee0-97a2-5c0acdfdb5d8",
       "name": "Tiffany Moldovan",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
