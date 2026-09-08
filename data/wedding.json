@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-08T20:53:41.933Z",
+  "updatedAt": "2026-09-08T20:54:09.259Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2642,7 +2642,7 @@
       "id": "fd230291-428c-4988-b164-4f3cdc03c539",
       "name": "David Moldovan",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "declined",
       "dietary": "",
       "notes": "",
       "tableId": null,
