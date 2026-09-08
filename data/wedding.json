@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07T02:07:21.987Z",
+  "updatedAt": "2026-09-08T20:53:41.933Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2092,7 +2092,7 @@
       "id": "36088c27-9b1d-4d49-8427-554fa747f654",
       "name": "Alex Mocuta",
       "side": "a",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
