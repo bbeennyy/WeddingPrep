@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:40:18.371Z",
+  "updatedAt": "2026-09-09T21:41:03.425Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3448,7 +3448,9 @@
       "id": "4c20041d-fc69-486a-88fe-962ee5f60262",
       "name": "Bride & Groom with Bride's parents only",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
+      ]
     },
     {
       "id": "fd8cb3c3-3141-41d2-949b-2cef5ca951e3",
