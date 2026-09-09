@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:43:48.447Z",
+  "updatedAt": "2026-09-09T21:43:51.885Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3554,7 +3554,8 @@
       "name": "Groom with Bride's men (father, brothers, bil)",
       "notes": "",
       "guestIds": [
-        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50",
+        "75fac41a-e3be-4199-8e52-4cd00e85886c"
       ]
     },
     {
