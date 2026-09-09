@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:39:13.813Z",
+  "updatedAt": "2026-09-09T21:39:41.328Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3511,6 +3511,12 @@
         "a2f965fc-d7fa-44ed-93d9-823c88723a52",
         "77bfb541-f7bf-4bbf-bb9d-a25081b46e5a"
       ]
+    },
+    {
+      "id": "f6ce1642-7202-4e18-9ec6-e67f77a7a732",
+      "name": "Photo 25",
+      "notes": "",
+      "guestIds": []
     }
   ],
   "program": [
