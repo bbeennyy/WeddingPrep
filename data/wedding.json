@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:38:56.459Z",
+  "updatedAt": "2026-09-09T21:39:00.496Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3502,7 +3502,9 @@
       "id": "debedec9-c182-4689-aee1-d043792b7479",
       "name": "Groom with nieces & nephews",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
+      ]
     }
   ],
   "program": [
