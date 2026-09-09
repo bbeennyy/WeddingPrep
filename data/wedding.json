@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:39:49.527Z",
+  "updatedAt": "2026-09-09T21:39:54.207Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3516,7 +3516,9 @@
       "id": "f6ce1642-7202-4e18-9ec6-e67f77a7a732",
       "name": "Bride with nieces and nephews",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
+      ]
     }
   ],
   "program": [
