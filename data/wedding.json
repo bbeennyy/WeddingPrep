@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:37:50.352Z",
+  "updatedAt": "2026-09-09T21:38:45.941Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3495,6 +3495,12 @@
     {
       "id": "3102d9b9-adf1-41bf-b2cd-6186796610ab",
       "name": "Bride with Bride's ladies (mother, sisters, sil)",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "debedec9-c182-4689-aee1-d043792b7479",
+      "name": "Photo 24",
       "notes": "",
       "guestIds": []
     }
