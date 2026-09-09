@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:17:37.314Z",
+  "updatedAt": "2026-09-09T21:17:45.405Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3151,33 +3151,13 @@
       "id": "fb776b82-4cf6-41a2-b203-e610a48c4a9d",
       "name": "Bride & Groom with extended family of both",
       "notes": "",
-      "guestIds": [
-        "79201c2d-6d80-4c49-88a2-fa4b3bc748dd",
-        "31a4992d-d0e4-417e-9574-c53fff32186b",
-        "75fac41a-e3be-4199-8e52-4cd00e85886c",
-        "84e4fb1f-f372-4a3a-b2a1-c2bdd7a29c4b",
-        "45a80b41-5b3b-4d99-9b11-ac6378505e50",
-        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
-      ]
+      "guestIds": []
     },
     {
       "id": "6daceef4-9967-4da2-a809-6ae7ac12440f",
       "name": "Bride & Groom with Bride's extended family",
       "notes": "",
-      "guestIds": [
-        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
-        "45a80b41-5b3b-4d99-9b11-ac6378505e50",
-        "a619d62f-a1b7-46b9-a261-70775c2f8865",
-        "c4573f92-fda2-48ff-ac97-36dd4a283cff",
-        "410f0a44-c0ef-4747-bb2c-f7b48be5f7a3",
-        "61d02fa0-6627-4f40-9f8b-d86d358548a4",
-        "203268df-32d5-4261-94d0-f74c61b81fa6",
-        "b82d406d-cf2c-4089-b36c-ee5dce3a446f",
-        "ac308a30-596c-40bf-895f-8f292671a1d1",
-        "4ecc7244-6a3f-464d-be51-661a8ae38ab8",
-        "51b59351-4ad0-4aae-9900-fb6185ce9254",
-        "e3842b8e-7ff4-462a-88ca-9439e46ede67"
-      ]
+      "guestIds": []
     },
     {
       "id": "5253d7ae-ba3c-4741-9e49-daa94e722652",
