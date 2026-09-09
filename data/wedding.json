@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:43:17.968Z",
+  "updatedAt": "2026-09-09T21:43:20.949Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3527,7 +3527,9 @@
       "name": "Bride with siblings",
       "notes": "",
       "guestIds": [
-        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
+        "ac308a30-596c-40bf-895f-8f292671a1d1",
+        "4ecc7244-6a3f-464d-be51-661a8ae38ab8"
       ]
     },
     {
