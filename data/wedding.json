@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:34:40.234Z",
+  "updatedAt": "2026-09-09T21:34:49.400Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3330,14 +3330,19 @@
       "guestIds": [
         "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
         "45a80b41-5b3b-4d99-9b11-ac6378505e50",
-        "75fac41a-e3be-4199-8e52-4cd00e85886c"
+        "75fac41a-e3be-4199-8e52-4cd00e85886c",
+        "84e4fb1f-f372-4a3a-b2a1-c2bdd7a29c4b",
+        "79201c2d-6d80-4c49-88a2-fa4b3bc748dd",
+        "31a4992d-d0e4-417e-9574-c53fff32186b"
       ]
     },
     {
       "id": "93fa331a-1634-40ee-9b56-a76203603ae4",
       "name": "Bride & Groom with Groom's parents only",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
+      ]
     },
     {
       "id": "c6a75ebe-da61-434e-b511-09250a48b7bb",
