@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:37:38.849Z",
+  "updatedAt": "2026-09-09T21:37:43.566Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3434,7 +3434,10 @@
       "name": "Bride with 7 nieces (flower girls plus Tobie)",
       "notes": "",
       "guestIds": [
-        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
+        "839b2cc7-1ee7-403e-8d2b-e4c6b673a741",
+        "492c65af-36bf-433d-be2e-ac8f2989e5bc",
+        "553a385c-88ca-4d68-bdd3-d30b2efc8a76"
       ]
     },
     {
