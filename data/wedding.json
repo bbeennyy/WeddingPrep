@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:18:31.720Z",
+  "updatedAt": "2026-09-09T21:18:36.950Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3173,6 +3173,120 @@
     {
       "id": "93fa331a-1634-40ee-9b56-a76203603ae4",
       "name": "Bride & Groom with Groom's parents only",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "c6a75ebe-da61-434e-b511-09250a48b7bb",
+      "name": "Photo 8",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "50d4852c-4edc-49b1-b9df-22c89ee23d16",
+      "name": "Photo 9",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "08ea4c75-5edc-4091-87e8-079ad0425385",
+      "name": "Photo 10",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "cf4d7242-f2cb-4304-bad3-5b71a263b26f",
+      "name": "Photo 11",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "f3af37fe-5a8e-428a-bfaa-b0985da278eb",
+      "name": "Photo 12",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "a6d9c243-9534-4459-ab00-b113c7985b53",
+      "name": "Photo 13",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "98938b0e-7051-47ab-86e8-d6cb1063f2a6",
+      "name": "Photo 14",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "4c20041d-fc69-486a-88fe-962ee5f60262",
+      "name": "Photo 15",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "fd8cb3c3-3141-41d2-949b-2cef5ca951e3",
+      "name": "Photo 16",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "0ee02f6a-b7ad-4af4-8c52-b3f78bec57ee",
+      "name": "Photo 17",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "41fd3819-acc5-47c1-984b-af44aec41e16",
+      "name": "Photo 18",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "67e91b31-a141-409e-8bbe-556f709813e1",
+      "name": "Photo 19",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "68a473b7-72cd-4b5f-be7c-18a864d05d70",
+      "name": "Photo 20",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "059dd390-9e49-4622-b114-e400f9214f71",
+      "name": "Photo 21",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "fecf4868-6691-491e-ad48-b2fe6d14bef6",
+      "name": "Photo 22",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "94d79188-ace6-415c-9f90-7a012f41bfb1",
+      "name": "Photo 23",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "3102d9b9-adf1-41bf-b2cd-6186796610ab",
+      "name": "Photo 24",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "7d15caaa-a149-4681-98d7-9900e3a85c62",
+      "name": "Photo 25",
+      "notes": "",
+      "guestIds": []
+    },
+    {
+      "id": "a9dd2dc7-63a4-4c43-b5c5-4f62694353a7",
+      "name": "Photo 26",
       "notes": "",
       "guestIds": []
     }
