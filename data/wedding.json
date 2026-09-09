@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:41:19.958Z",
+  "updatedAt": "2026-09-09T21:41:32.645Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3468,7 +3468,9 @@
       "id": "0ee02f6a-b7ad-4af4-8c52-b3f78bec57ee",
       "name": "Bride with Bride's father",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
+      ]
     },
     {
       "id": "41fd3819-acc5-47c1-984b-af44aec41e16",
