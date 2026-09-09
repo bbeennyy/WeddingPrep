@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:37:07.040Z",
+  "updatedAt": "2026-09-09T21:37:12.430Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3416,7 +3416,10 @@
       "id": "a6d9c243-9534-4459-ab00-b113c7985b53",
       "name": "Bride & Groom with flower girls",
       "notes": "",
-      "guestIds": []
+      "guestIds": [
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
+      ]
     },
     {
       "id": "98938b0e-7051-47ab-86e8-d6cb1063f2a6",
