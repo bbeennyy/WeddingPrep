@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:36:17.059Z",
+  "updatedAt": "2026-09-09T21:36:20.198Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3391,8 +3391,10 @@
     {
       "id": "cf4d7242-f2cb-4304-bad3-5b71a263b26f",
       "name": "Groom with Groom's parents and brothers only",
-      "notes": "beni",
-      "guestIds": []
+      "notes": "",
+      "guestIds": [
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
+      ]
     },
     {
       "id": "f3af37fe-5a8e-428a-bfaa-b0985da278eb",
