@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T21:26:04.921Z",
+  "updatedAt": "2026-09-09T21:26:06.439Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3130,7 +3130,8 @@
       "name": "Bride & Groom ",
       "notes": "",
       "guestIds": [
-        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e"
+        "821e8f7f-046c-406e-b8fb-1a84c5e5e58e",
+        "45a80b41-5b3b-4d99-9b11-ac6378505e50"
       ]
     },
     {
