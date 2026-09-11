@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:54:38.966Z",
+  "updatedAt": "2026-09-11T13:54:46.625Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -3676,17 +3676,6 @@
       "body": "",
       "people": "Parents",
       "mcNotes": ""
-    },
-    {
-      "id": "d8e1d4f4-53a8-48bb-89d0-fc36f7bd3032",
-      "tag": "mc",
-      "section": "pre-ceremony",
-      "time": "",
-      "title": "MC",
-      "subtitle": "",
-      "body": "",
-      "people": "MC",
-      "mcNotes": "What to say or do…"
     },
     {
       "id": "f8181ba6-e464-4b1c-9690-e0531b2e969d",
