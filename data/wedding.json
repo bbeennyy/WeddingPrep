@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:57:54.575Z",
+  "updatedAt": "2026-09-11T13:57:55.562Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -953,7 +953,7 @@
       "notes": "",
       "tableId": "c211c85f-4634-4617-a700-46c9002fbc87",
       "group": "Priscilla Joseph",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "0f5d982b-4ef9-4698-9a27-d42f30071296",
