@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:54:46.625Z",
+  "updatedAt": "2026-09-11T13:57:26.847Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -645,7 +645,7 @@
       "notes": "",
       "tableId": "6b07773d-8a23-44ee-aaa1-193c11ed9746",
       "group": "Gheorghe & Lenuta Costea",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "31a4992d-d0e4-417e-9574-c53fff32186b",
