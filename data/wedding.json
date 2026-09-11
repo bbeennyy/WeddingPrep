@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:57:26.847Z",
+  "updatedAt": "2026-09-11T13:57:29.321Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -656,7 +656,7 @@
       "notes": "",
       "tableId": "6b07773d-8a23-44ee-aaa1-193c11ed9746",
       "group": "Gheorghe & Lenuta Costea",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "75fac41a-e3be-4199-8e52-4cd00e85886c",
@@ -667,7 +667,7 @@
       "notes": "",
       "tableId": "6071ae84-49de-4797-bf04-945fe6983d94",
       "group": "Phil & Sharon Joseph",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "84e4fb1f-f372-4a3a-b2a1-c2bdd7a29c4b",
@@ -678,7 +678,7 @@
       "notes": "",
       "tableId": "6071ae84-49de-4797-bf04-945fe6983d94",
       "group": "Phil & Sharon Joseph",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "2848c326-6d8e-4105-9eb4-63362eba0607",
