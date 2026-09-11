@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:57:46.766Z",
+  "updatedAt": "2026-09-11T13:57:49.544Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -887,7 +887,7 @@
       "notes": "",
       "tableId": "878704f7-b90a-4531-8c77-c1b8e6b589b9",
       "group": "Ethan Joseph & Samantha Cunningham",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "000341b5-f5c3-4445-99f2-5bf603357026",
@@ -898,7 +898,7 @@
       "notes": "",
       "tableId": "878704f7-b90a-4531-8c77-c1b8e6b589b9",
       "group": "Ethan Joseph & Samantha Cunningham",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "ddb105aa-cd7c-4819-b0f9-58b4e7df0631",
