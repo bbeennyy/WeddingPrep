@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:57:32.129Z",
+  "updatedAt": "2026-09-11T13:57:35.414Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -755,7 +755,7 @@
       "notes": "",
       "tableId": "69fe4338-72bb-4979-9e1b-759a96e47806",
       "group": "Stilwell Family",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "cf061e90-d428-406b-aa85-7154c1173ef7",
@@ -766,7 +766,7 @@
       "notes": "",
       "tableId": "69fe4338-72bb-4979-9e1b-759a96e47806",
       "group": "Stilwell Family",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "36d43c13-faf4-4cba-a281-6100c46933bd",
