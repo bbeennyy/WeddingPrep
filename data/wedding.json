@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:57:39.172Z",
+  "updatedAt": "2026-09-11T13:57:44.142Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -832,7 +832,7 @@
       "notes": "",
       "tableId": "298b77fa-2f83-4e1a-88dd-04627c6fbe67",
       "group": "Joseph Family",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "d2eddecd-d1b6-49ec-889c-c9e380723d4f",
@@ -843,7 +843,7 @@
       "notes": "",
       "tableId": "298b77fa-2f83-4e1a-88dd-04627c6fbe67",
       "group": "Joseph Family",
-      "rehearsalDinner": false
+      "rehearsalDinner": true
     },
     {
       "id": "11514cb6-cc9d-4ebc-91ff-6989bdd0ca66",
