@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T16:29:20.709Z",
+  "updatedAt": "2026-09-11T16:29:24.725Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -333,7 +333,7 @@
       "id": "1b3b2f3d-a236-41b9-8eaa-0706a779ea03",
       "title": "Aisle Decor",
       "category": "Decor",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "2026-09-05",
       "notes": "",
