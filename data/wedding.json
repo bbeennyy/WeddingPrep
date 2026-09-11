@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T16:25:21.844Z",
+  "updatedAt": "2026-09-11T16:25:25.145Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2961,7 +2961,7 @@
       "id": "325d8ae0-80bb-4c4b-aadb-2b03adbff7de",
       "name": "Debby Carter",
       "side": "both",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
