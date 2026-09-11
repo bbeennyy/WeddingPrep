@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T13:57:55.562Z",
+  "updatedAt": "2026-09-11T16:24:58.172Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1355,7 +1355,7 @@
       "id": "02b43f29-01e2-4e56-8b10-c6c6a1568b17",
       "name": "John Hester",
       "side": "both",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
