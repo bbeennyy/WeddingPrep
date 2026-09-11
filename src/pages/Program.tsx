@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { ChevronDown, ChevronUp, Clock, Plus, Printer, Trash2 } from "lucide-react";
-import { PROGRAM_SECTIONS, SECTION_PRESETS } from "../constants";
+import { PROGRAM_SECTIONS, SECTION_PRESETS, TAG_BY_ID } from "../constants";
 import { useWedding } from "../context";
 import { coupleLabel, uid } from "../defaults";
 import { printTarget } from "../print";
@@ -10,6 +10,13 @@ const sectionTone: Record<ProgramSection, { line: string; dot: string; chip: str
   "pre-ceremony": { line: "bg-gold/35", dot: "border-gold bg-gold-soft", chip: "text-gold" },
   ceremony: { line: "bg-sage/35", dot: "border-sage bg-sage-soft", chip: "text-sage" },
   reception: { line: "bg-rose/35", dot: "border-rose bg-rose-soft", chip: "text-rose" },
+};
+
+/** Print-safe colors for the schedule timeline rail (section identity). */
+const SECTION_RAIL: Record<ProgramSection, { line: string; accent: string; soft: string }> = {
+  "pre-ceremony": { line: "#d4b87a", accent: "#b0894f", soft: "#f4ead8" },
+  ceremony: { line: "#a8bfa0", accent: "#5c7356", soft: "#e5eee2" },
+  reception: { line: "#d4a8b0", accent: "#a85c66", soft: "#f4e6e8" },
 };
 
 function formatTime(value: string): string {
@@ -415,7 +422,7 @@ export function ProgramPage() {
   );
 }
 
-function BulletinHeader({ eyebrow }: { eyebrow: string }) {
+function BulletinHeader({ eyebrow, meta }: { eyebrow: string; meta?: string }) {
   const { data } = useWedding();
   const { settings } = data;
 
@@ -434,6 +441,7 @@ function BulletinHeader({ eyebrow }: { eyebrow: string }) {
           .filter(Boolean)
           .join(" · ")}
       </p>
+      {meta ? <p className="mt-2 text-xs text-muted">{meta}</p> : null}
       <div className="mx-auto my-8 h-px w-24 bg-gold/50" />
     </>
   );
@@ -449,34 +457,93 @@ function SectionBulletin({
   const { data } = useWedding();
   const meta = PROGRAM_SECTIONS.find((row) => row.id === section);
   const items = data.program.filter((item) => item.section === section);
+  const timed = items.filter((item) => item.time).length;
+  const rail = SECTION_RAIL[section];
 
   return (
     <article
-      className={`print-sheet card mx-auto max-w-2xl px-8 py-12 text-center ${className}`}
+      className={`print-sheet card mx-auto max-w-3xl bg-white px-8 py-12 text-center ${className}`}
       data-print-id={printIdForSection(section)}
     >
-      <BulletinHeader eyebrow={meta?.label ?? "Bulletin"} />
+      <BulletinHeader
+        eyebrow={meta?.label ?? "Bulletin"}
+        meta={
+          items.length === 0
+            ? undefined
+            : `${items.length} ${items.length === 1 ? "moment" : "moments"}${timed ? ` · ${timeRange(items)}` : ""}`
+        }
+      />
       {items.length === 0 ? (
         <p className="text-sm text-muted">No moments in this part of the day yet.</p>
       ) : (
-        <ol className="space-y-6 text-left">
-          {items.map((item) => (
-            <li key={item.id} className="print-break grid grid-cols-[4.5rem_1fr] gap-3">
-              <p className="pt-1 text-xs tabular-nums text-muted">{formatTime(item.time) || "—"}</p>
-              <div>
-                <h3 className="font-serif text-2xl leading-tight">{item.title}</h3>
-                {item.subtitle ? <p className="text-sm italic text-muted">{item.subtitle}</p> : null}
-                {item.people ? <p className="text-sm text-muted">{item.people}</p> : null}
-                {item.body ? (
+        <ol className="relative text-left">
+          <span
+            className="absolute bottom-4 left-[5.35rem] top-3 w-px"
+            style={{ backgroundColor: rail.line }}
+            aria-hidden
+          />
+          {items.map((item, index) => {
+            const tagLabel = TAG_BY_ID[item.tag]?.label;
+            return (
+              <li
+                key={item.id}
+                className="print-break relative grid grid-cols-[4.75rem_1.5rem_1fr] gap-x-3 pb-7 last:pb-0"
+              >
+                <p
+                  className="pt-0.5 text-right font-serif text-xl tabular-nums leading-none"
+                  style={{ color: rail.accent }}
+                >
+                  {formatTime(item.time) || "—"}
+                </p>
+                <div className="relative flex justify-center pt-1">
+                  <span
+                    className="relative z-10 h-3.5 w-3.5 rounded-full border-2 bg-white"
+                    style={{ borderColor: rail.accent, backgroundColor: rail.soft }}
+                  />
+                </div>
+                <div className="min-w-0 pb-1">
                   <p
-                    className={`mt-2 whitespace-pre-wrap text-sm leading-relaxed ${item.tag === "song" ? "text-center italic" : ""}`}
+                    className="text-[11px] font-medium uppercase tracking-[0.16em]"
+                    style={{ color: rail.accent }}
                   >
-                    {item.body}
+                    Moment {index + 1}
+                    {tagLabel ? ` · ${tagLabel}` : ""}
                   </p>
-                ) : null}
-              </div>
-            </li>
-          ))}
+                  <h3 className="mt-0.5 font-serif text-2xl leading-tight text-ink">
+                    {item.title || "Untitled moment"}
+                  </h3>
+                  {item.subtitle ? (
+                    <p className="mt-1 text-sm italic text-muted">{item.subtitle}</p>
+                  ) : null}
+                  {item.people ? (
+                    <p className="mt-1.5 text-sm text-ink">
+                      <span
+                        className="mr-2 text-[10px] font-medium uppercase tracking-[0.16em]"
+                        style={{ color: rail.accent }}
+                      >
+                        Who
+                      </span>
+                      {item.people}
+                    </p>
+                  ) : null}
+                  {item.body ? (
+                    <div
+                      className="mt-2 rounded-xl px-3 py-2.5"
+                      style={{ backgroundColor: rail.soft }}
+                    >
+                      <p
+                        className={`whitespace-pre-wrap text-sm leading-relaxed text-ink ${
+                          item.tag === "song" ? "text-center italic" : ""
+                        }`}
+                      >
+                        {item.body}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              </li>
+            );
+          })}
         </ol>
       )}
     </article>
@@ -501,65 +568,94 @@ function McBulletin({ className = "" }: { className?: string }) {
 
   return (
     <article
-      className={`print-sheet card mx-auto max-w-xl px-8 py-12 text-center ${className}`}
+      className={`print-sheet card mx-auto max-w-3xl bg-white px-8 py-12 text-center ${className}`}
       data-print-id="bulletin-mc"
     >
-      <p className="text-[11px] uppercase tracking-[0.28em] text-gold">For the MC only</p>
-      <h2 className="mt-3 font-serif text-5xl italic">{coupleLabel(data.settings)}</h2>
-      <p className="mt-3 text-sm text-muted">
-        {[
-          data.settings.weddingDate &&
-            new Date(`${data.settings.weddingDate}T12:00:00`).toLocaleDateString(undefined, { dateStyle: "long" }),
-          data.settings.receptionVenue || data.settings.churchName,
-          data.settings.city,
-        ]
-          .filter(Boolean)
-          .join(" · ")}
-      </p>
-      <p className="mx-auto mt-4 max-w-sm text-sm text-muted">
-        Your run-of-show. Only moments where you speak or act.
-      </p>
-      <div className="mx-auto my-8 h-px w-24 bg-gold/50" />
-
-      {bySection.length === 0 ? (
-        <p className="text-sm text-muted">
+      <BulletinHeader
+        eyebrow="For the MC only"
+        meta={
+          cues.length
+            ? `${cues.length} ${cues.length === 1 ? "cue" : "cues"} · your run-of-show`
+            : undefined
+        }
+      />
+      {!cues.length ? (
+        <p className="mx-auto max-w-sm text-sm text-muted">
           No MC moments yet. In Edit, add an <strong>MC</strong> item, or put a cue on another moment.
         </p>
       ) : (
-        bySection.map((section) => (
-          <section key={section.id} className="mb-10 text-left">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-gold">{section.label}</p>
-            <ol className="mt-4 space-y-6">
-              {section.items.map((item, index) => {
-                const cue = mcCue(item);
-                return (
-                  <li key={item.id} className="print-break">
-                    <div className="flex items-baseline gap-3">
-                      <p className="min-w-[4.75rem] shrink-0 font-serif text-3xl tabular-nums leading-none text-ink">
+        bySection.map((section, sectionIndex) => {
+          const rail = SECTION_RAIL[section.id];
+          const stepOffset = bySection
+            .slice(0, sectionIndex)
+            .reduce((total, row) => total + row.items.length, 0);
+          return (
+            <section key={section.id} className="mb-10 text-left last:mb-0">
+              <p
+                className="mb-4 text-[11px] font-medium uppercase tracking-[0.22em]"
+                style={{ color: rail.accent }}
+              >
+                {section.label}
+              </p>
+              <ol className="relative">
+                <span
+                  className="absolute bottom-4 left-[5.35rem] top-3 w-px"
+                  style={{ backgroundColor: rail.line }}
+                  aria-hidden
+                />
+                {section.items.map((item, index) => {
+                  const step = stepOffset + index + 1;
+                  const cue = mcCue(item);
+                  return (
+                    <li
+                      key={item.id}
+                      className="print-break relative grid grid-cols-[4.75rem_1.5rem_1fr] gap-x-3 pb-7 last:pb-0"
+                    >
+                      <p
+                        className="pt-0.5 text-right font-serif text-2xl tabular-nums leading-none"
+                        style={{ color: rail.accent }}
+                      >
                         {formatTime(item.time) || "—"}
                       </p>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[11px] uppercase tracking-[0.16em] text-gold">
-                          Step {index + 1}
+                      <div className="relative flex justify-center pt-1.5">
+                        <span
+                          className="relative z-10 h-3.5 w-3.5 rounded-full border-2 bg-white"
+                          style={{ borderColor: rail.accent, backgroundColor: rail.soft }}
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <p
+                          className="text-[11px] font-medium uppercase tracking-[0.16em]"
+                          style={{ color: rail.accent }}
+                        >
+                          Step {step}
                           {item.tag !== "mc" ? ` · while: ${item.title}` : ""}
                         </p>
-                        <h3 className="mt-1 font-serif text-3xl leading-tight">
+                        <h3 className="mt-0.5 font-serif text-2xl leading-tight text-ink">
                           {item.tag === "mc" ? item.title : "MC cue"}
                         </h3>
+                        <div
+                          className="mt-2 rounded-xl border px-4 py-3"
+                          style={{ backgroundColor: rail.soft, borderColor: rail.line }}
+                        >
+                          <p
+                            className="text-[10px] font-medium uppercase tracking-[0.2em]"
+                            style={{ color: rail.accent }}
+                          >
+                            Say or do this
+                          </p>
+                          <p className="mt-1.5 whitespace-pre-wrap text-lg leading-relaxed text-ink">
+                            {cue || "Add what to say in Edit."}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="mt-3 rounded-2xl border-2 border-gold/40 bg-gold-soft px-5 py-4 text-left">
-                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold">Say or do this</p>
-                      <p className="mt-2 whitespace-pre-wrap text-lg leading-relaxed text-ink">
-                        {cue || "Add what to say in Edit."}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </section>
-        ))
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
+          );
+        })
       )}
     </article>
   );
