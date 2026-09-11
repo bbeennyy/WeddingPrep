@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T16:29:24.725Z",
+  "updatedAt": "2026-09-11T16:29:31.483Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -449,7 +449,7 @@
       "id": "5e256b73-6afa-48a6-909f-859b9a4b2b28",
       "title": "jewelrie",
       "category": "Other",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "",
       "notes": "",
