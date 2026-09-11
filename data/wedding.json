@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T16:24:58.172Z",
+  "updatedAt": "2026-09-11T16:25:21.844Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2950,7 +2950,7 @@
       "id": "1d3dc185-1988-4134-a53d-0eeea18c7a20",
       "name": "Bob Carter",
       "side": "both",
-      "rsvp": "pending",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": "ddedf703-8ba4-4334-a763-311e20b03998",
