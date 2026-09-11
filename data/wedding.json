@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11T16:25:25.145Z",
+  "updatedAt": "2026-09-11T16:29:20.709Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -247,7 +247,7 @@
       "id": "32133741-9902-4173-8287-ff461f2c2b94",
       "title": "Tables Ornaments ",
       "category": "Decor",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "2026-08-22",
       "notes": "",
