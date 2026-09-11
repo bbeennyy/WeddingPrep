@@ -62,6 +62,10 @@
     background-image: none !important;
   }
 
+  @page {
+    margin: 12mm;
+  }
+
   .no-print {
     display: none !important;
   }
