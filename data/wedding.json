@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T15:29:53.650Z",
+  "updatedAt": "2026-09-23T15:29:59.343Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2117,7 +2117,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "f665bfa5-b26d-4ca2-81a2-e7979d79bd10",
       "group": "Carlos & Jamie Barreto",
       "rehearsalDinner": false
     },
