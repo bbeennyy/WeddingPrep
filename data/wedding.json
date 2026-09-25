@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T01:12:18.857Z",
+  "updatedAt": "2026-09-25T01:12:34.963Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -1776,7 +1776,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": null,
+      "tableId": "298b77fa-2f83-4e1a-88dd-04627c6fbe67",
       "group": "Ken & Becky Smith",
       "rehearsalDinner": false
     },
