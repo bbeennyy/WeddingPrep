@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T01:13:04.309Z",
+  "updatedAt": "2026-09-25T01:14:30.113Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2995,6 +2995,17 @@
       "name": "Steven Fan",
       "side": "b",
       "rsvp": "declined",
+      "dietary": "",
+      "notes": "",
+      "tableId": null,
+      "group": "",
+      "rehearsalDinner": false
+    },
+    {
+      "id": "7ffc0d96-2452-4c25-8dcc-1867da57a91a",
+      "name": "Francisco",
+      "side": "b",
+      "rsvp": "attending",
       "dietary": "",
       "notes": "",
       "tableId": null,
