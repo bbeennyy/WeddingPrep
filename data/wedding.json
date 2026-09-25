@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T00:11:14.923Z",
+  "updatedAt": "2026-09-25T00:11:22.094Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -2337,7 +2337,7 @@
       "rsvp": "attending",
       "dietary": "",
       "notes": "",
-      "tableId": "fbf7e7e1-2eab-4ab0-9fb5-e8efcf2fa745",
+      "tableId": null,
       "group": "Floriana Costea Kenelley & Connor Kenelley",
       "rehearsalDinner": false
     },
