@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T02:03:37.587Z",
+  "updatedAt": "2026-10-01T00:14:57.642Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -429,7 +429,7 @@
       "id": "711dfc23-f60f-47d6-903a-b0319f149701",
       "title": "Send spotify lists to Caroline",
       "category": "Church",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-09-21",
       "notes": "",
