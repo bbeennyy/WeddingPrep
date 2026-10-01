@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:14:59.607Z",
+  "updatedAt": "2026-10-01T00:15:03.571Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -439,7 +439,7 @@
       "id": "9875e8b7-cdcb-43c1-9b36-cf04b8a93ef1",
       "title": "Hair appointment",
       "category": "Attire",
-      "done": false,
+      "done": true,
       "owner": "b",
       "dueDate": "",
       "notes": "",
