@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:15:10.299Z",
+  "updatedAt": "2026-10-01T00:15:14.344Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -207,7 +207,7 @@
       "id": "d4e81ed0-6183-40bf-a632-373c796449e2",
       "title": "Assign day-of helpers (programs, gifts, grandparents)",
       "category": "Other",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-09-10",
       "notes": "",
