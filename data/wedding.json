@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:14:57.642Z",
+  "updatedAt": "2026-10-01T00:14:59.607Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -409,7 +409,7 @@
       "id": "0dbb2ab5-ed04-4161-8c6f-374cb1b229e0",
       "title": "Flow of events of the reception",
       "category": "Venue",
-      "done": false,
+      "done": true,
       "owner": "both",
       "dueDate": "2026-09-20",
       "notes": "",
