@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:15:20.415Z",
+  "updatedAt": "2026-10-01T00:15:21.816Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -29,7 +29,7 @@
         {
           "id": "02d006b8-d30d-4713-b716-c3b74d2352ea",
           "title": "File the Documents to gwinnett court",
-          "done": false
+          "done": true
         }
       ]
     },
