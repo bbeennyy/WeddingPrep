@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:15:08.015Z",
+  "updatedAt": "2026-10-01T00:15:10.299Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -293,7 +293,7 @@
       "id": "09d1a072-ed56-4f1f-a662-09318f0e7482",
       "title": "Wedding Arch",
       "category": "Decor",
-      "done": false,
+      "done": true,
       "owner": "a",
       "dueDate": "2026-08-25",
       "notes": "in progress",
