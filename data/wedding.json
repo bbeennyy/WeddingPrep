@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:15:06.433Z",
+  "updatedAt": "2026-10-01T00:15:08.015Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -265,7 +265,7 @@
         {
           "id": "47a07673-c4a2-462d-a455-0495b97f6bb7",
           "title": "1 sweetheart table",
-          "done": false
+          "done": true
         }
       ]
     },
