@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T00:15:14.344Z",
+  "updatedAt": "2026-10-01T00:15:20.415Z",
   "settings": {
     "partnerA": "Beniamin Costea",
     "partnerB": "Evelyn Costea",
@@ -21,7 +21,7 @@
       "id": "e6ecc712-dd50-4c88-b3a5-87ed9891d15a",
       "title": "Confirm you can legally marry (documents, waiting period)",
       "category": "Legal",
-      "done": false,
+      "done": true,
       "owner": "a",
       "dueDate": "",
       "notes": "",
